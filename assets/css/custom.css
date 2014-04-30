@@ -1,0 +1,89 @@
+p{font-size: 12px;}
+
+.gageInfo{
+	font-size: 12px;	
+}
+
+.navbar-brand{
+	font-family: Nova Square;
+}
+
+#map{
+	position:absolute!important;
+	top:50px;
+	bottom:0px; 
+	width:100%;
+}
+
+#tabbedPanel{
+	position:absolute;
+	top:50%;
+	right:5%;
+	width:800px;
+	visibility:hidden;
+	opacity:0.9;
+}
+
+#tabs-2, #tabs-3{
+	width:700px;
+	height:600px;
+}
+
+#multiPlot{
+	width:700px;
+	height:500px;
+	margin-bottom:10px;
+}
+
+#plot{
+	height:500px; 
+	margin-bottom:10px;
+}
+
+#plotSelectParent{
+	visibility: hidden;
+}
+
+#plotSelect{
+	width: 90%;
+}
+
+#plotDPFrom, #plotDPTo{
+	width:140px;
+}
+
+#btnUpdatePlot{
+	margin-top:25px;
+}
+
+#closePanel{
+	padding-top:25px;
+}
+
+#forecastInfo{
+	position:absolute;
+	bottom:-50px;
+	height:400px;
+	width:100%;
+	background-color:white;
+	opacity:0.9;
+	visibility:hidden;
+}
+
+#fcGageInfo{
+	position:relative;
+	vertical-align:top;
+	width:25%;
+	cursor:pointer;
+	border:2px solid;
+	display:inline-block;
+	border-radius:5px;
+	padding:20px;
+	margin:10px;
+}
+
+#fcGagePlot{
+	height:250px;
+	width:70%;
+	display:inline-block;
+}

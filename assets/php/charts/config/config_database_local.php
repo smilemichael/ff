@@ -1,0 +1,13 @@
+<?php
+	// Set MySQL Connection / Login Variables
+	$db_hostname = "localhost";
+	//$db_database = "mysql";
+	$db_database = "datawise";
+	$db_username = "root";
+	$db_password = "DiamondIce";
+?>
+
+<?php
+	//When no data is available display "No Data" or "----"
+	$nodata = "----";
+?>

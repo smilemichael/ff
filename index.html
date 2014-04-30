@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<title>SCVWD GIS WEB APP Prototype</title>
+
+		<!--stylesheets -->
+		<link rel="stylesheet" href="assets/css/custom.css" type="text/css">
+    	<link rel="stylesheet" href="assets/css/style.css" type="text/css">
+    	<link rel="stylesheet" href="assets/css/OL/theme/default/style.css" type="text/css">
+    	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Nova Square&text=SCVWDGIebApProty">
+		<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+    	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+	</head>
+	<body onload="init()">
+		<nav id="navBar" class="navbar navbar-default" role="navigation">
+			<div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">SCVWD GIS Web App Prototype</a>
+				</div>
+					<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<div class="navbar-right" role="search">
+						<button type="submit" id="btnCountyView" class="btn btn-default navbar-btn">
+							<span class=""></span> County View
+						</button>
+					</div>
+				</div><!-- /.navbar-collapse -->
+			</div><!-- /.container-fluid -->
+		</nav>
+		<!--end navbar-->
+		<div id="map"></div>
+		<div id="tabbedPanel" title="Gage Information">
+			<ul>
+				<li><a href="#tabs-1">Gage Information</a></li>
+				<li><a href="#tabs-2">Plot Data</a></li>
+				<li><a href="#tabs-3">Multi-Plot</a></li>
+			</ul>
+			<div id="tabs-1">
+			</div>
+			<div id="tabs-2">
+				<div id="plot"></div>
+				<div class="container">
+					<div class='row'>
+						<div id="plotSelectParent" class="col-md-2">
+							<label>Plot Select: </label>
+							<select id="plotSelect">
+							</select>
+						</div>
+						<div class="col-md-2">
+							<label class="" for="">From:</label>
+							<input type="" class="form-control" id="plotDPFrom" placeholder="">
+						</div>
+						<div class="col-md-2" style="">
+							<label class="" for="">To:</label>
+							<input type="" class="form-control" id="plotDPTo" placeholder="">
+						</div>
+						<div id="col-md-2">	
+							<button id="btnUpdatePlot" type="submit" class="btn btn-default">Update Plot</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="tabs-3">
+				<div id="multiPlot"></div>
+			</div>
+			<div id="closePanel">
+				<button id="btnClosePanel" class="btn btn-info btn-xs">Close Panel</button>
+			</div>
+		</div>
+
+		<!--flood forecast gage information -->
+		<div id="forecastInfo">
+			<ul>
+				<li><a href="#fc-tabs-1">Flood Forecast Information</a></li>
+			</ul>
+			<div id="fc-tabs-1">
+				<div id="fcGageInfo">
+				</div>
+				<div id="fcGagePlot">
+				</div>
+			</div>
+		</div>
+		<!--end flood forecast gage information -->
+
+		<!--load scripts at end of page -->
+		<!--google maps, openlayers, proj4js -->
+		<script src="http://maps.google.com/maps/api/js?v=3&amp;sensor=false&amp;key=AIzaSyB7Ndq60bsM6G2DvKY7SGEbf7vsSa_2Eg8"></script>
+		<script src="assets/OpenLayers/OpenLayers.js"></script>
+    	<script src="assets/OpenLayers/proj4js/lib/proj4js-combined.js"></script>
+
+    	<!--jQuery, jQueryUI, bootstrap-->
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+		<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+		
+		<script src="assets/js/map.js"></script>
+		<script src="assets/Highcharts/js/highcharts.js"></script>
+	</body>
+</html>
