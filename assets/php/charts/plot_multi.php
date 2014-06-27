@@ -1,6 +1,6 @@
 <?php
     // Load Config Database File
-    require_once("config/config_database_local.php");
+    require_once("config/config_database.php");
 
     $ids = array(); //ids array
     $tarray = array(); //time array
@@ -99,15 +99,20 @@
 $(document).ready(function(){
         var chart = new Highcharts.Chart({
             chart: {
-                renderTo: 'multiPlot',
+                renderTo: 'alertMultiPlot',
                 type: 'spline',
                 zoomType: 'x',
+                height: $(window).height()/2-100,
+                backgroundColor: 'rgba(256, 256, 256, 0.80)',
+                borderWidth: 2,
+                plotBackgroundColor: 'rgba(256, 256, 256, 1)',
+                plotBorderWidth: 1
             },
             title: {
-                text: 'flow rate data'
+                text: 'Multiple Gage Plot (Flow Only)'
             },
             subtitle: {
-                text: 'date goes here'
+                text: ''//date goes here'
             },
             xAxis: {
                 gridLineWidth: 1,
@@ -116,11 +121,12 @@ $(document).ready(function(){
                 dateTimeLabelFormats: {
                     hour: '%I:%M %P',
                     minute: '%I %M'
-                }
+                },
+                min: null
             },
             yAxis: {
-                lineWidth:1,
-
+                lineColor: '#000',
+                lineWidth: 1,
                 title: {
                     text: 'flow rate (cfs)'
                 },

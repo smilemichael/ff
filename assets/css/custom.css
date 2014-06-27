@@ -1,7 +1,7 @@
 p{font-size: 12px;}
 
-.gageInfo{
-	font-size: 12px;	
+.gageInfo, .fcGageInfo{
+	font-size: 10px;	
 }
 
 .navbar-brand{
@@ -15,66 +15,86 @@ p{font-size: 12px;}
 	width:100%;
 }
 
-#tabbedPanel{
+#controls{
+
+}
+
+.panelPlot{	
+	position: absolute;
+	margin-bottom:10px;
+	width: 70%;
+	display:inline-block;
+}
+
+#plotOptions{
+	display: inline-block;
+}
+
+#dateSelect{
+	height: 250px;
+	width:20%;
 	position:absolute;
-	top:50%;
-	right:5%;
-	width:800px;
-	visibility:hidden;
-	opacity:0.9;
-}
-
-#tabs-2, #tabs-3{
-	width:700px;
-	height:600px;
-}
-
-#multiPlot{
-	width:700px;
-	height:500px;
-	margin-bottom:10px;
-}
-
-#plot{
-	height:500px; 
-	margin-bottom:10px;
+	left:75%;
+	padding-top:10px;
+	padding-left: 10px;
+	border:2px solid;
+	border-radius: 10px;
 }
 
 #plotSelectParent{
 	visibility: hidden;
+	position:absolute;
+	width: 20%;
+	left:75%;
+	top:350px;
+}
+
+#legend{
+	font-size: 10px;
+	position:absolute;
+	top:300px;
+	right:0px;
+	width: 175px;
+	height: 40px;
+	background-color: #00007C;
+	color: white;
+	opacity: 0.9;
+	border-radius:10px;
 }
 
 #plotSelect{
+	position:absolute;
 	width: 90%;
 }
 
-#plotDPFrom, #plotDPTo{
-	width:140px;
+#legend table td{
+	padding:10px;
 }
 
-#btnUpdatePlot{
+.dateField{
+	width:140px;
+	margin: 0 auto;
+}
+
+.btnUpdatePlot{
 	margin-top:25px;
 }
 
-#closePanel{
-	padding-top:25px;
-}
-
-#forecastInfo{
+#forecastInfo, #alertInfo, #wiskiInfo{
 	position:absolute;
-	bottom:-50px;
-	height:400px;
+	bottom:0px;
+	height:50%;
 	width:100%;
 	background-color:white;
 	opacity:0.9;
 	visibility:hidden;
 }
 
-#fcGageInfo{
+#fcGageInfo, #wkGageInfo{
+	font-size: 12px;	
 	position:relative;
 	vertical-align:top;
 	width:25%;
-	cursor:pointer;
 	border:2px solid;
 	display:inline-block;
 	border-radius:5px;
@@ -83,7 +103,63 @@ p{font-size: 12px;}
 }
 
 #fcGagePlot{
-	height:250px;
-	width:70%;
+	height:100%;
+	width:100%;
 	display:inline-block;
+}
+
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu>.dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -6px;
+    margin-left: -1px;
+    -webkit-border-radius: 0 6px 6px 6px;
+    -moz-border-radius: 0 6px 6px;
+    border-radius: 0 6px 6px 6px;
+}
+
+.dropdown-submenu:hover>.dropdown-menu {
+    display: block;
+}
+
+.dropdown-submenu>a:after {
+    display: block;
+    content: " ";
+    float: right;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px 0 5px 5px;
+    border-left-color: #ccc;
+    margin-top: 5px;
+    margin-right: -10px;
+}
+
+.dropdown-submenu:hover>a:after {
+    border-left-color: #fff;
+}
+
+.dropdown-submenu.pull-left {
+    float: none;
+}
+
+.dropdown-submenu.pull-left>.dropdown-menu {
+    left: -100%;
+    margin-left: 10px;
+    -webkit-border-radius: 6px 0 6px 6px;
+    -moz-border-radius: 6px 0 6px 6px;
+    border-radius: 6px 0 6px 6px;
+}
+
+#simInfo{
+	width:300px;
+}
+
+#signIn{
+	  border-right: 1px solid #000000;
 }

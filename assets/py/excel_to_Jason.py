@@ -1,7 +1,7 @@
 #!C:/Python27/python.exe 
 
 #import mysql
-import MySQLdb
+#import MySQLdb
 
 import xlrd
 from xlrd import open_workbook,xldate_as_tuple

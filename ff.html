@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<title>SCVWD GIS WEB APP Prototype</title>
+		<!--stylesheets -->
+    	<link rel="stylesheet" href="assets/css/style.css" type="text/css">
+    	<link rel="stylesheet" href="assets/css/OL/theme/default/style.css" type="text/css">
+    	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Nova Square&text=SCVWDGIFcasingmdebApProty">
+		<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+    	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+		<link rel="stylesheet" href="assets/css/custom.css" type="text/css">
+	</head>
+	<body onload="init()">
+		<nav id="navBar" class="navbar navbar-default" role="navigation">
+			<div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">SCVWD Flood Forecasting System</a>
+				</div>
+					<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<div class="navbar-left" id="controls">
+						<div class="btn-group">
+							<button type="button" class="btn btn-warning navbar-btn dropdown-toggle" data-toggle="dropdown">
+								View Select&nbsp<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" role="menu">
+								<li><a id="countyView"><strong>County</strong></a></li>
+							</ul>
+						</div>
+						<div class="btn-group">
+							<button type="button" data-toggle="dropdown" class="btn btn-warning navbar-btn dropdown-toggle">
+								Gage Select&nbsp<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+								
+								<li class="dropdown-submenu">
+									<a tabindex="-1" href="#">Flood Forecast</a>
+									<ul class="dropdown-menu" id="forecastMenu">
+										<li id="2058"><a tabindex="-1" href="#">Ross Ck at Cherry Ave</a></li>
+										<li id="1543"><a>Guadalupe R above Branham Ln</a></li>
+										<li id="1535"><a>Guadalupe R above Almaden Expwy</a></li>
+										<li id="1481" ><a>West Little Llagas blw Edmundson Ave</a></li>
+									</ul>
+								</li>
+								
+							</ul>
+						</div>
+
+					</div>
+
+					<div class="navbar-right">
+						<button type="submit" id="btnControls" class="btn btn-default navbar-btn">
+							<span class="glyphicon glyphicon-cog"></span>&nbsp Controls
+						</button>
+						<button type="submit" id="btnLegend" class="btn btn-default navbar-btn">
+							<span class="glyphicon glyphicon-th-large"></span>&nbsp Legend
+						</button>
+						<a href="help.html" target="_blank">
+							<button  type="submit" id="btnHelp" class="btn btn-info navbar-btn">
+							<span class="glyphicon glyphicon-info-sign"></span>&nbsp Help
+						</button>
+						</a>
+					</div>
+				</div><!-- /.navbar-collapse -->
+			</div><!-- /.container-fluid -->
+		</nav>
+		<!--end navbar-->
+		<div id="map"></div>
+		<!--flood forecast gage information -->
+		<div id="forecastInfo">
+			<ul>
+				<li><a href="#fc-tabs-1">Flood Forecast Information</a></li>
+				<li><a href="#fc-tabs-2">Gage Details</a></li>
+				<li><a href="#fc-tabs-3">1% Flood Simulation</a></li>
+				<li><a href="#fc-tabs-4">ALERT Me</a></li>
+
+			</ul>
+			<div id="fc-tabs-1">
+				<div id="fcGagePlot">
+				</div>
+			</div>
+			<div id="fc-tabs-2">
+				<div id="fcGageInfo">
+				</div> 
+			</div>
+			<div id="fc-tabs-3">
+				<div id="fcFloodSimulation" class="container">
+					<div class="row">
+						<div id="simInfo" class="col-md-5">
+							A one-hundred-year flood is a flood event that has a 1% probability of occurring in any given year. Click the flood animation button to simulate this type of flood event. 
+						</div>
+						<div class="col-md-4">
+							<div id="slider" style="width:250px;margin:10px;"></div>
+							<!-- <div id="sliderValueLabel"><a id="flowRate">0</a> cfs</div> -->
+							<div id="animationControls">
+								<button class="btn btn-primary" id="btnFloodAnimation">Flood Animation</button>	
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="fc-tabs-4">
+				<div class="container">
+					<p>Please sign in or register to receive text/email flood alerts for this flood zone</p>
+					<div class="row">
+						<div class="col-md-4" id="signIn">
+							<h4>Sign In</h4><hr/>
+							<form>
+								<div class="form-group">
+									<label for="signInEmail" class="control-label">Email</label>
+									<input type="text" class="form-control" id="signInEmailField" name="email" placeholder="email">
+								</div>
+								<div class="form-group">
+									<label for="signInPassword" class="control-label">Password</label>
+									<input type="password" class="form-control" id="signInPassword" name="password" placeholder="password">
+								</div>
+								<button type="submit" class="btn btn-primary">Sign In</button>
+							</form>
+						</div>
+						<div class="col-md-4">
+							<h4>Register</h4><hr/>
+							<a href="registration.php"><button class="btn btn-success">Register</button></a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<!--******LEGEND DIV********-->
+		<div id="legend">
+			<table>
+				<tr>
+					<td><img src="assets/images/fcLegendIcon.png"/></td>
+					<td>Flood Forecast Gage</td>
+				</tr>
+			<table>
+		</div>
+		<!--******END LEGEND DIV********-->
+
+		<!--load scripts at end of page -->
+		<!--google maps, openlayers, proj4js -->
+		<script src="http://maps.google.com/maps/api/js?v=3&amp;sensor=false&amp;key=AIzaSyB7Ndq60bsM6G2DvKY7SGEbf7vsSa_2Eg8"></script>
+		<script src="assets/OpenLayers/OpenLayers.js"></script>
+    	<script src="assets/OpenLayers/proj4js/lib/proj4js-combined.js"></script>
+
+    	<!--jQuery, jQueryUI, bootstrap-->
+		<!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>-->
+		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+		<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+		<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+		
+		<script src="assets/js/ff.js"></script>
+		<script src="assets/Highcharts/js/highcharts.js"></script>
+	</body>
+</html>

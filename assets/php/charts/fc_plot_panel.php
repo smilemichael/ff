@@ -5,7 +5,7 @@ var dataSetHistoric=[];
 <?php
 
 	 // Load Config Database File
-    require_once("config/config_database_local.php");
+    require_once("config/config_database.php");
 
     $id = $_GET["id"]; //ids array
     $tarray = array(); //time array
@@ -119,14 +119,14 @@ dataSetHistoric.push(<?php echo $dataString?>);
         chart = new Highcharts.Chart({
             chart: {
                 renderTo: 'fcGagePlot',
-                height: $('#fcGagePlot').height(),
-                width: $('#fcGagePlot').width(),
+                //height: $('#fcGagePlot').height(),
+                //width: $('#fcGagePlot').width(),
                 type: 'spline',
                 zoomType: 'x',
-                marginTop: 0,
+                //marginTop: 0,
             },
             title:{
-                text:''
+                text: "<?= $name ?>"
             },
             xAxis: {
                 gridLineWidth: 1,
@@ -150,25 +150,35 @@ dataSetHistoric.push(<?php echo $dataString?>);
                         }
                     },
                     id: 'now-line'
-                }]
+                }],
+                min: dataSetHistoric[0][0],
+                max: dataSetForecast[dataSetForecast.length-1][0]
+
             },
             yAxis: {
                 lineWidth:1,
-
                 title: {
                     text: 'flow rate (cfs)'
                 },
-                min: 0
+                min: 0,
+                minRange:0.1
             },
             legend: {
                 layout: "vertical",
-                align: "right"
+                align: "right",
+                verticalAlign: "middle"
             },
             credits: {
                 enabled: false
             },
             plotOptions: {
                 series: {
+                    //workaround for legend item click bug
+                    events: {
+                        legendItemClick: function(event) {
+                            return false;
+                        }
+                    },
                     marker: {
                         enabled: false,
                         radius: 2, // Marker Size
@@ -192,29 +202,7 @@ dataSetHistoric.push(<?php echo $dataString?>);
                 data: dataSetForecast
             }]
         });
-        //addNowLine();
     });
-
-	function addNowLine(){
-        //var now = new Date();
-        //removeNowLine();
-        chart.xAxis[0].addPlotLine({
-            //value: getDateUTC(now),
-            value: now,
-            color: '#696969',
-            dashStyle: 'shortDash',
-            width: 2,       
-            label: {
-                text: "Current Time",
-                rotation: 0,
-                style: {
-                    color: '#333333',
-                    fontWeight: 'bold'
-                }
-            },
-            id: 'now-line'
-        });
-	}
 
 	function getDates(){
 		//var now = new Date();

@@ -1,6 +1,6 @@
 <?php
 	// Load Config Database File
-	require_once("config/config_database_local.php");
+	require_once("config/config_database.php");
 
 	// Make a MySQL Connection
 	mysql_connect($db_hostname, $db_username, $db_password) or die(mysql_error());
@@ -161,9 +161,10 @@ if ( $minq < 0. ) {
 $(document).ready(function() {
 	chart = new Highcharts.Chart({
 	chart: {
-		width: 700,
-		height: 500,
-		renderTo: 'plot',
+		//width: 700,
+		height: $(window).height()/2-100,
+		renderTo: 'alertPlot',
+		//marginBottom: 10,
 		zoomType: 'x',
 		spacingRight: 10,
 		backgroundColor: 'rgba(256, 256, 256, 0.80)',

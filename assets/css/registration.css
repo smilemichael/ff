@@ -1,0 +1,44 @@
+.nameField{
+	width: 310px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.streetAddress{
+	
+}
+
+.citySelect, .zipCodeField{
+	width: 310px;
+	
+}
+
+.formField{
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.phoneField, .passwordField{
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+td{
+	padding-top: 5px;
+}
+
+.errorMsg{
+	font-size: 12px;
+	color: red;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+label{font-size: 12px;}
+
+html {height:100%;}
+body {height:100%; margin:0; padding:0;}
+/* prepares the background image to full capacity of the viewing area */
+#bg {position:fixed; top:0; left:0; width:100%; height:100%; min-width:1024px;}
+/* places the content ontop of the background image */
+#content {position:relative; z-index:1;}
