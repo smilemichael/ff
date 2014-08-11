@@ -1,13 +1,7 @@
 <?php
 	if ($_SERVER['REQUEST_METHOD'] === 'POST'){
-		// Load Config Database File
-		require_once("config_database_reg.php");
-
-		// Make a MySQL Connection
-		$mysqli = new mysqli($db_hostname, $db_username, $db_password, $db_database);
-	    if ($mysqli->connect_errno) {
-	        echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-	    }
+		//connect to DB
+		require_once("db_connect.php");
 			
 		$firstName = $_POST['firstName'];
 		$lastName = $_POST['lastName'];
@@ -20,7 +14,12 @@
 		$password = $_POST['password'];
 
 		// Get the hash for the password, letting the salt be automatically generated
-		$hash = crypt($password);
+		//TODO BETTER ENCRYPTION ALGORITHM
+
+		$salt = "salt";
+		$hash = crypt($password, $salt);
+
+
 		/* Prepared statement, stage 1: prepare */
 	 	$query = "INSERT INTO scvwd.users(first_name, last_name, street_address, city, zip_code, email, phone, password, cell_carrier) VALUES" . "('$firstName' , '$lastName' , '$streetAddress' , '$city', '$zipCode', '$email', '$phone', '$hash', '$carrier')";
 		if (!($stmt = $mysqli->prepare($query))) {
@@ -42,6 +41,25 @@
   			echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
 		}
 
+		//create user_gages tuple
+		//get user_id
+		//TODO: add more AND arguments for select
+
+	 	// $query = "SELECT id FROM scvwd.users WHERE first_name = '" . $firstName . "' AND last_name = '" . $last_name . "'";
+	 	// $res = $mysqli->query($query);
+	 	// $row = $res->fetch_array();
+	  	//  $id = $row['id'];
+
+	    //create tuple in user_gages with user id
+	 	// $query = "INSERT INTO scvwd.user_gages(user_id) VALUES" . "('$id')";
+	 	$query = "INSERT INTO scvwd.user_gages(user_id) VALUES (LAST_INSERT_ID())";
+
+	 	if (!($stmt = $mysqli->prepare($query))) {
+    		echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;
+		}
+		if (!$stmt->execute()) {
+  			echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+		}
 	}
 ?>
 <!DOCTYPE HTML>
@@ -50,7 +68,6 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 		<link rel="stylesheet" href="assets/css/registration.css">
-
 	</head>
 	<body style="background-color:#66FFFF;">
 		<div id="bg"><img src="assets/images/rainbg.jpg" width="100%" height="100%" alt=""></div>
@@ -266,8 +283,10 @@
 					        // log a message to the console
 					        console.log("Hooray, it worked!");
 
-					        // similar behavior as an HTTP redirect
-							window.location.replace("http://alertc/scvwd/ff/ff.html");
+					        // similar behavior as an HTTP redirect, ALERTC
+							// window.location.replace("http://alertc/scvwd/ff/ff.html");
+							// similar behavior as an HTTP redirect,LOCAL
+							window.location.replace("ff.php");
 
 					    });
 

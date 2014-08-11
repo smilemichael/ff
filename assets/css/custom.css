@@ -1,5 +1,8 @@
 p{font-size: 12px;}
 
+body{
+	min-width: 1000px;
+}
 .gageInfo, .fcGageInfo{
 	font-size: 10px;	
 }
@@ -11,7 +14,7 @@ p{font-size: 12px;}
 #map{
 	position:absolute!important;
 	top:50px;
-	bottom:0px; 
+	bottom:50px; 
 	width:100%;
 }
 

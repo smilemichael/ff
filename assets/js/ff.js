@@ -3,6 +3,7 @@ var map;
 var select_feature_control;
 
 var currentFCGage;
+var stationNumber;
 
 //OpenLayers projections
 var proj_2227 = new OpenLayers.Projection('EPSG:2227'); //projection for stream layer
@@ -87,11 +88,29 @@ function init(){
 
     ///////////////////START Stream gage layers///////////////////////////////////////////////////////
     //fc wiski_streamflow geoJSON
+    //alertd config
+    // forecast_streamflow = new OpenLayers.Layer.Vector(
+    //     "&nbspFlood Forecast Gages",
+    //     {
+    //         protocol: new OpenLayers.Protocol.HTTP({
+    //             url: "http://10.25.5.112:8080/geoserver/scvwd/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=scvwd:ForecastStreamFlow&maxFeatures=50&outputFormat=json",
+    //             format: new OpenLayers.Format.GeoJSON({
+    //                 // extractStyles: false,
+    //                 // extractAttributes: true,
+    //                 // maxDepth: 10
+    //             })
+                
+    //         }),
+    //         strategies: [new OpenLayers.Strategy.Fixed()]
+    //     }
+    // );
+
+    //local config
     forecast_streamflow = new OpenLayers.Layer.Vector(
         "&nbspFlood Forecast Gages",
         {
             protocol: new OpenLayers.Protocol.HTTP({
-                url: "http://10.25.5.112:8080/geoserver/scvwd/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=scvwd:ForecastStreamFlow&maxFeatures=50&outputFormat=json",
+                url: "http://localhost:8089/geoserver/scvwd/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=scvwd:ForecastStreamFlow&maxFeatures=50&outputFormat=json",
                 format: new OpenLayers.Format.GeoJSON({
                     // extractStyles: false,
                     // extractAttributes: true,
@@ -583,7 +602,7 @@ function init(){
     //zoom to county extent
     map.zoomToExtent(countyBounds);
 
-    alert("GIS themes are for illustration and general analysis purposes only and are not accurate to surveying or engineering standards. Information is not guaranteed to be accurate, current or complete and use of this information is your responsibility")
+    // alert("GIS themes are for illustration and general analysis purposes only and are not accurate to surveying or engineering standards. Information is not guaranteed to be accurate, current or complete and use of this information is your responsibility")
 
 }
 
@@ -607,7 +626,7 @@ function forecast_selected_feature(event){
     $('#fcGageInfo').html(fcGageInfo);
     //$('#fcGagePlot').load("assets/php/charts/fc_plot_panel.php?id=" + event.feature.attributes.ALERT_ID);
     if(event.feature.attributes.ALERT_ID === "2058"){
-        $('#fcGagePlot').load("assets/js/fc_dummyChart.js");
+        // $('#fcGagePlot').load("assets/js/fc_dummyChart.js");
         $( "#forecastInfo" ).tabs( "option", "active", 0 );
         //enable flood simulation tab
         $( "#forecastInfo" ).tabs( "enable", 2 );
@@ -631,8 +650,157 @@ function forecast_selected_feature(event){
 
     //save alert id of current FCGage
     currentFCGage = event.feature.attributes.ALERT_ID;
+    stationNumber = event.feature.attributes.STA_NUMBER;
+
+    //workaround for station 23.2 make stationNumber 23
+    //maybe fix in shapefile
+    if(stationNumber=="23.2"){
+        stationNumber="23";
+        alert(stationNumber);
+    } 
+
+    //if user is logged in, enable alert regisration/unregistration
+    var $object = $('#alertMe');
+    if($object.length > 0) {
+        // alert(stationNumber);
+        switch(stationNumber){
+            case("51"): if(gages['gage_51'] == "T"){
+                            $('#alertMe').html('<p>You are registered to receive alerts for this flood plain.</p>'+
+                                '<button class="btn btn-warning" id="btnUnAlertMe" data-gage-number="' + stationNumber +'">Unsubscribe</button>' +
+                                '<script>' +
+                                    '$(\'#btnUnAlertMe\').on("click", function(){' +
+                                        // 'alert("button clicked!"\+$(\'#btnAlertMe\').data("gageNumber"));' +
+                                        'unAlertMe();' +
+                                    '});'+
+                                '</script>');
+                        }else{
+                            $('#alertMe').html('<p>You have not registered to receive alerts for this flood plain.</p>'+
+                            '<button class="btn btn-default" id="btnAlertMe" data-gage-number="' + stationNumber +'">ALERT Me!</button>' +
+                            '<script>' +
+                                '$(\'#btnAlertMe\').on("click", function(){' +
+                                    // 'alert("button clicked!"\+$(\'#btnAlertMe\').data("gageNumber"));' +
+                                    'alertMe();' +
+                                '});'+
+                            '</script>');
+                        }
+                        break;
+            case("23"): if(gages['gage_23'] == "T"){
+                            $('#alertMe').html('<p>You are registered to receive alerts for this flood plain.</p>'+
+                                '<button class="btn btn-warning" id="btnUnAlertMe" data-gage-number="' + stationNumber +'">Unsubscribe</button>' +
+                                '<script>' +
+                                    '$(\'#btnUnAlertMe\').on("click", function(){' +
+                                        // 'alert("button clicked!"\+$(\'#btnAlertMe\').data("gageNumber"));' +
+                                        'unAlertMe();' +
+                                    '});'+
+                                '</script>');
+                        }else{
+                            $('#alertMe').html('<p>You have not registered to receive alerts for this flood plain.</p>'+
+                            '<button class="btn btn-default" id="btnAlertMe" data-gage-number="' + stationNumber +'">ALERT Me!</button>' +
+                            '<script>' +
+                                '$(\'#btnAlertMe\').on("click", function(){' +
+                                    // 'alert("button clicked!"\+$(\'#btnAlertMe\').data("gageNumber"));' +
+                                    'alertMe();' +
+                                '});'+
+                            '</script>');
+                        }
+                        break;       
+
+            case("93"): if(gages['gage_93'] == "T"){
+                            $('#alertMe').html('<p>You are registered to receive alerts for this flood plain.</p>'+
+                                '<button class="btn btn-warning" id="btnUnAlertMe" data-gage-number="' + stationNumber +'">Unsubscribe</button>' +
+                                '<script>' +
+                                    '$(\'#btnUnAlertMe\').on("click", function(){' +
+                                        // 'alert("button clicked!"\+$(\'#btnAlertMe\').data("gageNumber"));' +
+                                        'unAlertMe();' +
+                                    '});'+
+                                '</script>');
+                        }else{
+                            $('#alertMe').html('<p>You have not registered to receive alerts for this flood plain.</p>'+
+                            '<button class="btn btn-default" id="btnAlertMe" data-gage-number="' + stationNumber +'">ALERT Me!</button>' +
+                            '<script>' +
+                                '$(\'#btnAlertMe\').on("click", function(){' +
+                                    // 'alert("button clicked!"\+$(\'#btnAlertMe\').data("gageNumber"));' +
+                                    'alertMe();' +
+                                '});'+
+                            '</script>');
+                        }
+                        break;   
+            case("117"): if(gages['gage_117'] == "T"){
+                            $('#alertMe').html('<p>You are registered to receive alerts for this flood plain.</p>'+
+                                '<button class="btn btn-warning" id="btnUnAlertMe" data-gage-number="' + stationNumber +'">Unsubscribe</button>' +
+                                '<script>' +
+                                    '$(\'#btnUnAlertMe\').on("click", function(){' +
+                                        // 'alert("button clicked!"\+$(\'#btnAlertMe\').data("gageNumber"));' +
+                                        'unAlertMe();' +
+                                    '});'+
+                                '</script>');
+                        }else{
+                            $('#alertMe').html('<p>You have not registered to receive alerts for this flood plain.</p>'+
+                            '<button class="btn btn-default" id="btnAlertMe" data-gage-number="' + stationNumber +'">ALERT Me!</button>' +
+                            '<script>' +
+                                '$(\'#btnAlertMe\').on("click", function(){' +
+                                    // 'alert("button clicked!"\+$(\'#btnAlertMe\').data("gageNumber"));' +
+                                    'alertMe();' +
+                                '});'+
+                            '</script>');
+                        }
+                        break;                      
+       
+        }
+        
+    }else{
+         //user has registered for gage add manage alert subscription link
+    }
+
 }
 
+//handler for user gage registration
+function alertMe(){
+    var jqxhr = $.ajax( "alertMe.php?sta=" + stationNumber)
+        .done(function() {
+            // alert( "success" );
+            $('#alertMe').html("<p>You are registered to receive alerts for this flood plain.</p>" +
+                '<button class="btn btn-warning" id="btnAlertMe" data-gage-number="' + stationNumber +'">Unsubscribe</button>' +
+                            '<script>' +
+                                '$(\'#btnUnAlertMe\').on("click", function(){' +
+                                    // 'alert("button clicked!"\+$(\'#btnAlertMe\').data("gageNumber"));' +
+                                    'unAlertMe();' +
+                                '});'+
+                            '</script>');
+            //update gages client-side variable
+            gages["gage_"+stationNumber] = "T";
+        })
+        .fail(function() {
+            alert( "error" );
+        })
+        .always(function() {
+            // alert( "complete" );
+        });
+}
+
+//handler for user gage unsubscription
+function unAlertMe(){
+    var jqxhr = $.ajax( "unAlertMe.php?sta=" + stationNumber)
+        .done(function() {
+            // alert( "success" );
+            $('#alertMe').html('<p>You have not registered to receive alerts for this flood plain.</p>'+
+                            '<button class="btn btn-default" id="btnAlertMe" data-gage-number="' + stationNumber +'">ALERT Me!</button>' +
+                            '<script>' +
+                                '$(\'#btnAlertMe\').on("click", function(){' +
+                                    // 'alert("button clicked!"\+$(\'#btnAlertMe\').data("gageNumber"));' +
+                                    'alertMe();' +
+                                '});'+
+                            '</script>');
+            //update gage variable
+            gages["gage_"+stationNumber] = "F";
+        })
+        .fail(function() {
+            alert( "error" );
+        })
+        .always(function() {
+            // alert( "complete" );
+        });
+}
 //handler for forecast gage deselection
 function forecast_unselected_feature(event){
     currentFCGage = ""; //no gage selected
@@ -855,6 +1023,20 @@ $(document).ready(function(){
     $('#btnFloodAnimation').on("click", function(){
         myInterval = window.setInterval('animateSlider()',200);
     });
+
+    $('#btnSignIn').on("click", function(){
+        // alert('test');
+        $('#signInNavBar').html();
+        $('#signInNavBar').html('<form class="navbar-form navbar-left" role="search">' +
+                                    '<div class="form-group">' +
+                                        '<input type="text" class="form-control" placeholder="email">' +
+                                        '<input type="text" class="form-control" placeholder="password">' +
+                                    '</div>' +
+                                    '<button type="submit" class="btn btn-default">Submit</button>' +
+                                '</form>');
+        });
+
+    
 });
 
 function animateSlider(){
