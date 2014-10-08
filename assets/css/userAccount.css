@@ -1,3 +1,15 @@
-.dataField{
-	width:150px;
+td.dataLabel{
+	width: 200px;
+}
+
+.accountTableLabel{
+	background-color: #FFCC00;
+}
+
+.error {
+   color: red;
+}
+
+.navbar-outer{
+	width: 800px;
 }

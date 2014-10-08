@@ -4,7 +4,9 @@
 	//$db_database = "mysql";
 	$db_database = "scvwd";
 	$db_username = "root";
-	$db_password = "DiamondIce";
+	// $db_password = "DiamondIce"; //localmachine
+	$db_password = "mysql"; //cubemachine
+
 ?>
 
 <?php

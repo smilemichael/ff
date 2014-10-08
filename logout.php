@@ -4,10 +4,9 @@
 ?>
 <html>
 	<head>
-
 	</head>
 	<body>
 		<p>You Have Succesfully Logged Out.</p>
-		<p><a href="ff.php">Return to flood forecast system</a> 
+		<p><a href="index.php">Return to flood forecast system</a> 
 	</body>
 </html>

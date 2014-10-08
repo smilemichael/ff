@@ -1,7 +1,15 @@
+.popup {
+    position: absolute;
+    padding: 5px;
+    font-size: 8pt;
+    z-index: 1000;
+    background-color: white
+}
+
 p{font-size: 12px;}
 
 body{
-	min-width: 1000px;
+	min-width: 1150px;
 }
 .gageInfo, .fcGageInfo{
 	font-size: 10px;	
@@ -10,90 +18,42 @@ body{
 .navbar-brand{
 	font-family: Nova Square;
 }
+#myNav{
+	position: absolute;
+	min-width: 1150px;
+	width:100%;
+	height:50px;
+	background-color: white;
+	z-index: 5000;
+	box-shadow: 0px 5px 5px #000000;
+}
 
 #map{
 	position:absolute!important;
 	top:50px;
-	bottom:50px; 
+	bottom:0px; 
 	width:100%;
-}
-
-#controls{
-
-}
-
-.panelPlot{	
-	position: absolute;
-	margin-bottom:10px;
-	width: 70%;
-	display:inline-block;
-}
-
-#plotOptions{
-	display: inline-block;
-}
-
-#dateSelect{
-	height: 250px;
-	width:20%;
-	position:absolute;
-	left:75%;
-	padding-top:10px;
-	padding-left: 10px;
-	border:2px solid;
-	border-radius: 10px;
-}
-
-#plotSelectParent{
-	visibility: hidden;
-	position:absolute;
-	width: 20%;
-	left:75%;
-	top:350px;
-}
-
-#legend{
-	font-size: 10px;
-	position:absolute;
-	top:300px;
-	right:0px;
-	width: 175px;
-	height: 40px;
-	background-color: #00007C;
-	color: white;
-	opacity: 0.9;
-	border-radius:10px;
-}
-
-#plotSelect{
-	position:absolute;
-	width: 90%;
-}
-
-#legend table td{
-	padding:10px;
-}
-
-.dateField{
-	width:140px;
-	margin: 0 auto;
+	/*height:100%;*/
+	min-width: 1150px;
 }
 
 .btnUpdatePlot{
 	margin-top:25px;
 }
 
-#forecastInfo, #alertInfo, #wiskiInfo{
+#forecastInfo{
 	position:absolute;
 	bottom:0px;
-	height:50%;
+	height:400px;
 	width:100%;
+	min-width: 1150px;
 	background-color:white;
 	opacity:0.9;
 	visibility:hidden;
+	float: bottom;
 }
 
-#fcGageInfo, #wkGageInfo{
+#fcGageInfo{
 	font-size: 12px;	
 	position:relative;
 	vertical-align:top;
@@ -105,10 +65,29 @@ body{
 	margin:10px;
 }
 
-#fcGagePlot{
-	height:100%;
-	width:100%;
+#fcPlot{
+	height:300px;
+	width:850px;
 	display:inline-block;
+}
+
+.fccontrols{
+	margin-left: 10px;
+}
+
+#fcAnimatePanel{
+	display:inline-block;
+	width:200px;
+	visibility:hidden;
+}
+
+#fc-tabs-1 > * {
+    vertical-align:middle;  // Align children to middle of line
+}
+
+#fc-tabs-1{
+	height:50%;
+	min-width: 1150px;
 }
 
 .dropdown-submenu {
@@ -163,6 +142,8 @@ body{
 	width:300px;
 }
 
-#signIn{
-	  border-right: 1px solid #000000;
+#signInPanel{
+	min-width: 1000px;
+	padding-bottom: 10px;
+  	border-bottom: 2px dotted #000000;
 }

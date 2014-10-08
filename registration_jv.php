@@ -2,7 +2,8 @@
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 		//connect to DB
 		require_once("db_connect.php");
-			
+		
+		//parse post data fields into variables
 		$firstName = $_POST['first_name'];
 		$lastName = $_POST['last_name'];
 		$streetAddress = $_POST['street_address'];
@@ -15,64 +16,59 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 
 		// Get the hash for the password, letting the salt be automatically generated
 		//TODO BETTER ENCRYPTION ALGORITHM
-
 		$salt = "salt";
 		$hash = crypt($password, $salt);
 
-		/* Prepared statement, stage 1: prepare */
+		//Prepare statement to insert new user into db
+		//TODO: make sure email doesn't already exist
+		//TODO: email verification before insert
 	 	$query = "INSERT INTO scvwd.users(first_name, last_name, street_address, city, zip_code, email, phone, password, cell_carrier) VALUES" . "('$firstName' , '$lastName' , '$streetAddress' , '$city', '$zipCode', '$email', '$phone', '$hash', '$carrier')";
 		if (!($stmt = $mysqli->prepare($query))) {
     		echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;
 		}
 
-		// $userTextFile = "newUsers.txt";
-		// $file = fopen( $userTextFile, "a+" );
-		// if( $file == false )
-		// {
-		//    echo ( "Error in opening new file" );
-		//    exit();
-		// }
-		// fwrite( $file, $firstName . "\t" . $lastName . "\t" . $streetAddress . "\t" . $city . "\t" . $zipCode . "\t" . $email . "\t" . $phone . "\n");
-		// fclose( $file );
-
-
+		//Execute new user insert statment
 		if (!$stmt->execute()) {
   			echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
 		}
 
-		//create user_gages tuple
-		//get user_id
-		//TODO: add more AND arguments for select
-
-	 	// $query = "SELECT id FROM scvwd.users WHERE first_name = '" . $firstName . "' AND last_name = '" . $last_name . "'";
-	 	// $res = $mysqli->query($query);
-	 	// $row = $res->fetch_array();
-	  	//  $id = $row['id'];
-
-	    //create tuple in user_gages with user id
-	 	// $query = "INSERT INTO scvwd.user_gages(user_id) VALUES" . "('$id')";
+		//create user_gages tuple for new user using last isnert id
 	 	$query = "INSERT INTO scvwd.user_gages(user_id) VALUES (LAST_INSERT_ID())";
 
+	 	//prepare statement  to insert new user_gages tuple
 	 	if (!($stmt = $mysqli->prepare($query))) {
     		echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;
 		}
+
+		//execute new user_gages insert statment
 		if (!$stmt->execute()) {
   			echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
 		}
-		header("Location: ff.php");
+
+		//get id for session
+		$id = mysql_insert_id();
+
+		//set session variables for session peristence
+		//user will be automatically logged in upon successful registration
+		session_start();
+		$_SESSION['id'] = $id;
+		$_SESSION['email'] = $email;
+		$_SESSION['logged_in'] = true;
+		$_SESSION['first_name'] = $firstName;
+
+		//redirect to application index
+		header("Location: index.php");
 		exit;
 	}
-
 ?>
 <!doctype html>
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Registration with JQuery Validate</title>
+	<title>SCVWD Flood Forecast System - Account Settings</title>
 	<link rel="stylesheet" href="assets/css/cmxform.css">
 	<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="assets/css/registration.css">
-
 </head>
 <body>
 	<div id="bg"><img src="assets/images/rainbg.jpg" width="100%" height="100%" alt=""></div>
@@ -173,10 +169,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 										<label for="carrier_select">Cell Carrier</label>
 										<select class="form-control" name="carrier_select" id="carrier_select">
 											<option value="">Choose...</option>
-											<option value="verizon">Verizon</option>
-											<option value="att">AT&T</option>
-											<option value="sprint">Sprint</option>
-											<option value="tmobile">T-Mobile</option>
+											<option value="Verizon">Verizon</option>
+											<option value="ATT">AT&T</option>
+											<option value="Sprint">Sprint</option>
+											<option value="T-Mobile">T-Mobile</option>
 										</select>
 									</div>
 								</td>
@@ -222,10 +218,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 			rules: {
 				first_name: "required",
 				last_name:"required",
-				city:"required",
 				email: {
 					required: true,
 					email: true
+				},
+				zip_code:{
+					minlength: 5,
+                    maxlength: 5,
+                    digits: true
 				},
 			 	email_confirm: {
 			 		required: true,
@@ -253,12 +253,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 				carrier_select: "Please Select"
 			},
 		 	submitHandler: function(form) {
-		 		alert("test");
-				form.submit();
+		 		alert("before ajax to email validate");
+		 		var email_val = $('#email').val();
+
+		 		//check if email address doesn't already exist
+		 		$.ajax({
+					type: "GET",
+					url: "uniqueEmailValidate.php",
+					datatype: "string",
+					data: {email: email_val},
+					success: function(data, textStatus, jqXHR){
+						// alert(data);
+						if($.trim(data)=="0"){
+							alert("valid email");
+							form.submit();
+						}else{
+							alert("Please enter a different email address.");
+						}
+					},
+					error: function(data, textStatus, jqXHR){
+						alert("ajax error!");
+					}
+				});
 			}
 		});
 	});
-
 </script>
 </body>
 </html>
