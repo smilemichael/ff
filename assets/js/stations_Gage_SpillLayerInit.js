@@ -56,9 +56,6 @@ for(var i=0;i<jarvis_numSpillLayers;i++){
         }
     );
 }
-
-
-
 //////////END STATION51 SPILL ZONEINIT/////////////////////////////////
 
 //////////START STA93 SPILL ZONE INIT/////////////////////////////////
@@ -90,8 +87,8 @@ for(var i=0;i<ross2_numSpillLayers;i++){
             protocol: new OpenLayers.Protocol.HTTP({
                 url: "http://10.25.5.112:8080/geoserver/scvwd/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=scvwd:" + ross2_spillLayerNames[i] +"&outputFormat=json&mode=download" ,
                 format: new OpenLayers.Format.GeoJSON({
-                    extractStyles: true,
-                    extractAttributes: true
+                    extractStyles: false,
+                    extractAttributes: false
                     // maxDepth: 10
                 }) 
             }),
@@ -102,6 +99,19 @@ for(var i=0;i<ross2_numSpillLayers;i++){
     );
 }
 
+
+// //instantiate ross2 spill layers wms
+// for(var i=0;i<ross2_numSpillLayers;i++){
+//     sta93_Ross2_SpillLayers[i] = new OpenLayers.Layer.WMS(
+//         ross2_spillLayerNames[i],
+//         "http://10.25.5.112:8080/geoserver/wms/scvwd", 
+//         {
+//             layers: 'scvwd:' + ross2_spillLayerNames[i], 
+//             transparent:"true",
+//             styles: "green"}, 
+//         {isBaseLayer:false, opacity: 1, singleTile: true, visibility: true} 
+//     );
+// }
 
 //instantiate ross1 spill layers
 for(var i=0;i<ross1_numSpillLayers;i++){
@@ -233,8 +243,8 @@ for(var i=0;i<middlefieldR_numSpillLayers;i++){
             protocol: new OpenLayers.Protocol.HTTP({
                 url: "http://10.25.5.112:8080/geoserver/scvwd/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=scvwd:" + middlefieldR_spillLayerNames[i] +"&outputFormat=json&mode=download" ,
                 format: new OpenLayers.Format.GeoJSON({
-                    extractStyles: true,
-                    extractAttributes: true
+                    extractStyles: false,
+                    extractAttributes: false
                     // maxDepth: 10
                 }) 
             }),
@@ -347,13 +357,11 @@ for(var i=0;i<popeChaucerR_numSpillLayers;i++){
             }),
             strategies: [new OpenLayers.Strategy.Fixed({preload: true})],
             visibility: false,
-            displayInLayerSwitcher: true
+            displayInLayerSwitcher: false
         }
     );
 }
-//////////END STA112 SPILLZONE INIT/////////////////////////////
-
-
+//////////END STA112 SPILLZONE INIT////////////////////////////////
 /////////START STYLING RULES FOR ALL SPILL LAYERS//////////////////
 var spill_vector_style = new OpenLayers.Style({
   'fillColor':'#0033CC',
@@ -615,7 +623,7 @@ var sta117_spillExtent =  new OpenLayers.Bounds(-13547493.618568, 4451161.743461
 var sta117_floodWatch = 200;
 var sta117_floodWarning = 350;
 var station117 = new Gage(117, 1, sta117_spillZoneNames, sta117_spillZones, sta117_spillExtent, sta117_floodWatch, sta117_floodWarning);
-// //////////END STATION117 OBJECT INIT/////////////////////////////////
+////////////END STATION117 OBJECT INIT/////////////////////////////////
 
 //////////START STATION112 OBJECT CONFIGURATION///////////////////////////////////
 /////////////////STATION112 Middlefield L SPILL ZONE OBJECT CONFIGURATION/////////////////
@@ -720,7 +728,6 @@ SpillZone.prototype.getLayerFromSpillRate = function(spillRate){
             return this.spillRatesToLayers[currSpillRate];
         }
     }
-
 }
 
 function Gage(staNum, numSpillZones, spillZoneNames, spillZones, spillExtent, floodWatch, floodWarning){
@@ -753,7 +760,6 @@ Gage.prototype.displaySpill = function(tIndex){
             map.zoomToExtent(this.spillExtent, true);
         }
     }
-
 }
 
 Gage.prototype.hideSpillLayers = function(){
@@ -767,7 +773,6 @@ Gage.prototype.hideSpillLayers = function(){
             spillZone.displayedLayers = [];
         }
     }
-
 }
 
 //display gage's spillzone layers for particular flood event
@@ -785,7 +790,6 @@ Gage.prototype.displayFloodEvent = function(floodEvent){
         }
     }
     map.zoomToExtent(this.spillExtent, true);
-
 }
 ///////////////////END GAGE OBJECT CODE/////////////////////
 

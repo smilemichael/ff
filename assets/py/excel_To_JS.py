@@ -53,8 +53,6 @@ for c in range(2, shtFlow.ncols):
     for r in range(7, shtFlow.nrows):
         #date_value may used as x argument for highcharts plot
         date_value = xldate_as_tuple(shtFlow.cell(r,1).value,wrkFlow.datemode)
-        #pydate_value used to determine current time
-        
         #months are from 0-11 in highcharts, so subract 1 from month value in date_value
         #to modify date tuple, date_value must be turned into a list
         dv_lst = list(date_value)

@@ -1,4 +1,3 @@
-//globals
 //OpenLayers projections
 var proj_4326 = new OpenLayers.Projection('EPSG:4326'); //lat, lon
 var proj_900913 =  new OpenLayers.Projection('EPSG:900913'); //google maps projection
@@ -6,7 +5,7 @@ var proj_900913 =  new OpenLayers.Projection('EPSG:900913'); //google maps proje
 var map;
 
 //application state variables
-var stationNumber = null; //currently selected station
+var stationNumber = null; //currently selected station number
 var selectedStation = null;
 var previousStation = null; //previously selected station, for switching off spill layers
 
@@ -122,7 +121,13 @@ function computeBBox(lonlat, gageType){
 }
 
 function loadPlot(staID){
-    $('#fcPlot').load("assets/php/charts/fc_plot_panel_demo.php?id=" + staID);
+
+    //station 112 historic data not in datawise, so a different script is used to render the stream flow hydrograph
+    if(staID == "112"){
+        $('#fcPlot').load("assets/php/charts/fc_plot_usgs.php");
+    }else{
+        $('#fcPlot').load("assets/php/charts/fc_plot_scvwd.php?id=" + staID);
+    }
 }
 
 function featureOver(feature){

@@ -66,7 +66,6 @@ select_feature_control = new OpenLayers.Control.SelectFeature(
         multiple:false,
         toggle: true,
         toggleKey: 'ctrlKey',
-        multipleKey: 'shiftKey',
         box:false,
         callbacks: {
             over: featureOver,
@@ -127,19 +126,17 @@ function forecast_selected_feature(event){
     }else if(event.feature.attributes.STA_NUMBER === "117"){ //West Little Llagas blw
         loadPlot("1467");
         $('#fcAnimatePanel').css("visibility", "visible");
-           $( "#forecastInfo" ).tabs( "enable", 2 );
+        $( "#forecastInfo" ).tabs( "enable", 2 );
         $( "#forecastInfo" ).tabs( "option", "active", 0 );
     }else if(event.feature.attributes.STA_NUMBER === "112"){ //San Francisquito Ck at Stanford
-        $('#fcPlot').html("No Plot Data Available");
+        loadPlot("112");
+        $('#fcAnimatePanel').css("visibility", "visible");
         $( "#forecastInfo" ).tabs( "option", "active", 0 );
         $( "#forecastInfo" ).tabs( "enable", 2 )
     }
+    
     $('#forecastInfo').slideDown(); //forecast gage info made visible
-
-    //turn off spill layers that may have been displayed for previously selected gage
-    // if(previousStation != null){
-    //     previousStation.hideAllSpillLayers();
-    // }
+    
     stationNumber = event.feature.attributes.STA_NUMBER; 
     //save station number of currently selected gage
     selectedStation = stationObjects[stationNumber];
@@ -156,13 +153,11 @@ function forecast_selected_feature(event){
 //handler for forecast gage deselection
 function forecast_unselected_feature(event){
     previousStation = selectedStation;
-    previousStation = selectedStation; //set prevous station variable
-    $('#fcAnimatePanel').css("visibility", "hidden");//demo, hide animate controls
-    if(fcAnimate == true){
+    if(fcAnimate == true){ //stop animation if its playing
         stopFAnimate();
     }
     $('#forecastInfo').slideUp();
-    selectedStation = null;
+    selectedStation = null; //no station is currently selected
     $('#floodDemoSelect').val("default");//reset flood event select
 }
 
