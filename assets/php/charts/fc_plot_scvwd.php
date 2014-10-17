@@ -3,7 +3,7 @@
 var dataSetFlowHistoric=[];
 <?php
 	// Load Config Database File
-    require_once("config/config_database.php");
+    require_once("../db/config_db_alertd_datawise.php");
     $id = $_GET["id"]; //ids array
     $tarray = array(); //time array
     $darray = array(); //date array
@@ -87,6 +87,7 @@ var dataSetFlowHistoric=[];
             $fcFlowVar = "sta117_fcFlow";
             $fcSpillDataFiles = array("sta117_WLL_fcSpillTimeSeries.js");
             $fcSpillVars = array("WLL");
+            $name = "West Little Llagas blw Edmundson Ave";
             $fc = false;
             break;
     }

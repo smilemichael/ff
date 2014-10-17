@@ -2,7 +2,7 @@
 
 <?php
 	// Validate users login credentials
-	require_once("db_connect.php");
+	require_once("../assets/php/db/db_connect.php");
 
 	//salt for cryptographic hash function
     $salt ="salt";

@@ -1,6 +1,6 @@
 //handler for user gage registration
 function alertMe(){
-    var jqxhr = $.ajax( "alertMe.php?sta=" + stationNumber)
+    var jqxhr = $.ajax( "controllers/alertMe.php?sta=" + stationNumber)
         .done(function() {
             // alert( "success" );
             $('#alertGageRegistrationMessage').html(registeredForGageMessage);
@@ -23,7 +23,7 @@ function alertMe(){
 
 //handler for user gage unsubscription
 function unAlertMe(){
-    var jqxhr = $.ajax( "unAlertMe.php?sta=" + stationNumber)
+    var jqxhr = $.ajax( "controllers/unAlertMe.php?sta=" + stationNumber)
         .done(function() {
             $('#alertGageRegistrationMessage').html(notRegisteredForGageMessage);
             $('#registrationControl').html('<button class="btn btn-default" id="btnAlertMe" data-gage-number="' + stationNumber +'">ALERT Me!</button>' +

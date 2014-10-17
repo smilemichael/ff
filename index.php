@@ -2,12 +2,11 @@
 	session_start();
 	//check logged in session variable and set client side variables
 	if(isset($_SESSION['logged_in'])){
-	    	require_once("db_connect.php");
+	    	require_once("assets/php/db/db_connect.php");
 			$loggedIn = true;
 			$query = "SELECT * FROM scvwd.user_gages WHERE user_id='".$_SESSION['id']."'";
 			$res = $mysqli->query($query) or trigger_error($mysqli->error."[$sql]");
 		 	$row_gages = $res->fetch_array();
-
 		 	//client side variable to hold gage subscription states
 		 	//FIX for IE script cannot be placed outside of HTML tags
 		 	echo "<script>var gages = {'gage_51':'".$row_gages['col_51']."', 'gage_93':'".$row_gages['col_93']."', 'gage_23':'".$row_gages['col_23']."', 'gage_117':'".$row_gages['col_117']."'};</script>";
@@ -18,7 +17,7 @@
 	//POST request handler for site log in
 	if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     	//connect to DB
-    	require_once("db_connect.php");
+    	require_once("assets/php/db/db_connect.php");
     	//salt for crypt function
 	    $salt ="salt";
 
@@ -30,7 +29,6 @@
 	    //check if provided password matches password stored in DB
 		if($row["password"] == crypt($_POST['password'], $salt)){
 			$loggedIn=true;
-
 			//set session variables for session persistence
 			$_SESSION['id'] = $row['id'];
 			$_SESSION['email'] = $row['email'];
@@ -39,7 +37,7 @@
 
 			//TODO set session variables for gage subscription and session resumption
 			//js variable for gage registration states
-		 	header( 'Location: index.php' ); 
+		 	header('Location: index.php'); 
 		}else{
 			$loggedIn=false;
 		}
@@ -63,16 +61,16 @@
 		<div id="myNav">
 			<!-- if user logs in update navbar to show welcome message, account link, and log out link -->
 			<?php if($loggedIn == true){ ?>
-				<p class="navbar-text">Welcome, <?php echo $_SESSION['first_name']?>:&nbsp
-				<a href='userAccount.php?id=<?php echo $_SESSION['id']?>' target="_self">My Account&nbsp</a>|
-				<a href = "logout.php">&nbspLog out</a></label></p>
+				<p class="navbar-text">Welcome, <?= $_SESSION['first_name']?>:&nbsp
+				<a href='views/userAccount.php' target="_self">My Account&nbsp</a>|
+				<a href = "controllers/logout.php">&nbspLog out</a></label></p>
 			<?php	}else{ ?>
 				<form class="" role="search" id="signInNavBar" action="index.php" method="post" style="margin-left:25px;margin-top:8px;display:inline-block">
                     <div class="form-group" style="display:inline;">
                         <input style="width:200px;display:inline;" type="text" name="email" id="email" class="form-control" placeholder="email">
                         <input style="width:200px;display:inline;" type="password" name="password" id="password" class="form-control" placeholder="password">
                     </div>
-                    <button style="display:inline;" type="submit" class="btn btn-default btn-sm">Sign In</button>&nbspOr&nbsp<a href="registration_jv.php">Register</a>
+                    <button style="display:inline;" type="submit" class="btn btn-default btn-sm">Sign In</button>&nbspOr&nbsp<a href="views/registration_jv.php">Register</a>
                 </form>
 			<?php } ?>
 				<div class="pull-right" style='white-space:nowrap;margin-right:25px;'>
@@ -92,7 +90,7 @@
 						</ul>
 					</div>
 				</div>
-				<a href="help.html" target="_blank">
+				<a href="views/help.html" target="_blank">
 					<button  type="submit" id="btnHelp" class="btn btn-info" style="margin-top:8px;">
 						<span class="glyphicon glyphicon-info-sign"></span>&nbsp Help
 					</button>
@@ -188,7 +186,7 @@
 						</div>
 						<div class="row" style="padding-top:20px;">
 							<h4> Register Now</h4>
-							<a href="registration_jv.php"><button class="btn btn-success">Register</button></a>
+							<a href="views/registration_jv.php"><button class="btn btn-success">Register</button></a>
 						</div>
 					</div>
 				<?php	} else{ ?>
@@ -268,7 +266,7 @@
 				 		var password = $('#password').val();
 				 		$.ajax({
 							type: "GET",
-							url: "signInValidate.php",
+							url: "controllers/signInValidate.php",
 							datatype: "string",
 							data: {email: email, password: password},
 							success: function(data, textStatus, jqXHR) {
@@ -315,7 +313,7 @@
 				 		var password_p = $('#password_p').val();
 				 		$.ajax({
 							type: "GET",
-							url: "signInValidate.php",
+							url: "controllers/signInValidate.php",
 							datatype: "string",
 							data: {email: email_p, password: password_p},
 							success: function(data, textStatus, jqXHR) {

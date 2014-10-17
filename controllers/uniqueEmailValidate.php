@@ -1,5 +1,5 @@
 <?php
-	require_once("db_connect.php");
+	require_once("../assets/php/db/db_connect.php");
 
 	$email = $_GET["email"];
 	$query = "SELECT email FROM scvwd.users WHERE email = '" . $email . "'";

@@ -1,0 +1,15 @@
+td.dataLabel{
+	width: 200px;
+}
+
+.accountTableLabel{
+	background-color: #CCFFFF;
+}
+
+.error {
+   color: red;
+}
+
+.navbar-outer{
+	width: 800px;
+}

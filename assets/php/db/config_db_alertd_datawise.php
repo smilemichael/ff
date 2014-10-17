@@ -1,10 +1,9 @@
 <?php
 	// Set MySQL Connection / Login Variables
-	$db_hostname = "localhost";
-	//$db_database = "mysql";
-	$db_database = "scvwd";
+	$db_hostname = "ALERTD";
+	$db_database = "datawise";
 	$db_username = "root";
-	$db_password = "mysql";
+	$db_password = "datawise";
 ?>
 
 <?php

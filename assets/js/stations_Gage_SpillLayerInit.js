@@ -236,13 +236,16 @@ var middlefieldR_spillLayerNames = ["112_MiddlefieldR_100cfs", "112_MiddlefieldR
 var sta112_MiddlefieldR_SpillLayers = new Array();
 
 //instantiate SFQ MiddleField R spill layers
+//testing kml mirror
 for(var i=0;i<middlefieldR_numSpillLayers;i++){
     sta112_MiddlefieldR_SpillLayers[i] = new OpenLayers.Layer.Vector(
     middlefieldR_spillLayerNames[i],
         {
             protocol: new OpenLayers.Protocol.HTTP({
-                url: "http://10.25.5.112:8080/geoserver/scvwd/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=scvwd:" + middlefieldR_spillLayerNames[i] +"&outputFormat=json&mode=download" ,
-                format: new OpenLayers.Format.GeoJSON({
+                // url: "http://10.25.5.112:8080/geoserver/scvwd/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=scvwd:" + middlefieldR_spillLayerNames[i] +"&outputFormat=json&mode=download" ,
+                url: "http://10.25.5.112:8080/geoserver/wms/kml?layers=scvwd:" + middlefieldR_spillLayerNames[i] + "&mode=download",
+                // url: "http://10.25.5.112:8080/geoserver/wms?BBOX=-122,37,-121,38&height=1024&width=1024&layers=scvwd:" + middlefieldR_spillLayerNames[i] + "&request=GetMap&service=wms&styles=polygon&format_options=SUPEROVERLAY:false;KMPLACEMARK:false;KMSCORE:40;KMATTR:true;&srs=EPSG:4326&format=application/vnd.google-earth.kmz&transparent=false&version=1.1.1",
+                format: new OpenLayers.Format.KML({
                     extractStyles: false,
                     extractAttributes: false
                     // maxDepth: 10
@@ -253,6 +256,7 @@ for(var i=0;i<middlefieldR_numSpillLayers;i++){
             displayInLayerSwitcher: false
         }
     );
+
 }
 //////////DS101 L
 //DS101 L variables

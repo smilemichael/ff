@@ -1,11 +1,12 @@
 <?php
 	// Set MySQL Connection / Login Variables
-	// $db_hostname = "10.25.5.112";
-	$db_hostname = "ALERTD";
+	$db_hostname = "localhost";
 	//$db_database = "mysql";
 	$db_database = "scvwd";
 	$db_username = "root";
-	$db_password = "datawise";
+	// $db_password = "DiamondIce"; //localmachine
+	$db_password = "mysql"; //cubemachine
+
 ?>
 
 <?php

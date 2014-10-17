@@ -1,6 +1,6 @@
 <?php
 	//TODO http referer must be from user account page
-	require_once("db_connect.php");
+	require_once("../assets/php/db/db_connect.php");
 	session_start();
 	$query = "DELETE FROM scvwd.users WHERE id = '" . $_GET['id'] . "'";
  	if (!($stmt = $mysqli->prepare($query))) {
@@ -15,6 +15,6 @@
 	</head>
 	<body>
 		<p>You have successfully unsubscribed from the flood forecast system.</p>
-		<p><a href="index.php">Return to flood forecast system</a> 
+		<p><a href="../index.php">Return to flood forecast system</a> 
 	</body>
 </html>
