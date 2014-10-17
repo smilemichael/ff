@@ -75,11 +75,11 @@
 			<?php } ?>
 				<div class="pull-right" style='white-space:nowrap;margin-right:25px;'>
 				<div id="controls" style="display:inline-block;">
-					<div class="btn-group" id="signInNavBar">
-						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="margin-top:8px;">
+					<!-- <div class="btn-group" id="signInNavBar"> -->
+					<!-- 	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="margin-top:8px;">
 							View Select&nbsp<span class="caret"></span>
-						</button>
-						<ul class="dropdown-menu" role="menu">
+						</button> -->
+						<!-- <ul class="dropdown-menu" role="menu">
 							<li><a id="countyView">County</a></li>
 							<li><a id="sanJoseView">San Jose</a></li>
 							<li><a id="santaClaraView">Santa Clara</a></li>
@@ -88,7 +88,17 @@
 							<li><a id="paloAltoView">Palo Alto</a></li>
 							<li><a id="sunnyvaleView">Sunnyvale</a></li>
 						</ul>
-					</div>
+					</div> -->
+					<select id="sbViewSelect" class="form-control">
+				  		<option><strong>View Select</strong></option>
+				  		<option>County</option>
+						<option>Los Altos</option>
+						<option>Milpitas</option>
+						<option>Palo Alto</option>
+						<option>San Jose</option>
+						<option>Santa Clara</option>
+						<option>Sunnyvale</option>
+					</select>
 				</div>
 				<a href="views/help.html" target="_blank">
 					<button  type="submit" id="btnHelp" class="btn btn-info" style="margin-top:8px;">
