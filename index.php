@@ -129,12 +129,12 @@
 			                            <span class='glyphicon glyphicon-stop'></span>&nbspstop
 			                        </button>
 			                    </a>
-			                    <hr/>
+			                    <!-- <hr/>
 			                    <p><strong>&nbsp&nbspDownload KML</strong></p>
 		                       	<button id="btnDownloadKML" class='btn btn-default btn-sm' style='margin-left:10px;'>
 		                            <span class='glyphicon glyphicon-download'></span>&nbspDownload
 		                        </button> 
-		                        <a href="" style="visibility:hidden;" id="linkKMLDownload">download kml</a>
+		                        <a href="" style="visibility:hidden;" id="linkKMLDownload">download kml</a> -->
 			                </div>
 						</div>
 					</div>
@@ -221,16 +221,16 @@
 		<script>
 			$(document).ready(function () {
 
-				$('#btnDownloadKML').on("click", function(){
-					$('#linkKMLDownload').trigger('click');
-				});
+				// $('#btnDownloadKML').on("click", function(){
+				// 	$('#linkKMLDownload').trigger('click');
+				// });
 
-				$("#linkKMLDownload").click(function(event){
-					event.preventDefault();
-					var link = $(this);
-					var link = "downloadKML.php?station=" + stationNumber + "&layer=" + currentSpillLayerNames[0];
-					window.location = link;
-				});
+				// $("#linkKMLDownload").click(function(event){
+				// 	event.preventDefault();
+				// 	var link = $(this);
+				// 	var link = "downloadKML.php?station=" + stationNumber + "&layer=" + currentSpillLayerNames[0];
+				// 	window.location = link;
+				// });
 	
 				//TODO consolidate sign in validation for both forms
 				//navbar sign-in validation
