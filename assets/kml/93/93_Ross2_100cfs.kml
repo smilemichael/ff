@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?><kml xmlns="http://www.opengis.net/kml/2.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/kml/2.2 http://schemas.opengis.net/kml/2.2.0/ogckml22.xsd">
+   <Document xmlns:atom="http://purl.org/atom/ns#">
+      <name>scvwd:93_Ross2_100cfs</name>
+      <LookAt>
+         <longitude>-121.8726036318935</longitude>
+         <latitude>37.27588851745685</latitude>
+         <altitude>937.2505228339373</altitude>
+         <range>757.3475828052462</range>
+         <tilt>0.0</tilt>
+         <heading>0.0</heading>
+         <altitudeMode>clampToGround</altitudeMode>
+      </LookAt>
+      <Placemark id="93_Ross2_100cfs.1">
+         <name><![CDATA[93_Ross2_100cfs.1]]></name>
+         <description><![CDATA[<h4>93_Ross2_100cfs</h4>
+
+<ul class="textattributes">
+  
+  <li><strong><span class="atr-name">Range</span>:</strong> <span class="atr-value">1</span></li>
+</ul>
+]]></description>
+         <LookAt>
+            <longitude>-121.8726036318935</longitude>
+            <latitude>37.27588851745685</latitude>
+            <altitude>937.2505228339373</altitude>
+            <range>757.3475828052462</range>
+            <tilt>0.0</tilt>
+            <heading>0.0</heading>
+            <altitudeMode>clampToGround</altitudeMode>
+         </LookAt>
+         <Style>
+            <IconStyle>
+               <color>00ffffff</color>
+               <scale>0.4</scale>
+               <Icon>
+                  <href>http://icons.opengeo.org/markers/icon-poly.1.png</href>
+               </Icon>
+            </IconStyle>
+            <LabelStyle>
+               <color>00ffffff</color>
+            </LabelStyle>
+            <PolyStyle>
+               <color>ffaaaaaa</color>
+               <outline>1</outline>
+            </PolyStyle>
+            <LineStyle>
+               <color>ff000000</color>
+               <width>1</width>
+            </LineStyle>
+         </Style>
+         <MultiGeometry>
+            <Point>
+               <coordinates>-121.87272724346721,37.275938267472895</coordinates>
+            </Point>
+            <Polygon>
+               <outerBoundaryIs>
+                  <LinearRing>
+                     <coordinates>-121.86968504,37.27536136 -121.8693414,37.27536538 -121.86933637,37.27509076 -121.86933134,37.27481614 -121.86967498,37.27481212 -121.87001863,37.2748081 -121.87002366,37.27508272 -121.86968001,37.27508674 -121.86968504,37.27536136</coordinates>
+                  </LinearRing>
+               </outerBoundaryIs>
+            </Polygon>
+            <Polygon>
+               <outerBoundaryIs>
+                  <LinearRing>
+                     <coordinates>-121.86968504,37.27536136 -121.87002869,37.27535734 -121.87003372,37.27563196 -121.86969007,37.27563598 -121.86968504,37.27536136</coordinates>
+                  </LinearRing>
+               </outerBoundaryIs>
+            </Polygon>
+            <Polygon>
+               <outerBoundaryIs>
+                  <LinearRing>
+                     <coordinates>-121.87315177,37.27696882 -121.87349542,37.27696479 -121.87350046,37.27723941 -121.87315681,37.27724344 -121.87315177,37.27696882</coordinates>
+                  </LinearRing>
+               </outerBoundaryIs>
+            </Polygon>
+            <Polygon>
+               <outerBoundaryIs>
+                  <LinearRing>
+                     <coordinates>-121.87143853,37.27726358 -121.87178219,37.27725955 -121.87177715,37.27698493 -121.8721208,37.27698091 -121.87211576,37.27670629 -121.87177211,37.27671031 -121.87142846,37.27671434 -121.8714335,37.27698896 -121.87143853,37.27726358 -121.87109488,37.2772676 -121.87108984,37.27699298 -121.87108481,37.27671836 -121.87074115,37.27672239 -121.87073612,37.27644777 -121.87039247,37.27645179 -121.87038744,37.27617717 -121.8703824,37.27590255 -121.87037737,37.27562794 -121.87072102,37.27562391 -121.87071598,37.2753493 -121.87071095,37.27507468 -121.8710546,37.27507065 -121.87104956,37.27479604 -121.87104453,37.27452142 -121.87103949,37.2742468 -121.87103446,37.27397218 -121.87102942,37.27369756 -121.87137306,37.27369354 -121.8713781,37.27396816 -121.87172174,37.27396413 -121.87172677,37.27423875 -121.87138313,37.27424278 -121.87138817,37.27451739 -121.87139321,37.27479201 -121.87173685,37.27478799 -121.87208049,37.27478396 -121.87208553,37.27505858 -121.87209057,37.2753332 -121.87243422,37.27532917 -121.87242918,37.27505455 -121.87277282,37.27505052 -121.87311647,37.2750465 -121.87312151,37.27532111 -121.87346516,37.27531708 -121.87346011,37.27504246 -121.87380376,37.27503843 -121.8741474,37.2750344 -121.87414236,37.27475978 -121.874486,37.27475575 -121.87482964,37.27475172 -121.87517329,37.27474768 -121.87551693,37.27474365 -121.87552198,37.27501826 -121.87552703,37.27529288 -121.87587068,37.27528884 -121.87587573,37.27556346 -121.87553208,37.2755675 -121.87553714,37.27584212 -121.87519349,37.27584615 -121.87519854,37.27612077 -121.87485489,37.27612481 -121.87451124,37.27612884 -121.87416759,37.27613287 -121.87382394,37.27613691 -121.87382898,37.27641152 -121.87383403,37.27668614 -121.87349038,37.27669017 -121.87314672,37.2766942 -121.87315177,37.27696882 -121.87280811,37.27697285 -121.87281315,37.27724747 -121.8724695,37.2772515 -121.87247454,37.27752612 -121.87281819,37.27752209 -121.87281315,37.27724747 -121.87315681,37.27724344 -121.87316185,37.27751806 -121.87316689,37.27779268 -121.87282324,37.27779671 -121.87247958,37.27780073 -121.87248462,37.27807535 -121.87214096,37.27807938 -121.8717973,37.27808341 -121.87179226,37.27780879 -121.87213592,37.27780476 -121.87213088,37.27753014 -121.87178723,37.27753417 -121.87144357,37.27753819 -121.87143853,37.27726358</coordinates>
+                  </LinearRing>
+               </outerBoundaryIs>
+               <innerBoundaryIs>
+                  <LinearRing>
+                     <coordinates>-121.8731316,37.27587035 -121.87312655,37.27559573 -121.8727829,37.27559976 -121.87243926,37.27560379 -121.8724443,37.27587841 -121.87278795,37.27587438 -121.8731316,37.27587035</coordinates>
+                  </LinearRing>
+               </innerBoundaryIs>
+               <innerBoundaryIs>
+                  <LinearRing>
+                     <coordinates>-121.87175196,37.27561184 -121.87174692,37.27533722 -121.87174189,37.27506261 -121.87139824,37.27506663 -121.87140328,37.27534125 -121.87140831,37.27561587 -121.87175196,37.27561184</coordinates>
+                  </LinearRing>
+               </innerBoundaryIs>
+            </Polygon>
+         </MultiGeometry>
+      </Placemark>
+      <Placemark id="93_Ross2_100cfs.2">
+         <name><![CDATA[93_Ross2_100cfs.2]]></name>
+         <description><![CDATA[<h4>93_Ross2_100cfs</h4>
+
+<ul class="textattributes">
+  
+  <li><strong><span class="atr-name">Range</span>:</strong> <span class="atr-value">2</span></li>
+</ul>
+]]></description>
+         <LookAt>
+            <longitude>-121.87362695547077</longitude>
+            <latitude>37.27588245443743</latitude>
+            <altitude>667.9030691418457</altitude>
+            <range>539.7007124981953</range>
+            <tilt>0.0</tilt>
+            <heading>0.0</heading>
+            <altitudeMode>clampToGround</altitudeMode>
+         </LookAt>
+         <Style>
+            <IconStyle>
+               <color>00ffffff</color>
+               <scale>0.4</scale>
+               <Icon>
+                  <href>http://icons.opengeo.org/markers/icon-poly.1.png</href>
+               </Icon>
+            </IconStyle>
+            <LabelStyle>
+               <color>00ffffff</color>
+            </LabelStyle>
+            <PolyStyle>
+               <color>ffaaaaaa</color>
+               <outline>1</outline>
+            </PolyStyle>
+            <LineStyle>
+               <color>ff000000</color>
+               <width>1</width>
+            </LineStyle>
+         </Style>
+         <MultiGeometry>
+            <Point>
+               <coordinates>-121.8717190341091,37.27693983413883</coordinates>
+            </Point>
+            <Polygon>
+               <outerBoundaryIs>
+                  <LinearRing>
+                     <coordinates>-121.87138313,37.27424278 -121.87172677,37.27423875 -121.87173181,37.27451337 -121.87173685,37.27478799 -121.87139321,37.27479201 -121.87138817,37.27451739 -121.87138313,37.27424278</coordinates>
+                  </LinearRing>
+               </outerBoundaryIs>
+            </Polygon>
+            <Polygon>
+               <outerBoundaryIs>
+                  <LinearRing>
+                     <coordinates>-121.87552198,37.27501826 -121.87586563,37.27501423 -121.87587068,37.27528884 -121.87552703,37.27529288 -121.87552198,37.27501826</coordinates>
+                  </LinearRing>
+               </outerBoundaryIs>
+            </Polygon>
+            <Polygon>
+               <outerBoundaryIs>
+                  <LinearRing>
+                     <coordinates>-121.87208553,37.27505858 -121.87242918,37.27505455 -121.87243422,37.27532917 -121.87209057,37.2753332 -121.87208553,37.27505858</coordinates>
+                  </LinearRing>
+               </outerBoundaryIs>
+            </Polygon>
+            <Polygon>
+               <outerBoundaryIs>
+                  <LinearRing>
+                     <coordinates>-121.87139824,37.27506663 -121.87174189,37.27506261 -121.87174692,37.27533722 -121.87175196,37.27561184 -121.87140831,37.27561587 -121.87140328,37.27534125 -121.87139824,37.27506663</coordinates>
+                  </LinearRing>
+               </outerBoundaryIs>
+            </Polygon>
+            <Polygon>
+               <outerBoundaryIs>
+                  <LinearRing>
+                     <coordinates>-121.8727829,37.27559976 -121.87312655,37.27559573 -121.8731316,37.27587035 -121.87278795,37.27587438 -121.8724443,37.27587841 -121.87243926,37.27560379 -121.8727829,37.27559976</coordinates>
+                  </LinearRing>
+               </outerBoundaryIs>
+            </Polygon>
+            <Polygon>
+               <outerBoundaryIs>
+                  <LinearRing>
+                     <coordinates>-121.87177211,37.27671031 -121.87211576,37.27670629 -121.8721208,37.27698091 -121.87177715,37.27698493 -121.87178219,37.27725955 -121.87143853,37.27726358 -121.8714335,37.27698896 -121.87142846,37.27671434 -121.87177211,37.27671031</coordinates>
+                  </LinearRing>
+               </outerBoundaryIs>
+            </Polygon>
+            <Polygon>
+               <outerBoundaryIs>
+                  <LinearRing>
+                     <coordinates>-121.8724695,37.2772515 -121.87281315,37.27724747 -121.87281819,37.27752209 -121.87247454,37.27752612 -121.8724695,37.2772515</coordinates>
+                  </LinearRing>
+               </outerBoundaryIs>
+            </Polygon>
+         </MultiGeometry>
+      </Placemark>
+   </Document>
+</kml>

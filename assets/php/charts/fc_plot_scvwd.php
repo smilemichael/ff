@@ -112,17 +112,13 @@ var year, month, date, hour, minute;
 //add now to the historic data set
 var now = new Date().getTime() - 28800000; //subtract 8 hours (gmt->pst)
 
-//LOOK INTO interpolations between last historic point and first forecast point
-dataSetFlowHistoric.push([now, 0]);
 
 var nowFC = new Date().getTime() - 28800000; //subtract 8 hours (gmt->pst)
 var dataSetFlowForecast = [];
 var fcTimeIndex = [];
 
 $(document).ready(function(){
-    //add now to forecast array
-    dataSetFlowForecast.push([now, 0]);
-    fcTimeIndex.push(now);
+
     //initialize forecast array
     //first find correct index to start addding forecast data stamps from
     var fcCurrIndex = 0;
@@ -132,6 +128,19 @@ $(document).ready(function(){
             break;
          }
     }
+
+    //interpolate between last point in historic flow dataset and first point in forecast flow dataset
+    // if(dataSetFlowHistoric.length > 0)
+    lastPtHistoricFlow = dataSetFlowHistoric[dataSetFlowHistoric.length-1][1];
+    firstPtForecastFlow = <?=$fcFlowVar?>[fcCurrIndex][1];
+    //linear interpolation
+    interpolation = (lastPtHistoricFlow + firstPtForecastFlow)/2;
+
+    //add now to historic array
+    dataSetFlowHistoric.push([now, interpolation]);
+    //add now to forecast array
+    dataSetFlowForecast.push([now, interpolation]);
+    fcTimeIndex.push(now);
 
     //TODO make dynamic for all fcSpillZones
     <?php
@@ -143,6 +152,7 @@ $(document).ready(function(){
                 echo "selectedStation.spillZones['" . $fcSpillVars[$i] . "'].forecastData = " .  $fcSpillVars[$i] . ";";
             }
         }
+       
     ?>
 
     //determine num timepoints to use for forecast dataset
@@ -157,6 +167,12 @@ $(document).ready(function(){
         dataSetFlowForecast.push([<?=$fcFlowVar?>[i][0], <?=$fcFlowVar?>[i][1]]);
         fcTimeIndex.push(<?=$fcFlowVar?>[i][0]);
     }
+    <?php
+     //wll exception, forecast data is directly used for spill data
+        if(!$fc){
+            echo "selectedStation.spillZones['WLL'].forecastData = dataSetFlowForecast";
+        }
+    ?>
 
     chart = new Highcharts.Chart({
         chart: {
@@ -245,6 +261,7 @@ $(document).ready(function(){
                         click: function(e){
                             var x = this.x;
                             var tIndex = jQuery.inArray(x, fcTimeIndex);
+                            alert(tIndex);
                             selectedStation.displaySpill(tIndex);
                             this.select();
                             if(fcAnimate==true){

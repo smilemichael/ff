@@ -98,7 +98,7 @@ function init(){
     //zoom to county extent
     map.zoomToExtent(countyBounds);
     //disclaimer
-    // alert("GIS themes are for illustration and general analysis purposes only and are not accurate to surveying or engineering standards. Information is not guaranteed to be accurate, current or complete and use of this information is your responsibility")
+    
 }
 
 //get lon and lat of feature for zooming in on feature
@@ -170,7 +170,7 @@ function hideTooltip(){
 function fAnimate(){
    if (animationIndex === chart.series[1].data.length) {
         animationIndex = 0;
-        selectedStation.displaySpill(0);
+        // selectedStation.displaySpill(0);
         stopFAnimate();
     }
     var x = chart.series[1].data[animationIndex].x;
@@ -183,7 +183,7 @@ function fAnimate(){
 //stop flood animation function
 function stopFAnimate(){
     clearInterval(myInterval);
-    selectedStation.previousFlowRate = 0;
+    // selectedStation.previousFlowRate = 0;
     fcAnimate = false;
     $('.fccontrols').toggle();
 }
@@ -229,12 +229,16 @@ $(document).ready(function(){
         }
     });
     // view menu event handlers
-    $('#countyView').on("click", function(){map.zoomToExtent(countyBounds, true);});
-    $('#sanJoseView').on("click", function(){map.zoomToExtent(sanJoseBounds, true);});
-    $('#santaClaraView').on("click", function(){map.zoomToExtent(santaClaraBounds, true);});
-    $('#losAltosView').on("click", function(){map.zoomToExtent(losAltosBounds, true);});
-    $('#milpitasView').on("click", function(){map.zoomToExtent(milpitasBounds, true);});
-    $('#paloAltoView').on("click", function(){map.zoomToExtent(paloAltoBounds, true);});
-    $('#sunnyvaleView').on("click", function(){map.zoomToExtent(sunnyvaleBounds, true);});
+    $('#sbViewSelect').change(function(){
+        bounds = $('#sbViewSelect option:selected').val();
+        map.zoomToExtent(eval(bounds),true);
+    });
+
+    $('#btnDownloadKML').on("click", function(){
+        console.log("downloadbtn pushed");
+        selectedStation.downloadKML();
+        // $('#linkKMLDownload').trigger('click');
+    });
+
 });
 

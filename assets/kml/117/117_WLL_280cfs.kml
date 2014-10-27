@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?><kml xmlns="http://www.opengis.net/kml/2.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/kml/2.2 http://schemas.opengis.net/kml/2.2.0/ogckml22.xsd">
+   <Document xmlns:atom="http://purl.org/atom/ns#">
+      <name>scvwd:117_WLL_280cfs</name>
+      <LookAt>
+         <longitude>-121.67267716675406</longitude>
+         <latitude>37.135661118723014</latitude>
+         <altitude>187.49357399157302</altitude>
+         <range>151.50464213631992</range>
+         <tilt>0.0</tilt>
+         <heading>0.0</heading>
+         <altitudeMode>clampToGround</altitudeMode>
+      </LookAt>
+      <Placemark id="117_WLL_280cfs.1">
+         <name><![CDATA[117_WLL_280cfs.1]]></name>
+         <description><![CDATA[<h4>117_WLL_280cfs</h4>
+
+<ul class="textattributes">
+  
+  <li><strong><span class="atr-name">Range</span>:</strong> <span class="atr-value">1</span></li>
+</ul>
+]]></description>
+         <LookAt>
+            <longitude>-121.67267716675406</longitude>
+            <latitude>37.135661118723014</latitude>
+            <altitude>187.49357399157302</altitude>
+            <range>151.50464213631992</range>
+            <tilt>0.0</tilt>
+            <heading>0.0</heading>
+            <altitudeMode>clampToGround</altitudeMode>
+         </LookAt>
+         <Style>
+            <IconStyle>
+               <color>00ffffff</color>
+               <scale>0.4</scale>
+               <Icon>
+                  <href>http://icons.opengeo.org/markers/icon-poly.1.png</href>
+               </Icon>
+            </IconStyle>
+            <LabelStyle>
+               <color>00ffffff</color>
+            </LabelStyle>
+            <PolyStyle>
+               <color>ffaaaaaa</color>
+               <outline>1</outline>
+            </PolyStyle>
+            <LineStyle>
+               <color>ff000000</color>
+               <width>1</width>
+            </LineStyle>
+         </Style>
+         <MultiGeometry>
+            <Point>
+               <coordinates>-121.67243498500697,37.13571352729295</coordinates>
+            </Point>
+            <Polygon>
+               <outerBoundaryIs>
+                  <LinearRing>
+                     <coordinates>-121.67303346,37.13545102 -121.67293056,37.13545205 -121.67292927,37.13536966 -121.67303217,37.13536863 -121.67303346,37.13545102</coordinates>
+                  </LinearRing>
+               </outerBoundaryIs>
+            </Polygon>
+            <Polygon>
+               <outerBoundaryIs>
+                  <LinearRing>
+                     <coordinates>-121.67293056,37.13545205 -121.67293185,37.13553444 -121.67282894,37.13553547 -121.67282765,37.13545308 -121.67293056,37.13545205</coordinates>
+                  </LinearRing>
+               </outerBoundaryIs>
+            </Polygon>
+            <Polygon>
+               <outerBoundaryIs>
+                  <LinearRing>
+                     <coordinates>-121.67293314,37.13561683 -121.67293185,37.13553444 -121.67303475,37.1355334 -121.67303346,37.13545102 -121.67313637,37.13544998 -121.67323927,37.13544895 -121.67334217,37.13544792 -121.67334346,37.13553031 -121.67334475,37.13561269 -121.67344766,37.13561166 -121.67344895,37.13569405 -121.67334604,37.13569508 -121.67324314,37.13569611 -121.67314024,37.13569715 -121.67313895,37.13561476 -121.67303604,37.13561579 -121.67293314,37.13561683</coordinates>
+                  </LinearRing>
+               </outerBoundaryIs>
+            </Polygon>
+            <Polygon>
+               <outerBoundaryIs>
+                  <LinearRing>
+                     <coordinates>-121.67282894,37.13553547 -121.67283023,37.13561786 -121.67293314,37.13561683 -121.67293443,37.13569921 -121.67303733,37.13569818 -121.67303862,37.13578057 -121.67293572,37.1357816 -121.67283281,37.13578263 -121.67272991,37.13578367 -121.672627,37.1357847 -121.67262571,37.13570231 -121.67252281,37.13570334 -121.6724199,37.13570438 -121.67242119,37.13578676 -121.67242248,37.13586915 -121.67252539,37.13586812 -121.67252667,37.13595051 -121.67242377,37.13595154 -121.67232086,37.13595257 -121.67221796,37.1359536 -121.67221667,37.13587122 -121.67211377,37.13587225 -121.67211248,37.13578986 -121.67200957,37.13579089 -121.67201086,37.13587328 -121.67190796,37.13587431 -121.67190667,37.13579192 -121.67190538,37.13570954 -121.67200828,37.1357085 -121.67211119,37.13570747 -121.6721099,37.13562508 -121.67210861,37.1355427 -121.67221151,37.13554166 -121.67231442,37.13554063 -121.67241732,37.1355396 -121.67252023,37.13553857 -121.67262313,37.13553754 -121.67272604,37.1355365 -121.67282894,37.13553547</coordinates>
+                  </LinearRing>
+               </outerBoundaryIs>
+            </Polygon>
+         </MultiGeometry>
+      </Placemark>
+      <Placemark id="117_WLL_280cfs.2">
+         <name><![CDATA[117_WLL_280cfs.2]]></name>
+         <description><![CDATA[<h4>117_WLL_280cfs</h4>
+
+<ul class="textattributes">
+  
+  <li><strong><span class="atr-name">Range</span>:</strong> <span class="atr-value">2</span></li>
+</ul>
+]]></description>
+         <LookAt>
+            <longitude>-121.67278006903675</longitude>
+            <latitude>37.1357007622028</latitude>
+            <altitude>82.4910951491265</altitude>
+            <range>66.65713167622077</range>
+            <tilt>0.0</tilt>
+            <heading>0.0</heading>
+            <altitudeMode>clampToGround</altitudeMode>
+         </LookAt>
+         <Style>
+            <IconStyle>
+               <color>00ffffff</color>
+               <scale>0.4</scale>
+               <Icon>
+                  <href>http://icons.opengeo.org/markers/icon-poly.1.png</href>
+               </Icon>
+            </IconStyle>
+            <LabelStyle>
+               <color>00ffffff</color>
+            </LabelStyle>
+            <PolyStyle>
+               <color>ffaaaaaa</color>
+               <outline>1</outline>
+            </PolyStyle>
+            <LineStyle>
+               <color>ff000000</color>
+               <width>1</width>
+            </LineStyle>
+         </Style>
+         <MultiGeometry>
+            <Point>
+               <coordinates>-121.6725234513313,37.135744537146486</coordinates>
+            </Point>
+            <Polygon>
+               <outerBoundaryIs>
+                  <LinearRing>
+                     <coordinates>-121.67303604,37.13561579 -121.67313895,37.13561476 -121.67314024,37.13569715 -121.67303733,37.13569818 -121.67293443,37.13569921 -121.67293314,37.13561683 -121.67303604,37.13561579</coordinates>
+                  </LinearRing>
+               </outerBoundaryIs>
+            </Polygon>
+            <Polygon>
+               <outerBoundaryIs>
+                  <LinearRing>
+                     <coordinates>-121.67252281,37.13570334 -121.67262571,37.13570231 -121.672627,37.1357847 -121.6725241,37.13578573 -121.67242119,37.13578676 -121.6724199,37.13570438 -121.67252281,37.13570334</coordinates>
+                  </LinearRing>
+               </outerBoundaryIs>
+            </Polygon>
+         </MultiGeometry>
+      </Placemark>
+   </Document>
+</kml>

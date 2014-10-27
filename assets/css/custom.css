@@ -7,7 +7,12 @@
 }
 
 #sbViewSelect{
-	margin-top: 10px;
+}
+
+span.glyphicon-question-sign {
+    color:#00CCFF;
+    margin-right:25px;
+    font-size: 1.5em;
 }
 
 p{font-size: 12px;}
