@@ -624,8 +624,8 @@ var sta117_WLL_spillZone = new SpillZone(280, 1402, 9, sta117_WLL_spillZone_spil
 var sta117_spillZoneNames = ["WLL"];
 var sta117_spillZones = {"WLL": sta117_WLL_spillZone};                            
 var sta117_spillExtent =  new OpenLayers.Bounds(-13547493.618568, 4451161.743461, -13535263.694044, 4459369.169372);
-var sta117_floodWatch = 200;
-var sta117_floodWarning = 350;
+var sta117_floodWatch = 150;
+var sta117_floodWarning = 280;
 var station117 = new Gage(117, 1, sta117_spillZoneNames, sta117_spillZones, sta117_spillExtent, sta117_floodWatch, sta117_floodWarning);
 ////////////END STATION117 OBJECT INIT/////////////////////////////////
 
@@ -753,7 +753,11 @@ Gage.prototype.displaySpill = function(tIndex){
         var spillZone = this.spillZones[spillZoneName]; 
 
         //remove any layers that may be currently displayed
-        this.hideSpillLayers();
+        // this.hideSpillLayers();
+        prevSpillLayer = spillZone.displayedLayers.pop();
+        if(prevSpillLayer != undefined){
+            prevSpillLayer.setVisibility(false);
+        }
 
         var fcSpillRate = spillZone.forecastData[tIndex][1];
         //if fcSpillRate > min spill layer, theres a layer to display
@@ -761,6 +765,7 @@ Gage.prototype.displaySpill = function(tIndex){
             spillLayer = spillZone.getLayerFromSpillRate(fcSpillRate);
             spillLayer.setVisibility(true);
             spillZone.displayedLayers.push(spillLayer);
+            // $('#btnDownloadKML').removeAttr('disabled');
             map.zoomToExtent(this.spillExtent, true);
         }
     }
@@ -794,6 +799,31 @@ Gage.prototype.displayFloodEvent = function(floodEvent){
         }
     }
     map.zoomToExtent(this.spillExtent, true);
+}
+
+Gage.prototype.downloadKML = function(){
+    //research ajax call
+    layerString = "&layers=";
+    numLayersInStr = 0;
+    for(var i=0;i<this.numSpillZones;i++){
+        spillZoneName = this.spillZoneNames[i];
+        spillZone = this.spillZones[spillZoneName];
+        if(spillZone.displayedLayers.length > 0){
+            if(numLayersInStr > 0){
+                layerString +=",";
+            }
+            layerName = spillZone.displayedLayers[0].name;
+            layerString += layerName;
+            numLayersInStr++;
+        }
+    }
+    //download kml if spills are displayed
+    if(numLayersInStr > 0){
+        var link = "controllers/downloadKML.php?station=" + this.stationNumber + layerString;
+        window.location = link;
+    }else{
+        alert("No spills currently on map.");
+    }
 }
 ///////////////////END GAGE OBJECT CODE/////////////////////
 

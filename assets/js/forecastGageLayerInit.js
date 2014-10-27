@@ -130,7 +130,8 @@ function forecast_selected_feature(event){
         $( "#forecastInfo" ).tabs( "option", "active", 0 );
     }else if(event.feature.attributes.STA_NUMBER === "112"){ //San Francisquito Ck at Stanford
         loadPlot("112");
-        $('#fcAnimatePanel').css("visibility", "visible");
+        //fc animation panel disabled until forecast data becomes available
+        $('#fcAnimatePanel').css("visibility", "hidden");
         $( "#forecastInfo" ).tabs( "option", "active", 0 );
         $( "#forecastInfo" ).tabs( "enable", 2 )
     }
@@ -147,7 +148,7 @@ function forecast_selected_feature(event){
         $('#registrationControl').html(registrationControlHTML(selectedStation.stationNumber));
     }
     //disable download kml button until spill layer is displayed
-    $('#btnDownloadKML').attr("disabled", "disabled");
+    // $('#btnDownloadKML').attr("disabled", "disabled");
 }
 
 //handler for forecast gage deselection
