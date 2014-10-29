@@ -253,10 +253,9 @@ for(var i=0;i<middlefieldR_numSpillLayers;i++){
             }),
             strategies: [new OpenLayers.Strategy.Fixed({preload: true})],
             visibility: false,
-            displayInLayerSwitcher: false
+            displayInLayerSwitcher: true
         }
     );
-
 }
 //////////DS101 L
 //DS101 L variables
@@ -707,7 +706,9 @@ var station112 = new Gage(112, 6, sta112_spillZoneNames, sta112_spillZones, sta1
 // //map station numbers to station objects
 var stationObjects = {"51": station51, "93": station93, "117": station117, "112": station112};
 
-//////////GAGE OBJECT CODE////////////////////
+
+
+////////////////////SPILL ZONE OBJECT CODE/////////////////////////////////
 function SpillZone(minSpill, maxSpill, numSpillLayers, spillRates, spillRatesToLayers, floodEvents){
     this.minSpill = minSpill;
     this.maxSpill = maxSpill;
@@ -733,7 +734,8 @@ SpillZone.prototype.getLayerFromSpillRate = function(spillRate){
         }
     }
 }
-
+////////////////////END SPILL ZONE OBJECT CODE/////////////////////////////////
+//////////GAGE OBJECT CODE////////////////////
 function Gage(staNum, numSpillZones, spillZoneNames, spillZones, spillExtent, floodWatch, floodWarning){
     this.stationNumber = staNum;
     this.numSpillZones = numSpillZones;
