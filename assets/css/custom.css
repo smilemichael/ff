@@ -74,10 +74,17 @@ body{
 	margin:10px;
 }
 
-#fcPlot{
-	height:300px;
-	width:850px;
+#plotContainer{
+    width: 850px;
+    height: 300px;
+    position: relative;
 	display:inline-block;
+}
+#fcPlot{
+    width: 850px;
+    height: 300px;
+	display:inline-block;
+
 }
 
 .fccontrols{
