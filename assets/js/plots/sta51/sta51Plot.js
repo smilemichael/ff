@@ -70,10 +70,6 @@ chart = new Highcharts.Chart({
                         var tIndex = jQuery.inArray(x, selectedStation.plot.fcTimeIndex);
                         selectedStation.displaySpill(tIndex);
                         this.select();
-                        selectedStation.plot.animationIndex = 0;
-                        if(fcAnimate==true){
-                            stopFAnimate();
-                        }
                         //reset floodevent demo select 
                         $('#floodDemoSelect').val("default");
                     }
@@ -97,16 +93,4 @@ chart = new Highcharts.Chart({
             }
         }
     }
-    // ,
-    // series: [{
-    //     name: "Historic",
-    //     color: '#0000FF',
-    //     data: sta51_histFlow
-    // }]
-    // },
-    // {
-    // 	name: "Forecast",
-    //     color: '#FF0000',
-    //     data: sta51_fcFlow
-    // }]
 }); //end chart

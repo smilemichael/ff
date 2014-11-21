@@ -261,6 +261,7 @@ function Plot(plotURL, historicData, forecastData){
 	this.animationIndex = 0;
 	this.fcTimeIndex = new Array();
 }
+
 Plot.prototype.getFCCurrIndex = function(nowFC){
    for(var i=0;i<this.forecastData.length;i++){
       // alert("nowFC: " + nowFC +", fcTime: "+ this.forecastData[i][0]);
@@ -270,17 +271,14 @@ Plot.prototype.getFCCurrIndex = function(nowFC){
       //i.e. forecastData[i] = {x: timestamp, y: flow, selected: boolean}
       if(this.forecastData[i][0] == undefined){
         if(this.forecastData[i].x >= nowFC){
-          // alert("curr index found!");
           return i;
         }
       }
       else{
         if(this.forecastData[i][0] >= nowFC){
-          // alert("curr index found!");
           return i;
         }
       }
-      
     }
 }
 Plot.prototype.getSeries = function(time){
@@ -474,37 +472,69 @@ Gage.prototype.downloadKML = function(){
 
 Gage.prototype.loadPlot = function(){
     //load plot
-  $.getScript(this.plot.plotURL, function( data, textStatus, jqxhr ) {
-    // console.log( data ); // Data returned
-    // console.log( textStatus ); // Success
-    // console.log( jqxhr.status ); // 200
-    // console.log( "Load was performed." );
-    selectedStation.plot.hc_chart = chart;
-    var now = new Date().getTime() - 28800000;
-    selectedStation.plot.hc_chart.xAxis[0].addPlotLine({
-      value: now,
-      color: 'red',
-      width: 2,
-      color: '#000000',
-      dashStyle: 'shortDash',
-      label: {
-                text: "Current Time (PST)", //TODO PST
-                rotation: 0,
-                style: {
-                  color: '#333333',
-                  fontWeight: 'bold'
-                }
-              },
-              id: 'now-line'
+    $.getScript(this.plot.plotURL)
+      .done(function( script, textStatus ) {
+        console.log( textStatus );
+        selectedStation.plot.hc_chart = chart;
+        var now = new Date().getTime() - 28800000;
+        selectedStation.plot.hc_chart.xAxis[0].addPlotLine({
+          value: now,
+          color: 'red',
+          width: 2,
+          color: '#000000',
+          dashStyle: 'shortDash',
+          label: {
+                    text: "Current Time (PST)", //TODO PST
+                    rotation: 0,
+                    style: {
+                      color: '#333333',
+                      fontWeight: 'bold'
+                    }
+                  },
+                  id: 'now-line'
+        });
+        currIndex = selectedStation.plot.getSeries(now);
+        //add now to spill datasets
+        for(var i=0;i<this.numSpillZones;i++){
+          var spillZoneName = selectedStation.spillZoneNames[i];
+          var spillZone = selectedStation.spillZones[spillZoneName];
+          spillZone.forecastData.splice(0,0, [now, 0]);
+        }
+      })
+      .fail(function( jqxhr, settings, exception ) {
+        alert( "Triggered ajaxError handler. e: " + exception + "\njqxhr: " + jqxhr.statusCode() );
     });
-    currIndex = selectedStation.plot.getSeries(now);
-    //add now to spill datasets
-    for(var i=0;i<this.numSpillZones;i++){
-      var spillZoneName = selectedStation.spillZoneNames[i];
-      var spillZone = selectedStation.spillZones[spillZoneName];
-      spillZone.forecastData.splice(0,0, [now, 0]);
-    }
-  });
+  // $.getScript(this.plot.plotURL, function( data, textStatus, jqxhr ){
+  //   console.log( data ); // Data returned
+  //   console.log( textStatus ); // Success
+  //   console.log( jqxhr.status ); // 200
+  //   console.log( "Load was performed." );
+  //   selectedStation.plot.hc_chart = chart;
+  //   var now = new Date().getTime() - 28800000;
+  //   selectedStation.plot.hc_chart.xAxis[0].addPlotLine({
+  //     value: now,
+  //     color: 'red',
+  //     width: 2,
+  //     color: '#000000',
+  //     dashStyle: 'shortDash',
+  //     label: {
+  //               text: "Current Time (PST)", //TODO PST
+  //               rotation: 0,
+  //               style: {
+  //                 color: '#333333',
+  //                 fontWeight: 'bold'
+  //               }
+  //             },
+  //             id: 'now-line'
+  //   });
+  //   currIndex = selectedStation.plot.getSeries(now);
+  //   //add now to spill datasets
+  //   for(var i=0;i<this.numSpillZones;i++){
+  //     var spillZoneName = selectedStation.spillZoneNames[i];
+  //     var spillZone = selectedStation.spillZones[spillZoneName];
+  //     spillZone.forecastData.splice(0,0, [now, 0]);
+  //   }
+  // });
 }
 ///////////////////END GAGE OBJECT CODE/////////////////////
 

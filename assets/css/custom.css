@@ -6,19 +6,19 @@
     background-color: white
 }
 
-#sbViewSelect{
+p{
+	font-size: 12px;
 }
-
-span.glyphicon-question-sign {
-    color:#00CCFF;
-    margin-right:25px;
-    font-size: 1.5em;
-}
-
-p{font-size: 12px;}
 
 body{
-	min-width: 1150px;
+	width: 100%;
+	min-width: 1000px;
+}
+
+#btnsNavBar{
+	margin-left:25px;
+	margin-top:8px;
+	display:inline-block;
 }
 .gageInfo, .fcGageInfo{
 	font-size: 10px;	
@@ -27,11 +27,13 @@ body{
 .navbar-brand{
 	font-family: Nova Square;
 }
+
 #myNav{
 	position: absolute;
-	min-width: 1150px;
+	min-width: 1000px;
 	width:100%;
 	height:50px;
+	max-height: 50px;
 	background-color: white;
 	z-index: 5000;
 	box-shadow: 0px 5px 5px #000000;
@@ -43,23 +45,29 @@ body{
 	bottom:0px; 
 	width:100%;
 	/*height:100%;*/
-	min-width: 1150px;
+	min-width: 1000px;
 }
 
-.btnUpdatePlot{
-	margin-top:25px;
-}
 
 #forecastInfo{
 	position:absolute;
 	bottom:0px;
 	height:400px;
 	width:100%;
-	min-width: 1150px;
+	min-width: 1000px;
 	background-color:white;
 	opacity:0.9;
 	visibility:hidden;
 	float: bottom;
+}
+
+hr { 
+	display: block; 
+	height: 1px;
+    border: 0; 
+    border-top: 1px solid #000;
+    margin: 1em 0; 
+    padding: 0; 
 }
 
 #fcGageInfo{
@@ -81,20 +89,10 @@ body{
 	display:inline-block;
 }
 #fcPlot{
-    width: 850px;
+	width: 80%;
+    min-width: 850px;
     height: 300px;
 	display:inline-block;
-
-}
-
-.fccontrols{
-	margin-left: 10px;
-}
-
-#fcAnimatePanel{
-	display:inline-block;
-	width:200px;
-	visibility:hidden;
 }
 
 #fc-tabs-1 > * {
@@ -102,64 +100,72 @@ body{
 }
 
 #fc-tabs-1{
-	height:50%;
-	min-width: 1150px;
-}
-
-.dropdown-submenu {
-    position: relative;
-}
-
-.dropdown-submenu>.dropdown-menu {
-    top: 0;
-    left: 100%;
-    margin-top: -6px;
-    margin-left: -1px;
-    -webkit-border-radius: 0 6px 6px 6px;
-    -moz-border-radius: 0 6px 6px;
-    border-radius: 0 6px 6px 6px;
-}
-
-.dropdown-submenu:hover>.dropdown-menu {
-    display: block;
-}
-
-.dropdown-submenu>a:after {
-    display: block;
-    content: " ";
-    float: right;
-    width: 0;
-    height: 0;
-    border-color: transparent;
-    border-style: solid;
-    border-width: 5px 0 5px 5px;
-    border-left-color: #ccc;
-    margin-top: 5px;
-    margin-right: -10px;
-}
-
-.dropdown-submenu:hover>a:after {
-    border-left-color: #fff;
-}
-
-.dropdown-submenu.pull-left {
-    float: none;
-}
-
-.dropdown-submenu.pull-left>.dropdown-menu {
-    left: -100%;
-    margin-left: 10px;
-    -webkit-border-radius: 6px 0 6px 6px;
-    -moz-border-radius: 6px 0 6px 6px;
-    border-radius: 6px 0 6px 6px;
-}
-
-#simInfo{
-	width:300px;
-}
-
-#signInPanel{
+	height: 50%;
 	min-width: 1000px;
-	padding-bottom: 10px;
-  	border-bottom: 2px dotted #000000;
+}
+
+
+/*lean modal css*/
+/* Overlay when Modal is open */
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic);
+
+body {font-family: 'Source Sans Pro', sans-serif; font-size: 14px; color: #666;}
+
+#lean_overlay {
+    position: fixed;
+    z-index:100;
+    top: 0px;
+    left: 0px;
+    height:100%;
+    width:100%;
+    background: #000;
+    display: none;
+}
+
+.popupContainer{
+	position:absolute;
+	width:330px;
+	height: auto;
+	left:45%;
+	top:80px;
+	background: #FFF;
+}
+
+.modal_trigger {
+
+}
+
+.btnLM {padding:10px 20px; background: #00F;float:left;}
+.btnLM_red{background: #FF3333; color: #FFF;width:95%;}
+
+.btnLM:hover {background: #E4E4E2;}
+.btnLM_red:hover {background: #C12B05;color: #FFF;}
+
+a.btnLM {color:#666; text-align: center; text-decoration: none;}
+a.btnLM_red {background: #F00; color: #FFF;}
+
+.one_half {display: block;}
+
+/* Popup Styles*/
+.popupHeader {font-size:16px; text-transform: uppercase;}
+.popupHeader {background:#F4F4F2; position:relative; padding:10px 20px; border-bottom:1px solid #DDD; font-weight:bold;}
+.popupHeader .modal_close {position: absolute; right: 0; top:0; padding:10px 15px; background:#E4E4E2; cursor: pointer; color:#aaa; font-size:16px;}
+.popupBody {padding:20px;}
+
+/* User Login Form */
+/*.user_login {display: none;}*/
+.user_login label {display: block; margin-bottom:5px;}
+.user_login input[type="text"], .user_login input[type="email"], .user_login input[type="password"] {display: block; width:95%; padding: 10px; border:1px solid #DDD; color:#666;}
+.user_login input[type="checkbox"] {float:left; margin-right:5px;}
+.user_login input[type="checkbox"]+label {float:left;}
+
+.forgot_password {display:block; margin: 20px 10px 20px; float: right; clear: both; overflow: hidden; text-decoration: none; color:#ED6347;}
+
+.action_btns  {
+    clear: both;
+ 	overflow:  hidden;
+}
+ 
+.action_btns a  {
+    display:  block;
 }

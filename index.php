@@ -51,24 +51,21 @@
     	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Nova Square&text=SCVWDGIFcasingmdebApProty">
 		<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
     	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
 		<link rel="stylesheet" href="assets/css/custom.css" type="text/css">
 	</head>
 	<body onload="init()">
 		<div id="myNav">
 			<!-- if user logs in update navbar to show welcome message, account link, and log out link -->
-			<?php if($loggedIn == true){ ?>
-				<p class="navbar-text">Welcome, <?= $_SESSION['first_name']?>:&nbsp
+			<?php #if($loggedIn == true){ ?>
+				<!-- <p class="navbar-text">Welcome, <?= $_SESSION['first_name']?>:&nbsp
 				<a href='views/userAccount.php' target="_self">My Account&nbsp</a>|
-				<a href = "controllers/logout.php">&nbspLog out</a></label></p>
-			<?php	}else{ ?>
-				<form class="" role="search" id="signInNavBar" action="index.php" method="post" style="margin-left:25px;margin-top:8px;display:inline-block">
-                    <div class="form-group" style="display:inline;">
-                        <input style="width:200px;display:inline;" type="text" name="email" id="email" class="form-control" placeholder="email">
-                        <input style="width:200px;display:inline;" type="password" name="password" id="password" class="form-control" placeholder="password">
-                    </div>
-                    <button style="display:inline;" type="submit" class="btn btn-default btn-sm">Sign In</button>&nbspOr&nbsp<a href="views/registration_uc.html">Register</a>
-                </form>
-			<?php } ?>
+				<a href = "controllers/logout.php">&nbspLog out</a></label></p> -->
+			<?php	#}else{ ?>
+           <!--      <div id="btnsNavBar">
+                	<a id="" href="#modal" class="btn btn-success modal_trigger">Login</a>&nbspOr&nbsp<a href="views/registration_uc.html" class="btn btn-info">Register</a>
+				</div> -->
+			<?php #} ?>
 				<div class="pull-right" style="display:inline!important; margin-top:10px;">
 					<span class="glyphicon glyphicon-eye-open" title="View Select" style="display:inline;">&nbsp</span>
 					<select id="sbViewSelect" class="form-control" style="display:inline;width:125px;margin-right:25px;">
@@ -81,11 +78,7 @@
 						<option value="santaClaraBounds">Santa Clara</option>
 						<option value="sunnyvaleBounds">Sunnyvale</option>
 					</select>
-				<!-- 	<a href="views/help.html" target="_blank" style="">
-						<span title="Help" class="glyphicon glyphicon-question-sign" style="margin-top:25px;"></span>
-					</a> -->
 				</div>
-					
 		</div><!--end navbar-->
 		<div id="map"></div>
 		<!-- hide mouseposition, position only used for tooltips -->
@@ -93,39 +86,37 @@
 		<!-- popup div for tooltips over forecast gages -->
 		<div class="popup" id="tooltip" style="visibility: hidden"></div>
 		<!--flood forecast gage information in jQuery UI tabs -->
+		<div id="modal" class="popupContainer" style="display:none;">
+			<header class="popupHeader">
+				<span class="header_title">Login</span>
+				<span class="modal_close"><i class="fa fa-times"></i></span>
+			</header>
+		    <section class="popupBody">
+		    	<div class="user_login">
+				    <form id = "frmLogin">
+				        <label>Email / Username</label> <input name="email" id="email" type="text"><br>
+				        <label>Password</label> <input type="password" name="password" id="password"><br>
+				        <div class="action_btns">
+				            <div class="one_half">
+				                <button type="submit" class="btnLM btnLM_red">Login</button>
+				            </div>
+				        </div>
+				    </form>
+				    <a class="forgot_password" href="#">Forgot password?</a>
+				</div>
+		    </section>
+		</div>
 		<div id="forecastInfo">
 			<ul>
 				<li><a href="#fc-tabs-1">Flood Forecast Information</a></li>
 				<li><a href="#fc-tabs-2">Gage Details</a></li>
 				<li><a href="#fc-tabs-3">1% Flood Demo</a></li>
 				<li><a href="#fc-tabs-4">ALERT Me</a></li>
+				<!-- todo add slide down/up button functionality to hide tabbed pane -->
+				<!-- <li style="margin-left:50px;">Test</li> -->
 			</ul>
 			<div id="fc-tabs-1" style="white-space: nowrap;">
 					<div id="fcPlot">
-					</div>
-					<div id="fcAnimatePanel" class="panel panel-primary">
-						<div class="panel-heading">
-							<p class="panel-title" style="font-size:14px;color:white"> <strong>Forecast Animation</strong></p>
-						</div>
-						<div class="panel-body" style="">
-							<div id='fcAnimationControls' style=""> 
-			                    <p><strong>&nbsp&nbspAnimation Controls</strong></p> 
-			                    <a id='fcAnimationControlBtn'> 
-			                        <button class='btn btn-default btn-sm fccontrols' id='btnFCAnimate'>
-			                            <span class='glyphicon glyphicon-play'></span>&nbspplay
-			                        </button>
-			                        <button class='btn btn-default btn-sm fccontrols' id='btnFCAnimateStop' style='display:none'>
-			                            <span class='glyphicon glyphicon-stop'></span>&nbspstop
-			                        </button>
-			                    </a>
-			                    <hr/>
-			                    <p><strong>&nbsp&nbspDownload KML</strong></p>
-		                       	<button id="btnDownloadKML" class='btn btn-default btn-sm' style='margin-left:10px;'>
-		                            <span class='glyphicon glyphicon-download'></span>&nbspDownload
-		                        </button> 
-		                        <!-- <a href="" style="visibility:hidden;" id="linkKMLDownload">download kml</a> -->
-			                </div>
-						</div>
 					</div>
 			</div>
 			<div id="fc-tabs-2">
@@ -133,33 +124,28 @@
 				</div> 
 			</div>
 			<div id="fc-tabs-3">
-				<div id="fcFloodSimulation" class="container">
-					<div class="row">
-					<!-- 	<div id="simInfo" class="col-md-5">
-							A one-hundred-year flood is a flood event that has a 1% probability of occurring in any given year. Click the flood animation button to simulate this type of flood event. 
-						</div> -->
-						<div class="col-md-4">
-							<div id="demoControls">
-								<p><strong>Please Select Flood Event</strong></p>
-								<select id ="floodDemoSelect" class="form-control" style="width:200px;">
-									<option value="default">Choose...</option>
-									<option value="2year">50% (2 year)</option>
-									<option value="5year">20% (5 year)</option>
-									<option value="10year">10% (10 year)</option>
-									<option value="25year">4% (25 year)</option>
-									<option value="50year">2% (50 year)</option>
-									<option value="100year">1% (100 year)</option>
-								</select>
-							</div>
+				<div class="row">
+					<div class="col-md-4">
+						<div id="demoControls">
+							<p><strong>Please Select Flood Event</strong></p>
+							<select id ="floodDemoSelect" class="form-control" style="width:200px;">
+								<option value="default">Choose...</option>
+								<option value="2year">50% (2 year)</option>
+								<option value="5year">20% (5 year)</option>
+								<option value="10year">10% (10 year)</option>
+								<option value="25year">4% (25 year)</option>
+								<option value="50year">2% (50 year)</option>
+								<option value="100year">1% (100 year)</option>
+							</select>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div id="fc-tabs-4">
 				<?php if($loggedIn == false){ ?>
-					<p>Please sign in or register to receive text/email flood alerts for this flood zone</p>
-					<div class="container">
-						<div class="row">
+					<p><strong>Please login or register to receive text/email flood alerts for this flood zone.</strong></p>
+					<hr/>
+				<!-- 		<div class="row">
 							<h4>Sign In</h4>
 							<form class="" role="form" id="signInPanel" action="index.php" method="post">
 								<div class="form-group" style="display:inline-block">
@@ -172,12 +158,11 @@
 								</div>
 								<button type="submit" class="btn btn-default btn-sm" style="">Sign in</button>
 							</form>
+						</div> -->
+						<div class="row" style="padding-top:20px;padding-left:20px;">
+							<a id="" href="#modal" class="btn btn-primary modal_trigger">Login</a>
+							<a href="views/registration_uc.html"><button class="btn btn-info">Register</button></a>
 						</div>
-						<div class="row" style="padding-top:20px;">
-							<h4> Register Now</h4>
-							<a href="views/registration_uc.html"><button class="btn btn-success">Register</button></a>
-						</div>
-					</div>
 				<?php	} else{ ?>
 					<div id="alertMe">
 						<p id="alertGageRegistrationMessage"></p>
@@ -205,7 +190,7 @@
 		<script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
 
 		<script src="assets/js/plots/flowData.js"></script>
-		
+		<script src= "assets/js/jquery.leanModal.min.js"></script>
 		<script src="assets/js/map.js"></script>
 		<script src="assets/js/Gage_Spill_Plot_Init.js"></script>
 		<script src="assets/js/alertMe.js"></script>
@@ -214,15 +199,18 @@
 			var stationNumber = null; //currently selected station number
 			var selectedStation = null;
 			var previousStation = null; //previously selected station, for switching off spill layers
-
 			$(document).ready(function () {
 				//display alert upon site entrance
 				<?php if($loggedIn == false){ ?>
     				alert("The flood forecasts and predicted inundation areas are generated by the Santa Clara Water District using data collected from multiple other sources, including the National Weather Service. As with all weather forecasts, information is not guaranteed to be accurate, current or complete, and the tools used to predict the flooding areas are not guaranteed to be accurate either. Therefore, this website is designed as a informational tool to aid in disaster preparation. Information is provided as-is, and the use of the data provided by this website is solely at your own risk.");
 				<?php } ?>
+			 	$(".modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
 				//disable sign in buttons
-			  	$("button[type=submit]").attr("disabled", "disabled");
-
+			  	// $("button[type=submit]").attr("disabled", "disabled");
+			  	// $('.signIn').on("click", function(){
+			  	// 	alert("sign in clicked!");
+			  	// 	$('#signInWrapper').css('visibility', 'visible');
+			  	// });
 				// $('#btnDownloadKML').on("click", function(){
 				// 	alert("downloadKMLbtn Clicked");
 				// 	// $('#linkKMLDownload').trigger('click');
@@ -236,7 +224,7 @@
 	
 				//TODO consolidate sign in validation for both forms
 				//navbar sign-in validation
-				$("#signInNavBar").validate({
+				$("#frmLogin").validate({
 					rules: {
 						email: {
 							required: true,
@@ -271,53 +259,6 @@
 							url: "controllers/signInValidate.php",
 							datatype: "string",
 							data: {email: email, password: password},
-							success: function(data, textStatus, jqXHR) {
-								if($.trim(data)=="1"){
-									form.submit();
-								}else{
-									alert("Invalid email and/or password.");
-								}
-							}
-						});
-					}
-				});
-
-				//panel sign-in validation
-				$("#signInPanel").validate({
-					rules: {
-						email_p: {
-							required: true,
-							email: true
-						},
-						password_p: {
-							required: true
-						}		
-					},
-					messages: {
-						email_p: {
-							required: "Please enter email"
-						},
-						password_p: {
-							required: "Please enter password"
-						}
-					},
-				 	errorPlacement: function(error, element) { 
-				 		//just nothing, empty. do nothing  
-				 	},
-					invalidHandler: function(form, validator) {
-						var errors = validator.numberOfInvalids();
-						if (errors) {
-							alert("Invalid email and/or password ih.");
-						}
-					},
-				 	submitHandler: function(form) {
-				 		var email_p = $('#email_p').val();
-				 		var password_p = $('#password_p').val();
-				 		$.ajax({
-							type: "GET",
-							url: "controllers/signInValidate.php",
-							datatype: "string",
-							data: {email: email_p, password: password_p},
 							success: function(data, textStatus, jqXHR) {
 								if($.trim(data)=="1"){
 									form.submit();

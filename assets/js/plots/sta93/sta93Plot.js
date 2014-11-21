@@ -1,6 +1,5 @@
 chart = new Highcharts.Chart({
   chart: {
-            // renderTo: 'fcPlot_sta93',
             renderTo: 'fcPlot',
             height: 300,
             type: 'spline',
@@ -18,7 +17,7 @@ chart = new Highcharts.Chart({
             minute: '%I %M'
         },
         min: sta93_histFlow[0][0],
-        max: sta93_fcFlow[sta51_fcFlow.length-1][0]
+        max: sta93_fcFlow[sta93_fcFlow.length-1][0]
     },
     yAxis: {
         lineWidth:1,
@@ -71,10 +70,6 @@ chart = new Highcharts.Chart({
                         var tIndex = jQuery.inArray(x, selectedStation.plot.fcTimeIndex);
                         selectedStation.displaySpill(tIndex);
                         this.select();
-                        selectedStation.plot.animationIndex = 0;
-                        if(fcAnimate==true){
-                            stopFAnimate();
-                        }
                         //reset floodevent demo select 
                         $('#floodDemoSelect').val("default");
                     }
@@ -98,16 +93,4 @@ chart = new Highcharts.Chart({
             }
         }
     }
-    // ,
-    // series: [{
-    //     name: "Historic",
-    //     color: '#0000FF',
-    //     data: sta51_histFlow
-    // }]
-    // },
-    // {
-    //  name: "Forecast",
-    //     color: '#FF0000',
-    //     data: sta51_fcFlow
-    // }]
 }); //end chart

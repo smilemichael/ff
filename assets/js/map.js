@@ -1,13 +1,7 @@
 //OpenLayers projections
 var proj_4326 = new OpenLayers.Projection('EPSG:4326'); //lat, lon
 var proj_900913 =  new OpenLayers.Projection('EPSG:900913'); //google maps projection
-//OL map
-var map;
-//flood animation variables;
-var myInterval;
-var fcAnimate = false;
-var animationIndex = 0;
-
+var map; //OL Map
 //ol bounds for view select
 var countyBounds = new OpenLayers.Bounds(-13604530.147681711,4444768.802554563 ,-13534055.207602875,4498656.90749554);
 var sanJoseBounds = new OpenLayers.Bounds(-13575212.778089, 4482595.7357638, -13562982.853565, 4489322.194252);
@@ -16,6 +10,10 @@ var losAltosBounds = new OpenLayers.Bounds(-13596708.942446, 4491246.0376315, -1
 var milpitasBounds = new OpenLayers.Bounds(-13575631.431899, 4496367.3185259, -13563401.507375, 4502138.3141607);
 var paloAltoBounds = new OpenLayers.Bounds(-13599848.424913, 4499135.226219, -13593733.462651, 4502020.7240364);
 var sunnyvaleBounds = new OpenLayers.Bounds(-13591207.387007, 4485362.4567691, -13578977.462483, 4493569.8826801);
+
+//gage registration state strings
+var registeredForGageMessage = "You are registered to receive alerts for this flood plain.";
+var notRegisteredForGageMessage = "You are not registered to receive alerts for this flood plain.";
 
 //////////////////APPLICATION JS FUNCTIONS///////////////////////
 //initialize web map
@@ -79,11 +77,7 @@ function init(){
     map.addLayers([gphys,grod,gsat]);
     //zoom to county extent
     map.zoomToExtent(countyBounds);
-    //disclaimer
-    //gage registration state strings
-    var registeredForGageMessage = "You are registered to receive alerts for this flood plain.";
-    var notRegisteredForGageMessage = "You are not registered to receive alerts for this flood plain.";
-
+    
     //ol select feature control
     var select_feature_control;
 
@@ -101,7 +95,7 @@ function init(){
             strategies: [new OpenLayers.Strategy.Fixed()],
             displayInLayerSwitcher: false
         }
-        );
+    );
 
     //forecast gage feature style
     var fc_vector_style = new OpenLayers.Style({
@@ -161,7 +155,6 @@ function init(){
     //register events when features are selected/unselected
     forecast_streamflow.events.register('featureselected', this, forecast_selected_feature);
     forecast_streamflow.events.register('featureunselected', this, forecast_unselected_feature);
-    
 }
 
 //get lon and lat of feature for zooming in on feature
@@ -219,33 +212,11 @@ function hideTooltip(){
     document.getElementById('tooltip').style.visibility = 'hidden';
 }
 
-///////////////////////////////////////FLOOD ANIMATION FUNCTIONS
-function fAnimate(){
-   if (animationIndex === chart.series[1].data.length) {
-        animationIndex = 0;
-        // selectedStation.displaySpill(0);
-        stopFAnimate();
-    }
-    var x = chart.series[1].data[animationIndex].x;
-    var tIndex = jQuery.inArray(x, fcTimeIndex);
-    selectedStation.displaySpill(tIndex);
-    chart.series[1].data[animationIndex].select();
-    animationIndex += 1;
-}
-
-//stop flood animation function
-function stopFAnimate(){
-    clearInterval(myInterval);
-    fcAnimate = false;
-    $('.fccontrols').toggle();
-}
 ///////////////////////////////////////END FLOOD ANIMATION FUNCTIONS
 //handler for forecast gage selection
 function forecast_selected_feature(event){
-    if(previousStation != null){
-        previousStation.hideSpillLayers();
-        //remove old chart
-    }
+
+
     $('#fcGageInfo, #fcPlot').empty();//clear old contents
     var fcGageInfo = "";  //forecast gageInfo will contain the data of the selected forecast gage
     
@@ -277,8 +248,10 @@ function forecast_selected_feature(event){
     if(selectedStation.spillLayersLoaded == false){
         selectedStation.getSpillLayers();
     }
+
     //load forecast hydrograph
     selectedStation.loadPlot();
+
     // if user is logged in, enable alert regisration/unregistration
     var $object = $('#alertMe');
     if($object.length > 0) {//check if alertme div exists in DOM
@@ -292,9 +265,8 @@ function forecast_selected_feature(event){
 function forecast_unselected_feature(event){
     previousStation = selectedStation;
     previousStation.plot.hc_chart.destroy();
-    if(fcAnimate == true){ //stop animation if its playing
-        stopFAnimate();
-    }
+    previousStation.hideSpillLayers();
+
     $('#forecastInfo').slideUp();
     selectedStation = null; //no station is currently selected
     $('#floodDemoSelect').val("default");//reset flood event select
@@ -340,27 +312,12 @@ $(document).ready(function(){
     $('#forecastInfo').hide();
     //enable jQuery UI tabs on forecastInfo div
     $('#forecastInfo').tabs();
+    //disable alert me button while registration, etc. is under construction
+    $( "#forecastInfo" ).tabs( "disable", 3 );
+
     //make forecast info visible, now that its off screen 
     $('#forecastInfo').css("visibility", "visible");
 
-    //start flood animation on play button click
-    $('#btnFCAnimate').on("click", function(){
-        fcAnimate = true;
-        //reset flood event select box
-        $('#floodDemoSelect').val("default");
-        //clear any old spill layers that may have been displayed from flood demo select
-        map.zoomToExtent(selectedStation.spillExtent, true);
-        //set animation interval and callback
-        myInterval = window.setInterval('fAnimate()', 20);
-        //toggle controls so stop button appears
-        $('.fccontrols').toggle();
-    });
-    
-    //stop flood animation on stop button click
-    $('#btnFCAnimateStop').on("click", function(){
-        stopFAnimate();
-    });
-    
     //show flood events for flood demos
     $("#floodDemoSelect").change(function() {
         var floodEvent = $("#floodDemoSelect").val();

@@ -1,6 +1,5 @@
 chart = new Highcharts.Chart({
   chart: {
-            // renderTo: 'fcPlot_sta93',
             renderTo: 'fcPlot',
             height: 300,
             type: 'spline',
@@ -71,10 +70,6 @@ chart = new Highcharts.Chart({
                         var tIndex = jQuery.inArray(x, selectedStation.plot.fcTimeIndex);
                         selectedStation.displaySpill(tIndex);
                         this.select();
-                        selectedStation.plot.animationIndex = 0;
-                        if(fcAnimate==true){
-                            stopFAnimate();
-                        }
                         //reset floodevent demo select 
                         $('#floodDemoSelect').val("default");
                     }
