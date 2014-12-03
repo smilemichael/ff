@@ -15,9 +15,10 @@ chart = new Highcharts.Chart({
         dateTimeLabelFormats: {
             hour: '%I:%M %P',
             minute: '%I %M'
-        },
-        min: sta112_histFlow[0][0],
-        max: sta112_fcFlow[sta112_fcFlow.length-1][0]
+        }
+        // ,
+        // min: sta112_histFlow[0][0],
+        // max: sta112_fcFlow[sta112_fcFlow.length-1][0]
     },
     yAxis: {
         lineWidth:1,
@@ -25,7 +26,7 @@ chart = new Highcharts.Chart({
             text: 'flow rate (cfs)'
         },
         plotLines : [{
-                value : sta112_floodWarning,
+                value : 4600,
                 color : 'red',
                 dashStyle : 'shortdash',
                 width : 2,
@@ -33,7 +34,7 @@ chart = new Highcharts.Chart({
                     text : 'Flood Warning'
                 }
             }, {
-                value : sta112_floodWatch,
+                value : 3200,
                 color : 'orange',
                 dashStyle : 'shortdash',
                 width : 2,
@@ -42,7 +43,7 @@ chart = new Highcharts.Chart({
                 }
             }],
         min: 0,
-        minRange: sta112_floodWarning + 500
+        minRange: 4600 + 500
     },
     legend: {
         layout: "vertical",
@@ -94,3 +95,7 @@ chart = new Highcharts.Chart({
         }
     }
 }); //end chart
+
+for(var i=0;i<selectedStation.plot.forecastData.length;i++){
+    selectedStation.plot.fcTimeIndex.push(selectedStation.plot.forecastData[i][0]);
+}

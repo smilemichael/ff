@@ -25,7 +25,7 @@ chart = new Highcharts.Chart({
             text: 'flow rate (cfs)'
         },
         plotLines : [{
-                value : sta51_floodWarning,
+                value : 1200,
                 color : 'red',
                 dashStyle : 'shortdash',
                 width : 2,
@@ -33,7 +33,7 @@ chart = new Highcharts.Chart({
                     text : 'Flood Warning'
                 }
             }, {
-                value : sta51_floodWatch,
+                value : 800,
                 color : 'orange',
                 dashStyle : 'shortdash',
                 width : 2,
@@ -42,7 +42,7 @@ chart = new Highcharts.Chart({
                 }
             }],
         min: 0,
-        minRange: sta51_floodWarning + 500
+        minRange: 1200 + 500
     },
     legend: {
         layout: "vertical",

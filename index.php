@@ -70,13 +70,13 @@
 					<span class="glyphicon glyphicon-eye-open" title="View Select" style="display:inline;">&nbsp</span>
 					<select id="sbViewSelect" class="form-control" style="display:inline;width:125px;margin-right:25px;">
 				  		<option selected="selected" disabled="disabled" value="default">View Select</option>
-				  		<option value="countyBounds">County</option>
-						<option value="losAltosBounds">Los Altos</option>
-						<option value="milpitasBounds">Milpitas</option>
-						<option value="paloAltoBounds">Palo Alto</option>
-						<option value="sanJoseBounds">San Jose</option>
-						<option value="santaClaraBounds">Santa Clara</option>
-						<option value="sunnyvaleBounds">Sunnyvale</option>
+				  		<option value="county">County</option>
+						<option value="losAltos">Los Altos</option>
+						<option value="milpitas">Milpitas</option>
+						<option value="paloAlto">Palo Alto</option>
+						<option value="sanJose">San Jose</option>
+						<option value="santaClara">Santa Clara</option>
+						<option value="sunnyvale">Sunnyvale</option>
 					</select>
 				</div>
 		</div><!--end navbar-->
@@ -191,8 +191,9 @@
 
 		<script src="assets/js/plots/flowData.js"></script>
 		<script src= "assets/js/jquery.leanModal.min.js"></script>
-		<script src="assets/js/map.js"></script>
-		<script src="assets/js/Gage_Spill_Plot_Init.js"></script>
+		<!-- <script src="assets/js/map.js"></script>
+		<script src="assets/js/Gage_Spill_Plot_Init.js"></script> -->
+		<script src="assets/js/app.min.js"></script>
 		<script src="assets/js/alertMe.js"></script>
 		<script>
 			//Globals

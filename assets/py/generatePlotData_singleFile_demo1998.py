@@ -29,7 +29,7 @@ try:
         day = str(date.day)
         hour = str(date.hour)
         minute = str(date.minute)
-        flowrate = str(row[2]) #R_DATA
+        flowrate = str(row[1])
         datastamp = "[Date.UTC("+year+","+month+","+day+","+hour+","+minute+")," + flowrate + "]"
         if i<result_count-1:
             datastamp += ","
@@ -133,7 +133,7 @@ try:
         day = str(date.day)
         hour = str(date.hour)
         minute = str(date.minute)
-        flowrate = str(row[2])
+        flowrate = str(row[1])
         datastamp = "[Date.UTC("+year+","+month+","+day+","+hour+","+minute+")," + flowrate + "]"
         if i<result_count-1:
             datastamp += ","
@@ -229,7 +229,7 @@ try:
         day = str(date.day)
         hour = str(date.hour)
         minute = str(date.minute)
-        flowrate = str(row[2])
+        flowrate = str(row[1])
         datastamp = "[Date.UTC("+year+","+month+","+day+","+hour+","+minute+")," + flowrate + "]"
         if i<result_count-1:
             datastamp += ","
@@ -365,21 +365,21 @@ for c in range(2, 8):
         date_value = xlrd.xldate_as_tuple(shtSpill.cell(r,1).value,wrkSpill.datemode)
         date_value_DT = datetime(*date_value)
         
-        if date_value_DT >= nowPST and numTimePoints < 192:
-            dv_tuple = date_value_DT.timetuple()
-            #months are from 0-11 in highcharts, so subract 1 from month value in date_value
-            #to modify date tuple, date_value must be turned into a list
-            dv_lst = list(dv_tuple)
-            year = str(dv_lst[0])
-            month = str(dv_lst[1]-1) ##hc format
-            day = str(dv_lst[2])
-            hour = str(dv_lst[3])
-            minute = str(dv_lst[4])
-            dataStamp = "[Date.UTC("+year+","+month+","+day+","+hour+","+minute+"), " + str(round(shtSpill.cell_value(r,c),2)) + "]"
-            if numTimePoints < 191:
-                dataStamp += ","
-            print>>fout, dataStamp
-            numTimePoints += 1
+##        if date_value_DT >= nowPST and numTimePoints < 192:
+        dv_tuple = date_value_DT.timetuple()
+        #months are from 0-11 in highcharts, so subract 1 from month value in date_value
+        #to modify date tuple, date_value must be turned into a list
+        dv_lst = list(dv_tuple)
+        year = str(dv_lst[0])
+        month = str(dv_lst[1]-1) ##hc format
+        day = str(dv_lst[2])
+        hour = str(dv_lst[3])
+        minute = str(dv_lst[4])
+        dataStamp = "[Date.UTC("+year+","+month+","+day+","+hour+","+minute+"), " + str(round(shtSpill.cell_value(r,c),2)) + "]"
+        if r < shtFlow.nrows-1:
+            dataStamp += ","
+        print>>fout, dataStamp
+        numTimePoints += 1
     print>>fout, "];"
 fout.close()
 con.close()

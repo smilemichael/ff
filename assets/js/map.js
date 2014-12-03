@@ -1,20 +1,5 @@
-//OpenLayers projections
-var proj_4326 = new OpenLayers.Projection('EPSG:4326'); //lat, lon
-var proj_900913 =  new OpenLayers.Projection('EPSG:900913'); //google maps projection
+
 var map; //OL Map
-//ol bounds for view select
-var countyBounds = new OpenLayers.Bounds(-13604530.147681711,4444768.802554563 ,-13534055.207602875,4498656.90749554);
-var sanJoseBounds = new OpenLayers.Bounds(-13575212.778089, 4482595.7357638, -13562982.853565, 4489322.194252);
-var santaClaraBounds = new OpenLayers.Bounds(-13583080.00662, 4483885.4517777, -13570850.082096, 4490611.9102659);
-var losAltosBounds = new OpenLayers.Bounds(-13596708.942446, 4491246.0376315, -13590593.980184, 4494131.5354489);
-var milpitasBounds = new OpenLayers.Bounds(-13575631.431899, 4496367.3185259, -13563401.507375, 4502138.3141607);
-var paloAltoBounds = new OpenLayers.Bounds(-13599848.424913, 4499135.226219, -13593733.462651, 4502020.7240364);
-var sunnyvaleBounds = new OpenLayers.Bounds(-13591207.387007, 4485362.4567691, -13578977.462483, 4493569.8826801);
-
-//gage registration state strings
-var registeredForGageMessage = "You are registered to receive alerts for this flood plain.";
-var notRegisteredForGageMessage = "You are not registered to receive alerts for this flood plain.";
-
 //////////////////APPLICATION JS FUNCTIONS///////////////////////
 //initialize web map
 function init(){
@@ -22,14 +7,14 @@ function init(){
     OpenLayers.ProxyHost = 'proxy.php?url=';
     OpenLayers.IMAGE_RELOAD_ATTEMPTS = 3;
     OpenLayers.Util.onImageLoadErrorColor = "transparent";
-   
+    
     //map settings     
     map = new OpenLayers.Map('map', {
         maxExtent: new OpenLayers.Bounds(-20037508, -20037508, 20037508, 20037508.34),
         autoUpdateSize: true,
         transitionEffect: null,
         zoomMethod: null,
-        projection: proj_4326,
+        projection: new OpenLayers.Projection('EPSG:4326'),
         units: "degrees",
         	controls: [
         			new OpenLayers.Control.PanZoomBar(),
@@ -37,6 +22,16 @@ function init(){
         			new OpenLayers.Control.ScaleLine()
         	]	
     });
+
+    map.viewBounds = {  
+                        "county":   new OpenLayers.Bounds(-13604530.147681711,4444768.802554563 ,-13534055.207602875,4498656.90749554),
+                        "losAltos": new OpenLayers.Bounds(-13596708.942446, 4491246.0376315, -13590593.980184, 4494131.5354489),
+                        "sanJose":  new OpenLayers.Bounds(-13575212.778089, 4482595.7357638, -13562982.853565, 4489322.194252),
+                        "santaClara": new OpenLayers.Bounds(-13583080.00662, 4483885.4517777, -13570850.082096, 4490611.9102659),
+                        "milpitas": new OpenLayers.Bounds(-13575631.431899, 4496367.3185259, -13563401.507375, 4502138.3141607),
+                        "paloAlto": new OpenLayers.Bounds(-13599848.424913, 4499135.226219, -13593733.462651, 4502020.7240364),
+                        "sunnyvale": new OpenLayers.Bounds(-13591207.387007, 4485362.4567691, -13578977.462483, 4493569.8826801)
+                    };
 
     //mouse position control used for tooltips over forecast gages
     var mousePositionControl = new OpenLayers.Control.MousePosition({
@@ -51,7 +46,6 @@ function init(){
     switcherControl.maximizeControl();
 
     //google map base layers
-    //google satellite base layer		
     var gsat = new OpenLayers.Layer.Google("&nbspGoogle Satellite", {
             type: google.maps.MapTypeId.SATELLITE,
             numZoomLevels: 18,
@@ -59,7 +53,6 @@ function init(){
             animationEnabled: true
         }
     );
-    //google road base layer
     var grod = new OpenLayers.Layer.Google("&nbspGoogle Road", {
             type: google.maps.MapTypeId.ROADMAP,
             numZoomLevels: 22,
@@ -67,7 +60,6 @@ function init(){
             animationEnabled: true
         }
     );
-    //google physical base layer
     var gphys = new OpenLayers.Layer.Google("&nbspGoogle Physical", {
             type: google.maps.MapTypeId.TERRAIN,
             visibility: false,
@@ -76,11 +68,10 @@ function init(){
     );
     map.addLayers([gphys,grod,gsat]);
     //zoom to county extent
-    map.zoomToExtent(countyBounds);
+    map.zoomToExtent(map.viewBounds["county"]);
     
     //ol select feature control
     var select_feature_control;
-
     var forecast_streamflow = new OpenLayers.Layer.Vector(
         "&nbspFlood Forecast Gages",
         {
@@ -164,8 +155,8 @@ function getFeatureLonLat(feature){
 }
 
 //compute bounding box given a LonLat object
-function computeBBox(lonlat, gageType){
-    lonlat.transform(proj_4326, proj_900913);
+function computeBBox(lonlat){
+    lonlat.transform(new OpenLayers.Projection('EPSG:4326'), new OpenLayers.Projection('EPSG:900913'));
     var bBox = {
         left: lonlat.lon-100,
         bottom: lonlat.lat - (window.innerHeight)/0.75,
@@ -215,11 +206,10 @@ function hideTooltip(){
 ///////////////////////////////////////END FLOOD ANIMATION FUNCTIONS
 //handler for forecast gage selection
 function forecast_selected_feature(event){
-
-
-    $('#fcGageInfo, #fcPlot').empty();//clear old contents
     var fcGageInfo = "";  //forecast gageInfo will contain the data of the selected forecast gage
+    var featureLonLat = getFeatureLonLat(event.feature);
     
+    $('#fcGageInfo, #fcPlot').empty();//clear old contents
     fcGageInfo +=  "<div class='fcGageInfo' id=\"" + event.feature.fid + "\">"+
                 "<strong>Station Name: </strong>" + event.feature.attributes.STA_NAME +"<br/>" +
                 "<strong>Station Number: </strong>" + event.feature.attributes.STA_NUMBER +"<br/>" +
@@ -230,8 +220,8 @@ function forecast_selected_feature(event){
                 "<strong>Latitude: </strong>" + event.feature.attributes.LATDD83 +"<br/></div>";
             
     //zoom to selected forecast gage
-    var featureLonLat = getFeatureLonLat(event.feature);
-    map.zoomToExtent(computeBBox(featureLonLat, "forecast"));
+    map.zoomToExtent(computeBBox(featureLonLat));
+
     $('#fcGageInfo').html(fcGageInfo);
     $('#fcAnimatePanel').css("visibility", "visible");
     //make first tab active
@@ -275,6 +265,9 @@ function forecast_unselected_feature(event){
 //this function returns html to be placed in ALERT ME tab
 //html is dependent upon gage registration state
 function registrationControlHTML(staNumber){
+    //gage registration state strings
+    var registeredForGageMessage = "You are registered to receive alerts for this flood plain.";
+    var notRegisteredForGageMessage = "You are not registered to receive alerts for this flood plain.";
     var htmlString = "";
     var stationString = "gage_" + staNumber;
     var registered;
@@ -302,26 +295,19 @@ function registrationControlHTML(staNumber){
     }
     return htmlString;
 }
-
 //////////////////END APPLICATION JS FUNCTIONS///////////////////////
-
 
 //JQUERY CODE
 $(document).ready(function(){
-    //hide forecastInfo div
-    $('#forecastInfo').hide();
-    //enable jQuery UI tabs on forecastInfo div
-    $('#forecastInfo').tabs();
-    //disable alert me button while registration, etc. is under construction
-    $( "#forecastInfo" ).tabs( "disable", 3 );
-
+    initGages();
+    $('#forecastInfo').hide(); //hide forecastInfo div
+    $('#forecastInfo').tabs(); //enable jQuery UI tabs on forecastInfo div
+    $('#forecastInfo').tabs('disable', 3 ); //disable alert me button while registration, etc. is under construction
     //make forecast info visible, now that its off screen 
     $('#forecastInfo').css("visibility", "visible");
-
     //show flood events for flood demos
     $("#floodDemoSelect").change(function() {
         var floodEvent = $("#floodDemoSelect").val();
-        //TODO make dynamic
         if(floodEvent != "default"){
             selectedStation.displayFloodEvent(floodEvent);
         }else{
@@ -330,16 +316,14 @@ $(document).ready(function(){
     });
     // view menu event handlers
     $('#sbViewSelect').change(function(){
-        bounds = $('#sbViewSelect option:selected').val();
-        map.zoomToExtent(eval(bounds),true);
+        map.zoomToExtent(map.viewBounds[$('#sbViewSelect option:selected').val()],true);
         $('#sbViewSelect').val("default");
     });
 
-    $('#btnDownloadKML').on("click", function(){
-        console.log("downloadbtn pushed");
-        selectedStation.downloadKML();
-        // $('#linkKMLDownload').trigger('click');
-    });
+    // $('#btnDownloadKML').on("click", function(){
+    //     // selectedStation.downloadKML();
+    //     // $('#linkKMLDownload').trigger('click');
+    // });
 
 });
 
