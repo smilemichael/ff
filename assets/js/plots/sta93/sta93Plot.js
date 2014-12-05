@@ -3,7 +3,7 @@ chart = new Highcharts.Chart({
             renderTo: 'fcPlot',
             height: 300,
             type: 'spline',
-            zoomType: 'x'
+            zoomType: 'xy'
         },
     title:{
         text: "Upper Guadalupe Above Branham Lane"
@@ -42,7 +42,7 @@ chart = new Highcharts.Chart({
                 }
             }],
         min: 0,
-        minRange: 7000 + 500
+        max: 7000*1.2
     },
     legend: {
         layout: "vertical",

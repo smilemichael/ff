@@ -3,7 +3,7 @@ chart = new Highcharts.Chart({
             renderTo: 'fcPlot',
             height: 300,
             type: 'spline',
-            zoomType: 'x'
+            zoomType: 'xy'
         },
     title:{
         text: "Ross Creek at Cherry Ave."
@@ -42,7 +42,7 @@ chart = new Highcharts.Chart({
                 }
             }],
         min: 0,
-        minRange: 1200 + 500
+        max: 1200*1.2
     },
     legend: {
         layout: "vertical",

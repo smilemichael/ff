@@ -3,7 +3,7 @@ chart = new Highcharts.Chart({
             renderTo: 'fcPlot',
             height: 300,
             type: 'spline',
-            zoomType: 'x'
+            zoomType: 'xy'
         },
     title:{
         text: "San Francisquito"
@@ -43,7 +43,7 @@ chart = new Highcharts.Chart({
                 }
             }],
         min: 0,
-        minRange: 4600 + 500
+        max: 4600*1.2
     },
     legend: {
         layout: "vertical",

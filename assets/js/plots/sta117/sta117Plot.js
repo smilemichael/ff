@@ -3,7 +3,7 @@ chart = new Highcharts.Chart({
             renderTo: 'fcPlot',
             height: 300,
             type: 'spline',
-            zoomType: 'x'
+            zoomType: 'xy'
         },
     title:{
         text: "West Little Llagas below Edmundson"
@@ -42,7 +42,7 @@ chart = new Highcharts.Chart({
                 }
             }],
         min: 0,
-        minRange: 280*1.2
+        max: 280*1.2
     },
     legend: {
         layout: "vertical",
