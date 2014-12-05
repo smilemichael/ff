@@ -293,7 +293,7 @@ Plot.prototype.getSeries = function(time){
   });
   this.hc_chart.addSeries({
  	  name: "Forecast",
-    color: '#FF0000',
+    color: '#00FFFF',
   	data: this.forecastData
   });
 
