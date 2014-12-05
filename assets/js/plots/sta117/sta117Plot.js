@@ -42,7 +42,7 @@ chart = new Highcharts.Chart({
                 }
             }],
         min: 0,
-        minRange: 280 + 500
+        minRange: 280*1.2
     },
     legend: {
         layout: "vertical",
