@@ -1,5 +1,8 @@
 
 var map; //OL Map
+var forecast_streamflow;
+var select_feature_control;
+
 //////////////////APPLICATION JS FUNCTIONS///////////////////////
 //initialize web map
 function init(){
@@ -71,8 +74,7 @@ function init(){
     map.zoomToExtent(map.viewBounds["county"]);
     
     //ol select feature control
-    var select_feature_control;
-    var forecast_streamflow = new OpenLayers.Layer.Vector(
+    forecast_streamflow = new OpenLayers.Layer.Vector(
         "&nbspFlood Forecast Gages",
         {
             protocol: new OpenLayers.Protocol.HTTP({
@@ -91,7 +93,7 @@ function init(){
     //forecast gage feature style
     var fc_vector_style = new OpenLayers.Style({
         'cursor' : 'pointer',
-        'fillColor':'#FF0000',
+        'fillColor':'#66FFFF',
         'graphicName': 'triangle',
         'fillOpacity': 0.8,
         'strokeColor': '#000000',
@@ -146,6 +148,9 @@ function init(){
     //register events when features are selected/unselected
     forecast_streamflow.events.register('featureselected', this, forecast_selected_feature);
     forecast_streamflow.events.register('featureunselected', this, forecast_unselected_feature);
+    //hack to add legend
+    $("#OpenLayers_Control_LayerSwitcher_37_layersDiv").append('<div class="baseLbl">Legend</div><div class="baseLayersDiv"><img src="assets/images/streamflow.png">&nbspStreamflow Gage</div>');
+
 }
 
 //get lon and lat of feature for zooming in on feature
@@ -318,6 +323,13 @@ $(document).ready(function(){
     $('#sbViewSelect').change(function(){
         map.zoomToExtent(map.viewBounds[$('#sbViewSelect option:selected').val()],true);
         $('#sbViewSelect').val("default");
+    });
+
+    $('#sbGageSelect').change(function(){
+        select_feature_control.unselectAll();
+        select_feature_control.select(forecast_streamflow.getFeatureByFid($('#sbGageSelect option:selected').val()));
+        $('#sbGageSelect').val("default");
+
     });
 
     // $('#btnDownloadKML').on("click", function(){

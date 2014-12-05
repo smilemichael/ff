@@ -67,6 +67,13 @@
 				</div> -->
 			<?php #} ?>
 				<div class="pull-right" style="display:inline!important; margin-top:10px;">
+					<select id="sbGageSelect" class="form-control" style="display:inline;width:125px;margin-right:25px;">
+				  		<option selected="selected" disabled="disabled" value="default">Gage Select</option>
+				  		<option value="ForecastStreamFlow.1">Ross Ck. at Cherry Ave.</option>
+						<option value="ForecastStreamFlow.2">Upper Guadalupe above Branham Ln.</option>
+						<option value="ForecastStreamFlow.4">West Little Llagas</option>
+						<option value="ForecastStreamFlow.3">San Francisquito</option>
+					</select>
 					<span class="glyphicon glyphicon-eye-open" title="View Select" style="display:inline;">&nbsp</span>
 					<select id="sbViewSelect" class="form-control" style="display:inline;width:125px;margin-right:25px;">
 				  		<option selected="selected" disabled="disabled" value="default">View Select</option>
@@ -191,9 +198,9 @@
 
 		<script src="assets/js/plots/flowData.js"></script>
 		<script src= "assets/js/jquery.leanModal.min.js"></script>
-		<!-- <script src="assets/js/map.js"></script>
-		<script src="assets/js/Gage_Spill_Plot_Init.js"></script> -->
-		<script src="assets/js/app.min.js"></script>
+		<script src="assets/js/map.js"></script>
+		<script src="assets/js/Gage_Spill_Plot_Init.js"></script>
+		<!-- // <script src="assets/js/app.min.js"></script> -->
 		<script src="assets/js/alertMe.js"></script>
 		<script>
 			//Globals
