@@ -67,6 +67,7 @@
 				</div> -->
 			<?php #} ?>
 				<div class="pull-right" style="display:inline!important; margin-top:10px;">
+					<span class="glyphicon glyphicon-search" title="View Select" style="display:inline;">&nbsp</span>
 					<select id="sbGageSelect" class="form-control" style="display:inline;width:125px;margin-right:25px;">
 				  		<option selected="selected" disabled="disabled" value="default">Gage Select</option>
 				  		<option value="ForecastStreamFlow.1">Ross Ck. at Cherry Ave.</option>
