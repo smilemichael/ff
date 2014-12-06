@@ -66,12 +66,12 @@
                 	<a id="" href="#modal" class="btn btn-success modal_trigger">Login</a>&nbspOr&nbsp<a href="views/registration_uc.html" class="btn btn-info">Register</a>
 				</div> -->
 			<?php #} ?>
-				<div id="logo" style="display:inline">
-					<img src="assets/images/logo.png">
+				<div id="logo" style="display:inline;margin-left:10px;">
+					<img src="assets/images/logo.gif">
 				</div>
 				<div class="pull-right" style="display:inline!important; margin-top:10px;">
 					<span class="glyphicon glyphicon-search" title="View Select" style="display:inline;">&nbsp</span>
-					<select id="sbGageSelect" class="form-control" style="display:inline;width:125px;margin-right:25px;">
+					<select id="sbGageSelect" class="form-control" style="display:inline;width:135px;margin-right:25px;">
 				  		<option selected="selected" disabled="disabled" value="default">Gage Select</option>
 				  		<option value="ForecastStreamFlow.1">Ross Ck. at Cherry Ave.</option>
 						<option value="ForecastStreamFlow.2">Upper Guadalupe above Branham Ln.</option>

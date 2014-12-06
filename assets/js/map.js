@@ -95,6 +95,7 @@ function init(){
         'cursor' : 'pointer',
         'fillColor':'#66FFFF',
         'graphicName': 'triangle',
+        // 'externalGraphic': 'http://www.clker.com/cliparts/F/w/l/C/e/W/map-marker-md.png',
         'fillOpacity': 0.8,
         'strokeColor': '#000000',
         'strokeWidth': 2,
@@ -104,7 +105,7 @@ function init(){
 
     //forecast gage feature select style
     var fc_vector_style_select = new OpenLayers.Style({
-        'fillColor':'#CC0000',
+        'fillColor':'#3399FF',
         'graphicName': 'triangle',
         'fillOpacity': 0.8,
         'strokeColor': '#00FF00',

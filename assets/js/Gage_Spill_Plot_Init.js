@@ -288,12 +288,12 @@ Plot.prototype.getSeries = function(time){
   //add interpolation to spill zone forecast data
   this.hc_chart.addSeries({
  	  name: "Historic",
-    color: '#0000FF',
+    color: '#000000',
     data: this.historicData
   });
   this.hc_chart.addSeries({
  	  name: "Forecast",
-    color: '#00FFFF',
+    color: '#0000FF',
   	data: this.forecastData
   });
 
