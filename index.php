@@ -67,7 +67,7 @@
 				</div> -->
 			<?php #} ?>
 				<div id="logo" style="display:inline;margin-left:10px;">
-					<img src="assets/images/logo.gif">
+					<a href="http://www.valleywater.org"><img  src="assets/images/logo.gif"></a>
 				</div>
 				<div class="pull-right" style="display:inline!important; margin-top:10px;">
 					<span class="glyphicon glyphicon-search" title="View Select" style="display:inline;">&nbsp</span>
