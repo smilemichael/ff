@@ -16,8 +16,8 @@ chart = new Highcharts.Chart({
             hour: '%I:%M %P',
             minute: '%I %M'
         }
-        // ,
-        // min: sta112_histFlow[0][0],
+        ,
+        min: sta112_histFlow[0][0],
         // max: sta112_fcFlow[sta112_fcFlow.length-1][0]
     },
     yAxis: {

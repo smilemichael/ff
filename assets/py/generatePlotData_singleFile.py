@@ -62,6 +62,7 @@ for r in range(7, shtFlow.nrows):
     ##make python datetime object from excel date
     date_value_DT = datetime(*date_value)
     if date_value_DT >= nowPST and numTimePoints < 192:
+        #print numTimePoints
         dv_tuple = date_value_DT.timetuple()
         #months are from 0-11 in highcharts, so subract 1 from month value in date_value
         #to modify date tuple, date_value must be turned into a list
@@ -97,8 +98,16 @@ for c in range(2, 4):
     for r in range(7, shtSpill.nrows):
         date_value = xlrd.xldate_as_tuple(shtSpill.cell(r,1).value,wrkSpill.datemode)
         date_value_DT = datetime(*date_value)
-        
-        if date_value_DT >= nowPST and numTimePoints < 192:
+        #print date_value
+        #print "numTimePoints: " + str(numTimePoints)
+        #if date_value_DT >= nowPST:
+           # print "date value fc"
+        #else:
+            #print "not fc"
+       # print(date_value_DT >= nowPST)
+       # print(numTimePoints < 192)
+        if (date_value_DT >= nowPST) and (numTimePoints < 192):
+            #print numTimePoints
             dv_tuple = date_value_DT.timetuple()
             #months are from 0-11 in highcharts, so subract 1 from month value in date_value
             #to modify date tuple, date_value must be turned into a list
@@ -124,7 +133,7 @@ try:
     cur.execute(sql)
     results = cur.fetchall()
     result_count = cur.rowcount
-    print result_count
+    #print result_count
     i = 0
     for row in results:
         date = row[0]
@@ -177,7 +186,7 @@ rossr_c = 5
 ross1_c = 6
 ross2_c = 7
 for c in range(4, 8):
-    print c
+    #print c
     numTimePoints = 0;
     if c == 4:
         spillZone = "RossL"
@@ -220,7 +229,7 @@ try:
     cur.execute(sql)
     results = cur.fetchall()
     result_count = cur.rowcount
-    print result_count
+    #print result_count
     i = 0
     for row in results:
         date = row[0]

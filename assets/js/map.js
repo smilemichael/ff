@@ -78,8 +78,8 @@ function init(){
         "&nbspFlood Forecast Gages",
         {
             protocol: new OpenLayers.Protocol.HTTP({
-                url: "http://54.173.207.47:8080/geoserver/scvwd/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=scvwd:ForecastStreamFlow&maxFeatures=50&outputFormat=json", //aws
-                //url: "http://10.25.5.112:8080/geoserver/scvwd/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=scvwd:ForecastStreamFlow&maxFeatures=50&outputFormat=json", //alertd
+                // url: "http://54.173.207.47:8080/geoserver/scvwd/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=scvwd:ForecastStreamFlow&maxFeatures=50&outputFormat=json", //aws
+                url: "http://10.25.5.112:8080/geoserver/scvwd/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=scvwd:ForecastStreamFlow&maxFeatures=50&outputFormat=json", //alertd
                 format: new OpenLayers.Format.GeoJSON({
                     // extractStyles: false,
                     // extractAttributes: true,
@@ -94,25 +94,26 @@ function init(){
     //forecast gage feature style
     var fc_vector_style = new OpenLayers.Style({
         'cursor' : 'pointer',
-        'fillColor':'#66FFFF',
-        'graphicName': 'triangle',
-        // 'externalGraphic': 'http://www.clker.com/cliparts/F/w/l/C/e/W/map-marker-md.png',
+        // 'fillColor':'#66FFFF',
+        // 'graphicName': 'triangle',
+        'externalGraphic': 'assets/images/streamflow.png',
         'fillOpacity': 0.8,
-        'strokeColor': '#000000',
-        'strokeWidth': 2,
-        'pointRadius': 8,
-        'strokeDashStyle' : 'dot'
+        // 'strokeColor': '#000000',
+        // 'strokeWidth': 2,
+        'pointRadius': 12
+        // 'strokeDashStyle' : 'dot'
     });
 
     //forecast gage feature select style
     var fc_vector_style_select = new OpenLayers.Style({
-        'fillColor':'#3399FF',
-        'graphicName': 'triangle',
+        // 'fillColor':'#3399FF',
+        // 'graphicName': 'triangle',
+        'externalGraphic': 'assets/images/streamflow_selected.png',
         'fillOpacity': 0.8,
-        'strokeColor': '#00FF00',
-        'strokeWidth': 2,
-        'pointRadius': 10,
-        'strokeDashStyle' : 'dot'
+        // 'strokeColor': '#00FF00',
+        // 'strokeWidth': 2,
+        'pointRadius': 16
+        // 'strokeDashStyle' : 'dot'
     });
 
     //forecast gage style map
@@ -334,6 +335,11 @@ $(document).ready(function(){
 
     });
 
+    $('#btnClearDemoSpill').on('click', function(){
+        selectedStation.hideSpillLayers();
+        $(this).attr('disabled', 'disabled');
+        $('#floodDemoSelect').val('default');
+    });
     // $('#btnDownloadKML').on("click", function(){
     //     // selectedStation.downloadKML();
     //     // $('#linkKMLDownload').trigger('click');
