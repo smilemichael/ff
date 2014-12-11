@@ -297,6 +297,8 @@ Plot.prototype.getSeries = function(time){
   	data: this.forecastData
   });
 
+  //reset time index array
+  this.fcTimeIndex = [];
   for(var i=0;i<this.forecastData.length;i++){
   	this.fcTimeIndex.push(this.forecastData[i][0]);
   }
@@ -392,8 +394,8 @@ Gage.prototype.getSpillLayers = function(){
 	                spillZone.spillLayerNames[j],
 	                    {
 	                        protocol: new OpenLayers.Protocol.HTTP({
-                              url: "http://10.25.5.112:8080/geoserver/scvwd/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=scvwd:" + spillZone.spillLayerNames[j] +"&outputFormat=json&mode=download" , //alertd
-	                            // url: "http://54.173.207.47:8080/geoserver/scvwd/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=scvwd:" + spillZone.spillLayerNames[j] +"&outputFormat=json&mode=download" , //aws
+                              // url: "http://10.25.5.112:8080/geoserver/scvwd/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=scvwd:" + spillZone.spillLayerNames[j] +"&outputFormat=json&mode=download" , //alertd
+	                            url: "http://54.173.207.47:8080/geoserver/scvwd/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=scvwd:" + spillZone.spillLayerNames[j] +"&outputFormat=json&mode=download" , //aws
                               format: new OpenLayers.Format.GeoJSON({
 	                                extractStyles: true,
 	                                extractAttributes: true
