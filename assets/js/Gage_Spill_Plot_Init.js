@@ -356,8 +356,9 @@ Gage.prototype.displaySpill = function(tIndex){
             prevSpillLayer.setVisibility(false);
         }
         if(tIndex < spillZone.forecastData.length){
-        var fcSpillRate = spillZone.forecastData[tIndex][1];
-      }
+          var fcSpillRate = spillZone.forecastData[tIndex][1];
+          alert('spill rate: ' + fcSpillRate);
+        }
         //if fcSpillRate > min spill layer, theres a layer to display
         if(fcSpillRate>=spillZone.minSpill && fcSpillRate != -1){
             spillLayer = spillZone.getLayerFromSpillRate(fcSpillRate);
@@ -460,6 +461,7 @@ Gage.prototype.downloadKML = function(){
 }
 
 Gage.prototype.loadPlot = function(){
+    //have to use selectedStation variable, this keyword doesn't work inside getScript
     $.getScript(this.plot.plotURL)
       .done(function( script, textStatus ) {
         console.log( textStatus );
@@ -481,11 +483,13 @@ Gage.prototype.loadPlot = function(){
                   },
                   id: 'now-line'
         });
-        selectedStation.plot.getSeries(now);
+        var index = selectedStation.plot.getSeries(now);
+        // alert("fcCurrIndex: " + index);
         //add now to spill datasets
-        for(var i=0;i<this.numSpillZones;i++){
+        for(var i=0;i<selectedStation.numSpillZones;i++){
           var spillZoneName = selectedStation.spillZoneNames[i];
           var spillZone = selectedStation.spillZones[spillZoneName];
+          spillZone.forecastData.splice(0, index); //1-1 relation
           spillZone.forecastData.splice(0,0, [now, 0]);
         }
       })
