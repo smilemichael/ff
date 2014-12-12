@@ -281,7 +281,10 @@ Plot.prototype.getFCCurrIndex = function(nowFC){
 Plot.prototype.getSeries = function(time){
   var fcCurrIndex = this.getFCCurrIndex(time);
   //todo actual interpolation calculation
-  var interpolation = [time, 0]
+  var lastHistPt = this.historicData[this.historicData.length-1][1];
+  var firstFCPt = this.forecastData[0][1];
+  var interp = (lastHistPt + firstFCPt)/2;
+  var interpolation = [time, interp];
   this.historicData[this.historicData.length] = interpolation;
   this.forecastData.splice(0, fcCurrIndex);
   this.forecastData.splice(0, 0, interpolation);
@@ -357,7 +360,6 @@ Gage.prototype.displaySpill = function(tIndex){
         }
         if(tIndex < spillZone.forecastData.length){
           var fcSpillRate = spillZone.forecastData[tIndex][1];
-          alert('spill rate: ' + fcSpillRate);
         }
         //if fcSpillRate > min spill layer, theres a layer to display
         if(fcSpillRate>=spillZone.minSpill && fcSpillRate != -1){

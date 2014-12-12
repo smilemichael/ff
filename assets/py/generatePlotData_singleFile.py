@@ -17,7 +17,7 @@ try:
     print>>fout, "var sta51_histFlow = ["
     con = mdb.connect('10.25.5.112', 'root', 'datawise', 'datawise');
     cur = con.cursor()
-    sql = "Select * From s2058_rated Where T_TIME > DATE_ADD(now(),INTERVAL -2 DAY) ORDER BY T_TIME ASC"
+    sql = "Select * From s2058_rated Where T_TIME > DATE_ADD(now(),INTERVAL -3 DAY) ORDER BY T_TIME ASC"
     cur.execute(sql)
     results = cur.fetchall()
     result_count = cur.rowcount
@@ -53,7 +53,7 @@ print>>fout, "var sta51_fcFlow = ["
 
 nowUTC = datetime.utcnow()
 nowPST = nowUTC - timedelta(hours=8)
-numTimePoints = 0; ##192 timepoints for 48 hour forecast
+numTimePoints = 0; ##288 timepoints for 72 hour forecast
 
 for r in range(7, shtFlow.nrows):
     ##date_value may used as x argument for highcharts plot
@@ -61,7 +61,7 @@ for r in range(7, shtFlow.nrows):
     date_value = xlrd.xldate_as_tuple(shtFlow.cell(r,1).value,wrkFlow.datemode)
     ##make python datetime object from excel date
     date_value_DT = datetime(*date_value)
-    if date_value_DT >= nowPST and numTimePoints < 192:
+    if date_value_DT >= nowPST and numTimePoints < 288:
         #print numTimePoints
         dv_tuple = date_value_DT.timetuple()
         #months are from 0-11 in highcharts, so subract 1 from month value in date_value
@@ -73,7 +73,7 @@ for r in range(7, shtFlow.nrows):
         hour = str(dv_lst[3])
         minute = str(dv_lst[4])
         dataStamp = "[Date.UTC("+year+","+month+","+day+","+hour+","+minute+"), " + str(round(shtFlow.cell_value(r,c),2)) + "]"
-        if numTimePoints < 191:
+        if numTimePoints < 287:
             dataStamp += ","
         print>>fout, dataStamp
         numTimePoints += 1
@@ -106,7 +106,7 @@ for c in range(2, 4):
             #print "not fc"
        # print(date_value_DT >= nowPST)
        # print(numTimePoints < 192)
-        if (date_value_DT >= nowPST) and (numTimePoints < 192):
+        if (date_value_DT >= nowPST) and (numTimePoints < 288):
             #print numTimePoints
             dv_tuple = date_value_DT.timetuple()
             #months are from 0-11 in highcharts, so subract 1 from month value in date_value
@@ -118,7 +118,7 @@ for c in range(2, 4):
             hour = str(dv_lst[3])
             minute = str(dv_lst[4])
             dataStamp = "[Date.UTC("+year+","+month+","+day+","+hour+","+minute+"), " + str(round(shtSpill.cell_value(r,c),2)) + "]"
-            if numTimePoints < 191:
+            if numTimePoints < 287:
                 dataStamp += ","
             print>>fout, dataStamp
             numTimePoints += 1
@@ -129,7 +129,7 @@ for c in range(2, 4):
 try:
     print>>fout, "var sta93_histFlow = ["
     cur = con.cursor()
-    sql = "Select * From s1543_rated Where T_TIME > DATE_ADD(now(),INTERVAL -2 DAY) ORDER BY T_TIME ASC"
+    sql = "Select * From s1543_rated Where T_TIME > DATE_ADD(now(),INTERVAL -3 DAY) ORDER BY T_TIME ASC"
     cur.execute(sql)
     results = cur.fetchall()
     result_count = cur.rowcount
@@ -163,7 +163,7 @@ for r in range(7, shtFlow.nrows):
     date_value = xlrd.xldate_as_tuple(shtFlow.cell(r,1).value,wrkFlow.datemode)
     ##make python datetime object from excel date
     date_value_DT = datetime(*date_value)
-    if date_value_DT >= nowPST and numTimePoints < 192:
+    if date_value_DT >= nowPST and numTimePoints < 288:
         dv_tuple = date_value_DT.timetuple()
         #months are from 0-11 in highcharts, so subract 1 from month value in date_value
         #to modify date tuple, date_value must be turned into a list
@@ -174,7 +174,7 @@ for r in range(7, shtFlow.nrows):
         hour = str(dv_lst[3])
         minute = str(dv_lst[4])
         dataStamp = "[Date.UTC("+year+","+month+","+day+","+hour+","+minute+"), " + str(round(shtFlow.cell_value(r,c),2)) + "]"
-        if numTimePoints < 191:
+        if numTimePoints < 287:
             dataStamp += ","
         print>>fout, dataStamp
         numTimePoints += 1
@@ -203,7 +203,7 @@ for c in range(4, 8):
         date_value = xlrd.xldate_as_tuple(shtSpill.cell(r,1).value,wrkSpill.datemode)
         date_value_DT = datetime(*date_value)
         
-        if date_value_DT >= nowPST and numTimePoints < 192:
+        if date_value_DT >= nowPST and numTimePoints < 288:
             dv_tuple = date_value_DT.timetuple()
             #months are from 0-11 in highcharts, so subract 1 from month value in date_value
             #to modify date tuple, date_value must be turned into a list
@@ -214,7 +214,7 @@ for c in range(4, 8):
             hour = str(dv_lst[3])
             minute = str(dv_lst[4])
             dataStamp = "[Date.UTC("+year+","+month+","+day+","+hour+","+minute+"), " + str(round(shtSpill.cell_value(r,c),2)) + "]"
-            if numTimePoints < 191:
+            if numTimePoints < 287:
                 dataStamp += ","
             print>>fout, dataStamp
             numTimePoints += 1
@@ -225,7 +225,7 @@ for c in range(4, 8):
 try:
     print>>fout, "var sta117_histFlow = ["
     cur = con.cursor()
-    sql = "Select * From s1467_rated Where T_TIME > DATE_ADD(now(),INTERVAL -2 DAY) ORDER BY T_TIME ASC"
+    sql = "Select * From s1467_rated Where T_TIME > DATE_ADD(now(),INTERVAL -3 DAY) ORDER BY T_TIME ASC"
     cur.execute(sql)
     results = cur.fetchall()
     result_count = cur.rowcount
@@ -254,7 +254,7 @@ except mdb.Error, e:
 c = 4
 spillData = "var WLL = [";
 fcData = "var sta117_fcFlow = ["
-numTimePoints = 0; ##192 timepoints for 48 hour forecast
+numTimePoints = 0; ##288 timepoints for 72 hour forecast
 dataStamp=""
 for r in range(7, shtFlow.nrows):
     ##date_value may used as x argument for highcharts plot
@@ -262,7 +262,7 @@ for r in range(7, shtFlow.nrows):
     date_value = xlrd.xldate_as_tuple(shtFlow.cell(r,1).value,wrkFlow.datemode)
     ##make python datetime object from excel date
     date_value_DT = datetime(*date_value)
-    if date_value_DT >= nowPST and numTimePoints < 192:
+    if date_value_DT >= nowPST and numTimePoints < 288:
         dv_tuple = date_value_DT.timetuple()
         #months are from 0-11 in highcharts, so subract 1 from month value in date_value
         #to modify date tuple, date_value must be turned into a list
@@ -273,7 +273,7 @@ for r in range(7, shtFlow.nrows):
         hour = str(dv_lst[3])
         minute = str(dv_lst[4])
         dataStamp += "[Date.UTC("+year+","+month+","+day+","+hour+","+minute+"), " + str(round(shtFlow.cell_value(r,c),2)) + "]"
-        if numTimePoints < 191:
+        if numTimePoints < 287:
             dataStamp += ",\n"
         numTimePoints += 1
 spillData += dataStamp + "];"
@@ -286,7 +286,7 @@ print>>fout, spillData
 numheaderlines = 27
 now = datetime.utcnow()
 end_date = str(now.year) + "-" + str(now.month) + "-" + str(now.day)
-begin_date = str(now.year) + "-" + str(now.month) + "-" + str(now.day-2)
+begin_date = str(now.year) + "-" + str(now.month) + "-" + str(now.day-3)
 url = "http://waterdata.usgs.gov/ca/nwis/uv?cb_00060=on&cb_00065=on&format=rdb&site_no=11164500&period=&begin_date=" + begin_date + "&end_date=" + end_date
 res = urllib.urlopen(url)
 
@@ -374,7 +374,7 @@ for c in range(2, 8):
         date_value = xlrd.xldate_as_tuple(shtSpill.cell(r,1).value,wrkSpill.datemode)
         date_value_DT = datetime(*date_value)
         
-        if date_value_DT >= nowPST and numTimePoints < 192:
+        if date_value_DT >= nowPST and numTimePoints < 288:
             dv_tuple = date_value_DT.timetuple()
             #months are from 0-11 in highcharts, so subract 1 from month value in date_value
             #to modify date tuple, date_value must be turned into a list
@@ -385,7 +385,7 @@ for c in range(2, 8):
             hour = str(dv_lst[3])
             minute = str(dv_lst[4])
             dataStamp = "[Date.UTC("+year+","+month+","+day+","+hour+","+minute+"), " + str(round(shtSpill.cell_value(r,c),2)) + "]"
-            if numTimePoints < 191:
+            if numTimePoints < 287:
                 dataStamp += ","
             print>>fout, dataStamp
             numTimePoints += 1
