@@ -14,7 +14,8 @@ chart = new Highcharts.Chart({
         type: 'datetime',
         dateTimeLabelFormats: {
             hour: '%I:%M %P',
-            minute: '%I %M'
+            minute: '%I:%M %P',
+            second: '%I:%M:%S %P'
         },
         min: sta93_histFlow[0][0],
         max: sta93_fcFlow[sta93_fcFlow.length-1][0]
