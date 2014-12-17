@@ -284,6 +284,9 @@ Plot.prototype.getSeries = function(time){
   var lastHistPt = this.historicData[this.historicData.length-1][1];
   var firstFCPt = this.forecastData[0][1];
   var interp = (lastHistPt + firstFCPt)/2;
+  var strInterp = interp.toFixed(2); //round to 2 decimal places
+  interp = parseFloat(strInterp);
+
   var interpolation = [time, interp];
   this.historicData[this.historicData.length] = interpolation;
   this.forecastData.splice(0, fcCurrIndex);
