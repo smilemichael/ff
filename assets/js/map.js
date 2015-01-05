@@ -236,7 +236,12 @@ function forecast_selected_feature(event){
     $( "#forecastInfo" ).tabs( "option", "active", 0 );
     //enable flood simulation tab
     $( "#forecastInfo" ).tabs( "enable", 2 );
-    $('#forecastInfo').slideDown(); //forecast gage info made visible
+    $('#forecastInfo').slideDown(function(){
+        //display loading message while hydrograph is being rendered
+        $('#fcPlot').html("loading hydrograph...<img src='assets/images/ajax-loader.gif'/>");
+        //load forecast hydrograph before retrieving spill layers
+        selectedStation.loadPlot();
+    }); //forecast gage info made visible
     
     //save station number of currently selected gage
     stationNumber = event.feature.attributes.STA_NUMBER; 
@@ -246,9 +251,6 @@ function forecast_selected_feature(event){
     if(selectedStation.spillLayersLoaded == false){
         selectedStation.getSpillLayers();
     }
-
-    //load forecast hydrograph
-    selectedStation.loadPlot();
 
     // if user is logged in, enable alert regisration/unregistration
     var $object = $('#alertMe');
@@ -262,10 +264,11 @@ function forecast_selected_feature(event){
 //handler for forecast gage deselection
 function forecast_unselected_feature(event){
     previousStation = selectedStation;
-    previousStation.plot.hc_chart.destroy();
     previousStation.hideSpillLayers();
 
-    $('#forecastInfo').slideUp();
+    $('#forecastInfo').slideUp(function(){
+        previousStation.plot.hc_chart.destroy();
+    });
     selectedStation = null; //no station is currently selected
     $('#floodDemoSelect').val("default");//reset flood event select
 }
@@ -308,33 +311,39 @@ function registrationControlHTML(staNumber){
 //JQUERY CODE
 $(document).ready(function(){
     initGages();
+    $('#helpBox').hide();
     $('#forecastInfo').hide(); //hide forecastInfo div
     $('#forecastInfo').tabs(); //enable jQuery UI tabs on forecastInfo div
     $('#forecastInfo').tabs('disable', 3 ); //disable alert me button while registration, etc. is under construction
+    
     //make forecast info visible, now that its off screen 
     $('#forecastInfo').css("visibility", "visible");
+    
     //show flood events for flood demos
     $("#floodDemoSelect").change(function() {
         var floodEvent = $("#floodDemoSelect").val();
         if(floodEvent != "default"){
             selectedStation.displayFloodEvent(floodEvent);
-        }else{
-            selectedStation.hideAllSpillLayers();
         }
+        // }else{
+        //     selectedStation.hideAllSpillLayers();
+        // }
     });
-    // view menu event handlers
+    
+    //view menu event handler
     $('#sbViewSelect').change(function(){
         map.zoomToExtent(map.viewBounds[$('#sbViewSelect option:selected').val()],true);
         $('#sbViewSelect').val("default");
     });
 
+    //gage selection menu event handler
     $('#sbGageSelect').change(function(){
         select_feature_control.unselectAll();
         select_feature_control.select(forecast_streamflow.getFeatureByFid($('#sbGageSelect option:selected').val()));
         $('#sbGageSelect').val("default");
-
     });
 
+    //event handler to clear demo spills
     $('#btnClearDemoSpill').on('click', function(){
         selectedStation.hideSpillLayers();
         $(this).attr('disabled', 'disabled');
