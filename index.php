@@ -203,7 +203,7 @@
 		<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 		<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 		<script src="//code.highcharts.com/highcharts.js"></script>
-	<!-- 	// <script src="http://code.highcharts.com/stock/highstock.js"></script>
+		<!-- // <script src="http://code.highcharts.com/stock/highstock.js"></script>
 		// <script src="http://code.highcharts.com/stock/modules/exporting.js"></script> -->
 
 		<!-- jquery validation scripts -->
