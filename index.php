@@ -134,6 +134,7 @@
 			</ul>
 			<div id="fc-tabs-1" style="white-space: nowrap;">
 					<div id="fcPlot">
+						loading hydrograph...<img src='assets/images/ajax-loader.gif'/>
 					</div>
 			</div>
 			<div id="fc-tabs-2">
@@ -211,6 +212,7 @@
 		<script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
 
 		<script src="assets/js/plots/flowData.js"></script>
+		<script src="assets/js/plots/rainData.js"></script>	
 		<script src= "assets/js/jquery.leanModal.min.js"></script>
 		<script src="assets/js/map.js"></script>
 		<script src="assets/js/Gage_Spill_Plot_Init.js"></script>

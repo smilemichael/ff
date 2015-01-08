@@ -268,6 +268,7 @@ function forecast_unselected_feature(event){
 
     $('#forecastInfo').slideUp(function(){
         previousStation.plot.hc_chart.destroy();
+        $('#fcPlot').html("loading hydrograph...<img src='assets/images/ajax-loader.gif'/>");
     });
     selectedStation = null; //no station is currently selected
     $('#floodDemoSelect').val("default");//reset flood event select

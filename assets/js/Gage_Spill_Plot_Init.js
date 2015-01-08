@@ -478,12 +478,14 @@ Gage.prototype.loadPlot = function(){
           width: 2,
           color: '#000000',
           dashStyle: 'shortDash',
+          zIndex: 1000,
           label: {
                     text: "Current Time (PST)",
                     rotation: 0,
                     style: {
                       color: '#333333',
-                      fontWeight: 'bold'
+                      fontWeight: 'bold',
+                      top: 10
                     }
                   },
                   id: 'now-line'

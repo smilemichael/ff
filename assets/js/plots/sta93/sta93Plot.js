@@ -20,7 +20,7 @@ chart = new Highcharts.Chart({
         min: sta93_histFlow[0][0],
         max: sta93_fcFlow[sta93_fcFlow.length-1][0]
     },
-    yAxis: {
+    yAxis: [{ //primary axis (flow rate)
         lineWidth:1,
         title: {
             text: 'flow rate (cfs)'
@@ -30,6 +30,7 @@ chart = new Highcharts.Chart({
                 color : 'red',
                 dashStyle : 'shortdash',
                 width : 2,
+                zIndex: 1000,
                 label : {
                     text : 'Flood Warning'
                 }
@@ -45,6 +46,17 @@ chart = new Highcharts.Chart({
         min: 0,
         max: 7000*1.2
     },
+    {//secondary axis (precipitation)
+        title:{
+            text: 'rainfall (in.)'
+        },
+        min: 0,
+        max: 5,
+        tickInterval:1,
+        opposite: true,
+        reversed: true
+
+    }],
     legend: {
         layout: "vertical",
         align: "right",
@@ -62,6 +74,16 @@ chart = new Highcharts.Chart({
         + ', ' + this.y + ' cfs';
         }
     },
+    series: [
+        {//rainfall data
+            name: 'Rainfall', 
+            type: 'column',
+            yAxis: 1,
+            pointWidth: 2,
+            data: sta2065_Rain,
+            zIndex: 1
+        }
+    ],
     plotOptions: {
         series: {
             point: {
