@@ -17,7 +17,8 @@ try:
     print>>fout, "var sta51_histFlow = ["
     con = mdb.connect('10.25.5.112', 'root', 'datawise', 'datawise');
     cur = con.cursor()
-    sql = "Select * From s2058_rated Where T_TIME > DATE_ADD(now(),INTERVAL -3 DAY) ORDER BY T_TIME ASC"
+    ##sql = "Select * From s2058_rated Where T_TIME > DATE_ADD(now(),INTERVAL -3 DAY) ORDER BY T_TIME ASC"
+    sql = "Select * From s2058_0 Where T_TIME > DATE_ADD(now(),INTERVAL -3 DAY) ORDER BY T_TIME ASC"
     cur.execute(sql)
     results = cur.fetchall()
     result_count = cur.rowcount
