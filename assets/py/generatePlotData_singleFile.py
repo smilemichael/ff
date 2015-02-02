@@ -283,12 +283,15 @@ print>>fout, fcData
 print>>fout, spillData
 
 ###sta112 SFQ
+##historic data
 
 numheaderlines = 27
-now = datetime.utcnow()
-end_date = str(now.year) + "-" + str(now.month) + "-" + str(now.day)
-begin_date = str(now.year) + "-" + str(now.month) + "-" + str(now.day-3)
-url = "http://waterdata.usgs.gov/ca/nwis/uv?cb_00060=on&cb_00065=on&format=rdb&site_no=11164500&period=&begin_date=" + begin_date + "&end_date=" + end_date
+end_date = datetime.utcnow()
+end_date_str = str(end_date.year) + "-" + str(end_date.month) + "-" + str(end_date.day)
+begin_date = (end_date - timedelta(days=3))
+begin_date_str = str(begin_date.year) + "-" + str(begin_date.month) + "-" + str(begin_date.day)
+url = "http://waterdata.usgs.gov/ca/nwis/uv?cb_00060=on&cb_00065=on&format=rdb&site_no=11164500&period=&begin_date=" + begin_date_str + "&end_date=" + end_date_str
+print url
 res = urllib.urlopen(url)
 
 print>>fout, "var sta112_histFlow = ["
@@ -297,8 +300,14 @@ for i in range(0, numheaderlines):
     res.readline()
 
 ##process each data row
-linecount = 0;
+linecount = 0
+quarterHours = 0
 for line in res:
+    if quarterHours < 3:
+        quarterHours += 1
+        continue
+    else:
+        quarterHours = 0
     if linecount != 0:
         print>>fout, ","    
     a = re.split('\t',line)
@@ -311,8 +320,11 @@ for line in res:
     dv_lst[1] = timestamp[1]-1
     #todo scan row to figure out if PDT or PST is used
     #if PDT is used subtract an hour from timestamp
-    #subtract 1 from hour PDT->PST
-    dv_lst[3] = dv_lst[3] - 1
+    #subtract 1 from hour PDT->PST, accounting for 24 hour time
+    if dv_lst[3] > 0:
+        dv_lst[3] = dv_lst[3] - 1
+    else:
+        dv_lst[3] = 23
     #turn list back into a tuple
     timestamp = tuple(dv_lst)
     print>>fout, "[Date.UTC"+ str(timestamp) + "," + flow + "]",
@@ -327,20 +339,26 @@ shtFlow = wrkFlow.sheet_by_index(0)
 col_usgs = 5
 ###process flow data
 print>>fout, "var sta112_fcFlow = ["
+numTimePoints = 0
 for r in range(7, shtFlow.nrows):
-    #date_value may used as x argument for highcharts plot
-    date_value = xlrd.xldate_as_tuple(shtFlow.cell(r,1).value,wrkFlow.datemode)
-    #months are from 0-11 in highcharts, so subract 1 from month value in date_value
-    #to modify date tuple, date_value must be turned into a list
-    dv_lst = list(date_value)
-    #subtract 1 from month
-    dv_lst[1] = date_value[1]-1
-    #turn list back into a tuple
-    date_value = tuple(dv_lst)
-    dataStamp = "[Date.UTC" + str(date_value) + ", " + str(round(shtFlow.cell_value(r,5),2)) + "]"
-    if r < shtFlow.nrows-1:
-        dataStamp += ","
-    print>>fout, dataStamp 
+    date_value = xlrd.xldate_as_tuple(shtSpill.cell(r,1).value,wrkSpill.datemode)
+    date_value_DT = datetime(*date_value)   
+    if date_value_DT >= nowPST and numTimePoints < 288:
+        #date_value may used as x argument for highcharts plot
+        date_value = xlrd.xldate_as_tuple(shtFlow.cell(r,1).value,wrkFlow.datemode)
+        #months are from 0-11 in highcharts, so subract 1 from month value in date_value
+        #to modify date tuple, date_value must be turned into a list
+        dv_lst = list(date_value)
+        #subtract 1 from month
+        dv_lst[1] = date_value[1]-1
+        #turn list back into a tuple
+        date_value = tuple(dv_lst)
+        dataStamp = "[Date.UTC" + str(date_value) + ", " + str(round(shtFlow.cell_value(r,5),2)) + "]"
+        ##if r < shtFlow.nrows-1:
+        if numTimePoints < 287:
+            dataStamp += ","
+        print>>fout, dataStamp
+        numTimePoints += 1
 print>>fout, "];"
 
 ####station 112 spill
@@ -355,7 +373,7 @@ ds101R_c = 6
 ds101L_c = 7
 
 for c in range(2, 8):
-    numTimePoints = 0;
+    numTimePoints = 0
     if c == 2:
         spillZone = "MiddlefieldR"
     if c == 3:
