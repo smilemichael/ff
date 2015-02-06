@@ -45,6 +45,7 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<title>SCVWD Flood Forecast System</title>
+		<link rel="shortcut icon" href="assets/images/favicon.ico">
 		<!--stylesheets -->
     	<link rel="stylesheet" href="assets/css/style.css" type="text/css">
     	<link rel="stylesheet" href="assets/css/OL/theme/default/style.css" type="text/css">
