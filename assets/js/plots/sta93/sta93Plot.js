@@ -45,18 +45,20 @@ chart = new Highcharts.Chart({
             }],
         min: 0,
         max: 7000*1.2
-    },
-    {//secondary axis (precipitation)
-        title:{
-            text: 'rainfall (in.)'
-        },
-        min: 0,
-        max: 5,
-        tickInterval:1,
-        opposite: true,
-        reversed: true
+    }
+    // ,
+    // {//secondary axis (precipitation)
+    //     title:{
+    //         text: 'rainfall (in.)'
+    //     },
+    //     min: 0,
+    //     max: 5,
+    //     tickInterval:1,
+    //     opposite: true,
+    //     reversed: true
 
-    }],
+    // }
+    ],
     legend: {
         layout: "vertical",
         align: "right",
@@ -74,16 +76,16 @@ chart = new Highcharts.Chart({
         + ', ' + this.y + ' cfs';
         }
     },
-    series: [
-        {//rainfall data
-            name: 'Rainfall', 
-            type: 'column',
-            yAxis: 1,
-            pointWidth: 2,
-            data: sta2065_Rain,
-            zIndex: 1
-        }
-    ],
+    // series: [
+    //     {//rainfall data
+    //         name: 'Rainfall', 
+    //         type: 'column',
+    //         yAxis: 1,
+    //         pointWidth: 2,
+    //         data: sta2065_Rain,
+    //         zIndex: 1
+    //     }
+    // ],
     plotOptions: {
         series: {
             point: {
