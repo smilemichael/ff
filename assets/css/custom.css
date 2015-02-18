@@ -1,9 +1,8 @@
-.popup {
-    position: absolute;
-    padding: 5px;
-    font-size: 8pt;
-    z-index: 1000;
-    background-color: white;
+.ui-widget-overlay{
+	/*set jquery UI dialog modal overlay properties*/
+	opacity: .50 !important; 
+	filter: Alpha(Opacity=50) !important; /*IE*/
+	background: #000!important;
 }
 
 #helpBox{
@@ -35,10 +34,6 @@
     color:#fff;
 }
 
-p{
-	font-size: 12px;
-}
-
 body{
 	width: 100%;
 	min-width: 1000px;
@@ -48,13 +43,6 @@ body{
 	margin-left:25px;
 	margin-top:8px;
 	display:inline-block;
-}
-.gageInfo, .fcGageInfo{
-	font-size: 10px;	
-}
-
-.navbar-brand{
-	font-family: Nova Square;
 }
 
 #myNav{
@@ -73,10 +61,8 @@ body{
 	top:50px;
 	bottom:0px; 
 	width:100%;
-	/*height:100%;*/
 	min-width: 1000px;
 }
-
 
 #forecastInfo{
 	position:absolute;
@@ -100,7 +86,6 @@ hr {
 }
 
 #fcGageInfo{
-	font-size: 12px;	
 	position:relative;
 	vertical-align:top;
 	width:25%;
@@ -111,12 +96,6 @@ hr {
 	margin:10px;
 }
 
-#plotContainer{
-    width: 850px;
-    height: 300px;
-    position: relative;
-	display:inline-block;
-}
 #fcPlot{
 	width: 80%;
     min-width: 850px;
@@ -136,65 +115,5 @@ hr {
 
 /*lean modal css*/
 /* Overlay when Modal is open */
-@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic);
 
-body {font-family: 'Source Sans Pro', sans-serif; font-size: 14px; color: #666;}
 
-#lean_overlay {
-    position: fixed;
-    z-index:100;
-    top: 0px;
-    left: 0px;
-    height:100%;
-    width:100%;
-    background: #000;
-    display: none;
-}
-
-.popupContainer{
-	position:absolute;
-	width:330px;
-	height: auto;
-	left:45%;
-	top:80px;
-	background: #FFF;
-}
-
-.modal_trigger {
-
-}
-
-.btnLM {padding:10px 20px; background: #00F;float:left;}
-.btnLM_red{background: #FF3333; color: #FFF;width:95%;}
-
-.btnLM:hover {background: #E4E4E2;}
-.btnLM_red:hover {background: #C12B05;color: #FFF;}
-
-a.btnLM {color:#666; text-align: center; text-decoration: none;}
-a.btnLM_red {background: #F00; color: #FFF;}
-
-.one_half {display: block;}
-
-/* Popup Styles*/
-.popupHeader {font-size:16px; text-transform: uppercase;}
-.popupHeader {background:#F4F4F2; position:relative; padding:10px 20px; border-bottom:1px solid #DDD; font-weight:bold;}
-.popupHeader .modal_close {position: absolute; right: 0; top:0; padding:10px 15px; background:#E4E4E2; cursor: pointer; color:#aaa; font-size:16px;}
-.popupBody {padding:20px;}
-
-/* User Login Form */
-/*.user_login {display: none;}*/
-.user_login label {display: block; margin-bottom:5px;}
-.user_login input[type="text"], .user_login input[type="email"], .user_login input[type="password"] {display: block; width:95%; padding: 10px; border:1px solid #DDD; color:#666;}
-.user_login input[type="checkbox"] {float:left; margin-right:5px;}
-.user_login input[type="checkbox"]+label {float:left;}
-
-.forgot_password {display:block; margin: 20px 10px 20px; float: right; clear: both; overflow: hidden; text-decoration: none; color:#ED6347;}
-
-.action_btns  {
-    clear: both;
- 	overflow:  hidden;
-}
- 
-.action_btns a  {
-    display:  block;
-}
