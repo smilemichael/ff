@@ -213,7 +213,7 @@ function init(){
                     })
     });
     map.events.register("changebaselayer", this, function(obj){
-        alert("test");
+        // alert("test");
     });
 
 
