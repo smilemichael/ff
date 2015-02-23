@@ -68,8 +68,8 @@ chart = new Highcharts.Chart({
                 events: {
                     click: function(e){
                         var x = this.x;
-                        var tIndex = jQuery.inArray(x, selectedStation.plot.fcTimeIndex);
-                        selectedStation.displaySpill(tIndex);
+                        var tIndex = jQuery.inArray(x, scvwdflood.selectedStation.plot.fcTimeIndex);
+                        if(tIndex >= 0) scvwdflood.selectedStation.displaySpill(tIndex);
                         this.select();
                         //reset floodevent demo select 
                         $('#floodDemoSelect').val("default");

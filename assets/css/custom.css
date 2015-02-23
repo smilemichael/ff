@@ -76,6 +76,14 @@ body{
 	float: bottom;
 }
 
+.popup { /*used by tooltip*/
+    position: absolute;
+    padding: 5px;
+    font-size: 8pt;
+    z-index: 1000;
+    background-color: white;
+}
+
 hr { 
 	display: block; 
 	height: 1px;

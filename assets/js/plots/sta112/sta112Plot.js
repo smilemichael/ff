@@ -68,8 +68,8 @@ chart = new Highcharts.Chart({
                 events: {
                     click: function(e){
                         var x = this.x;
-                        var tIndex = jQuery.inArray(x, selectedStation.plot.fcTimeIndex);
-                        selectedStation.displaySpill(tIndex);
+                        var tIndex = jQuery.inArray(x, scvwdflood.selectedStation.plot.fcTimeIndex);
+                        scvwdflood.selectedStation.displaySpill(tIndex);
                         this.select();
                         //reset floodevent demo select 
                         $('#floodDemoSelect').val("default");
@@ -96,6 +96,6 @@ chart = new Highcharts.Chart({
     }
 }); //end chart
 
-for(var i=0;i<selectedStation.plot.forecastData.length;i++){
-    selectedStation.plot.fcTimeIndex.push(selectedStation.plot.forecastData[i][0]);
+for(var i=0;i<scvwdflood.selectedStation.plot.forecastData.length;i++){
+    scvwdflood.selectedStation.plot.fcTimeIndex.push(scvwdflood.selectedStation.plot.forecastData[i][0]);
 }
