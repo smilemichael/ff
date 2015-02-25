@@ -64,7 +64,17 @@
 			<!-- <p><a id="closeHelpBox" style="cursor:pointer;">[close]</a></p> -->
 		</div>
 		<!--flood forecast gage information in jQuery UI tabs -->
-		
+		<div id="qpfControls">
+			<ul>
+				<li><a href="#qpfTab">QPF</a></li>
+			</ul>
+			<div id="qpfTab">
+				<div id="qpf-scale"></div>
+				<div id="qpf-date"></div>
+		        <div id="qpf-slide"></div>
+		        <div id="qpf-value"></div>
+			</div>
+		</div>
 		<div id="forecastInfo">
 			<ul>
 				<li><a href="#fc-tabs-1">Flood Forecast Information</a></li>
@@ -118,8 +128,10 @@
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 		<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 		<script src="//code.highcharts.com/highcharts.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.min.js"></script>
 		
 		<!--application specific scripts -->
+		<!--<script src="http://166.78.145.195/qpfserve/qpfserve.js"></script>-->
 		<script src="assets/js/plots/flowData.js"></script>
 		<script src="assets/js/scvwdflood.js"></script>
 		<script src="assets/js/streamFlowGages.js"></script>

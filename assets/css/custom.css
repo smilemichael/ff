@@ -76,6 +76,21 @@ body{
 	float: bottom;
 }
 
+#qpfControls{
+	position:absolute;
+	bottom:0px;
+	height:200px;
+	width:100%;
+	min-width: 1000px;
+	background-color:white;
+	opacity:0.9;
+	visibility:hidden;
+	float: bottom;
+}
+
+#qpf-slide{
+	width:600px;
+}
 .popup { /*used by tooltip*/
     position: absolute;
     padding: 5px;

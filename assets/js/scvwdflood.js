@@ -212,8 +212,14 @@ function init(){
                       'strokeWidth': 0
                     })
     });
-    map.events.register("changebaselayer", this, function(obj){
-        // alert("test");
+    map.events.register("changelayer", this, function(obj){
+        if(obj.layer.name === "Fox Weather QPF"){
+            if(obj.layer.visibility == true){
+                $('#qpfControls').slideDown();
+            }else{ 
+                $('#qpfControls').slideUp();    
+            }
+        }
     });
 
 
@@ -250,19 +256,26 @@ function init(){
     
     //add map to global scvwdflood object
     scvwdflood.map = map;
+
+    // FXQPF.addQpfLayer(qpf_options);
     //hack to add legend
     //todo use regex to determine div id
     // $("#OpenLayers_Control_LayerSwitcher_37_layersDiv").append('<div class="baseLbl">Legend</div><div class="baseLayersDiv"><img src="assets/images/streamflow.png">&nbspStreamflow Gage</div>');
     $("#OpenLayers_Control_LayerSwitcher_32_layersDiv").append('<div class="baseLbl">Legend</div><div class="baseLayersDiv"><img src="assets/images/streamflow.png">&nbspStreamflow Gage</div>');
 }
-
-
-
-
 //////////////////END APPLICATION JS FUNCTIONS///////////////////////
 //JQUERY CODE
 $(document).ready(function(){
+    //get qpf layers
+    // qpf_options: {
+    //     mapId: scvwdflood.map,
+    //     scaleId: "qpf-scale",
+    //     slideId: "qpf-slide",
+    //     valueId: "qpf-value",
+    //     dateId:  "qpf-date"
+    // };
 
+    // FXQPF.addQpfLayer(scvwdflood.qpf_options);
     //disclaimer message on app launch
     $("#disclaimer-message").dialog({
         modal: true,
@@ -318,6 +331,12 @@ $(document).ready(function(){
     $('#forecastInfo').tabs('disable', 3 ); //disable alert me button while registration, etc. is under construction
     //make forecast info visible, now that its off screen 
     $('#forecastInfo').css("visibility", "visible");
+    //qpf tab set up
+    // $('#qpfControls').hide(); //hide forecastInfo div
+    $('#qpfControls').tabs();
+    $('#qpfControls').hide();
+    // FXQPF.draw_color_scale("qpf-scale", 600, 50, 0);
+    $('#qpfControls').css("visibility", "visible");
     
     //show flood events for flood demos
     $("#floodDemoSelect").change(function() {
@@ -329,7 +348,7 @@ $(document).ready(function(){
     
     //map bounds menu event handler
     $('#sbViewSelect').change(function(){
-        map.zoomToExtent(map.viewBounds[$('#sbViewSelect option:selected').val()],true);
+        scvwdflood.map.zoomToExtent(scvwdflood.map.viewBounds[$('#sbViewSelect option:selected').val()],true);
         $('#sbViewSelect').val("default");
     });
 
@@ -339,13 +358,11 @@ $(document).ready(function(){
         select_feature_control.select(forecast_streamflow.getFeatureByFid($('#sbGageSelect option:selected').val()));
         $('#sbGageSelect').val("default");
     });
-
     //event handler to clear demo spills
     $('#btnClearDemoSpill').on('click', function(){
         scvwdflood.selectedStation.hideSpillLayers();
         $(this).attr('disabled', 'disabled');
         $('#floodDemoSelect').val('default');
     });
-
 });
 
