@@ -70,170 +70,283 @@ function initGages(){
   //////////START STATION OBJECT CONFIGURATION//////////////////////////////////////
   //////////START STATION51 OBJECT CONFIGURATION//////////////////////////////////////////////
   /////////////////STATION51 CHERRY SPILL ZONE OBJECT CONFIGURATION/////////////////
-  var sta51_Cherry_spillZone_spillRates = [100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500,1600,1700,1800];
-  var sta51_Cherry_spillZone_spillRatesToLayers = {};
-  for(var i=0;i<sta51_Cherry_spillZone_spillRates.length;i++){
-      sta51_Cherry_spillZone_spillRatesToLayers[sta51_Cherry_spillZone_spillRates[i]] = null;
+  var cherryOpt = {
+    minSpill: 100, 
+    maxSpill: 1800, 
+    numSpillLayers: 18, 
+    spillRates: [100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500,1600,1700,1800],
+    spillRatesToLayers: {}, 
+    floodEvents: {"2year": null,"5year": null,"10year": 100,"25year": 300,"50year": 800,"100year": 1800}, 
+    spillLayerNames: cherry_spillLayerNames, 
+    forecastData: Cherry
+  };
+  for(var i=0;i<cherryOpt.spillRates.length;i++){
+      cherryOpt.spillRatesToLayers[cherryOpt.spillRates[i]] = null;
   }
-  var sta51_Cherry_spillZone_floodEvents = {"2year": null,"5year": null,"10year": 100,"25year": 300,"50year": 800,"100year": 1800};
-  var sta51_Cherry_spillZone = new SpillZone(100, 1800, 18, sta51_Cherry_spillZone_spillRates, sta51_Cherry_spillZone_spillRatesToLayers, sta51_Cherry_spillZone_floodEvents, cherry_spillLayerNames, Cherry);
+  var sta51_Cherry_SpillZone = new SpillZone(cherryOpt);
 
   ////////////////STATION51 JARVIS SPILL ZONE OBJECT CONFIGURATION//////////////////////////////////////
-  var sta51_Jarvis_spillZone_spillRates = [100,200,300,400,500,600,700];
-  var sta51_Jarvis_spillZone_spillRatesToLayers = {};
-  for(var i=0;i<sta51_Jarvis_spillZone_spillRates.length;i++){
-      sta51_Jarvis_spillZone_spillRatesToLayers[sta51_Jarvis_spillZone_spillRates[i]] = null;
+  var jarvisOpt = {
+    minSpill: 100, 
+    maxSpill: 700, 
+    numSpillLayers: 7, 
+    spillRates: [100,200,300,400,500,600,700],
+    spillRatesToLayers: {}, 
+    floodEvents: {"2year": null,"5year": null,"10year": 100,"25year": 300,"50year": 500,"100year": 700}, 
+    spillLayerNames: jarvis_spillLayerNames, 
+    forecastData: Jarvis 
+  };
+
+  for(var i=0;i<jarvisOpt.spillRates.length;i++){
+      jarvisOpt.spillRatesToLayers[jarvisOpt.spillRates[i]] = null;
   }
-  var sta51_Jarvis_spillZone_floodEvents = {"2year": null,"5year": null,"10year": 100,"25year": 300,"50year": 500,"100year": 700};
-  var sta51_Jarvis_spillZone = new SpillZone(100, 700, 7, sta51_Jarvis_spillZone_spillRates, sta51_Jarvis_spillZone_spillRatesToLayers, sta51_Jarvis_spillZone_floodEvents, jarvis_spillLayerNames, Jarvis);
 
-  var sta51_spillZoneNames = ["Cherry", "Jarvis"];
-  var sta51_spillZones = {"Cherry": sta51_Cherry_spillZone, "Jarvis": sta51_Jarvis_spillZone};
-  var sta51_spillExtent =  new OpenLayers.Bounds( -13580402.729243, 4466351.8865031,-13555942.880195,4482766.7383251);
+  var sta51_Jarvis_SpillZone = new SpillZone(jarvisOpt);
+  var sta51Opt = {
+    staNum: 51,
+    numSpillZones: 2,
+    spillZoneNames: ["Cherry", "Jarvis"],
+    spillZones: {"Cherry": sta51_Cherry_SpillZone, "Jarvis": sta51_Jarvis_SpillZone},
+    spillExtent:  new OpenLayers.Bounds( -13580402.729243, 4466351.8865031,-13555942.880195,4482766.7383251),
+    plot: new Plot("assets/js/plots/sta51/sta51Plot.js", sta51_histFlow, sta51_fcFlow)
+  };
 
-  var sta51Plot = new Plot("assets/js/plots/sta51/sta51Plot.js", sta51_histFlow, sta51_fcFlow);
-  var station51 = new Gage(51, 2, sta51_spillZoneNames, sta51_spillZones, sta51_spillExtent, sta51Plot);
+  var station51 = new Gage(sta51Opt);
   // //////////END STATION51 Object INIT///////////////////////////////////
 
   //////////START STATION93 OBJECT CONFIGURATION///////////////////////////////////
   /////////////////STATION93 ROSS1 SPILL ZONE OBJECT CONFIGURATION/////////////////
-  var sta93_Ross1_spillZone_spillRates = [100,200,300,400,500];
-  var sta93_Ross1_spillZone_spillRatesToLayers = {};
-  for(var i=0;i<sta93_Ross1_spillZone_spillRates.length;i++){
-      sta93_Ross1_spillZone_spillRatesToLayers[sta93_Ross1_spillZone_spillRates[i]] = null;
+  var ross1Opt = {
+    minSpill: 100, 
+    maxSpill: 500, 
+    numSpillLayers: 5, 
+    spillRates: [100,200,300,400,500],
+    spillRatesToLayers: {}, 
+    floodEvents: {"2year": null,"5year": null,"10year": null,"25year": null,"50year": 200,"100year": 500}, 
+    spillLayerNames: ross1_spillLayerNames, 
+    forecastData: Ross1 
+  };
+  for(var i=0;i<ross1Opt.spillRates.length;i++){
+      ross1Opt.spillRatesToLayers[ross1Opt.spillRates[i]] = null;
   }
-  var sta93_Ross1_spillZone_floodEvents = {"2year": null,"5year": null,"10year": null,"25year": null,"50year": 200,"100year": 500};
-  var sta93_Ross1_spillZone = new SpillZone(100, 500, 5, sta93_Ross1_spillZone_spillRates, sta93_Ross1_spillZone_spillRatesToLayers, sta93_Ross1_spillZone_floodEvents, ross1_spillLayerNames, Ross1);
-  // /////////////////STATION93 ROSS2 SPILL ZONE OBJECT CONFIGURATION/////////////////
-  var sta93_Ross2_spillZone_spillRates = [100,200];
-  var sta93_Ross2_spillZone_spillRatesToLayers = {};
-
-  for(var i=0;i<sta93_Ross2_spillZone_spillRates.length;i++){
-      sta93_Ross2_spillZone_spillRatesToLayers[sta93_Ross2_spillZone_spillRates[i]] = null;
+  var sta93_Ross1_SpillZone = new SpillZone(ross1Opt);
+  // // /////////////////STATION93 ROSS2 SPILL ZONE OBJECT CONFIGURATION/////////////////
+  var ross2Opt = {
+    minSpill: 100, 
+    maxSpill: 200, 
+    numSpillLayers: 2, 
+    spillRates: [100,200],
+    spillRatesToLayers: {}, 
+    floodEvents: {"2year": null,"5year": null,"10year": null,"25year": null,"50year": null,"100year": 200}, 
+    spillLayerNames: ross2_spillLayerNames, 
+    forecastData: Ross2 
+  };
+  for(var i=0;i<ross2Opt.spillRates.length;i++){
+    ross2Opt.spillRatesToLayers[ross2Opt.spillRates[i]] = null;
   }
-
-  var sta93_Ross2_spillZone_floodEvents = {"2year": null,"5year": null,"10year": null,"25year": null,"50year": null,"100year": 200};
-  var sta93_Ross2_spillZone = new SpillZone(100, 200, 2, sta93_Ross2_spillZone_spillRates, sta93_Ross2_spillZone_spillRatesToLayers, sta93_Ross2_spillZone_floodEvents, ross2_spillLayerNames, Ross2);
-  /////////////////STATION93 ROSSL SPILL ZONE OBJECT CONFIGURATION/////////////////
-  var sta93_RossL_spillZone_spillRates = [100,200];
-  var sta93_RossL_spillZone_spillRatesToLayers = {};
-
-  for(var i=0;i<sta93_RossL_spillZone_spillRates.length;i++){
-      sta93_RossL_spillZone_spillRatesToLayers[sta93_RossL_spillZone_spillRates[i]] = null;
+  var sta93_Ross2_SpillZone = new SpillZone(ross2Opt);
+  // /////////////////STATION93 ROSSL SPILL ZONE OBJECT CONFIGURATION/////////////////
+  var rossLOpt = {
+    minSpill: 100, 
+    maxSpill: 200, 
+    numSpillLayers: 2, 
+    spillRates: [100,200],
+    spillRatesToLayers: {}, 
+    floodEvents: {"2year": null,"5year": null,"10year": null,"25year": null,"50year": null,"100year": 200}, 
+    spillLayerNames: rossL_spillLayerNames, 
+    forecastData: RossL 
+  };
+  for(var i=0;i<rossLOpt.spillRates.length;i++){
+      rossLOpt.spillRatesToLayers[rossLOpt.spillRates[i]] = null;
   }
+  var sta93_RossL_SpillZone = new SpillZone(rossLOpt);
+  // // /////////////////STATION93 ROSSR SPILL ZONE OBJECT CONFIGURATION/////////////////
+  var rossROpt = {
+    minSpill: 100, 
+    maxSpill: 500, 
+    numSpillLayers: 5, 
+    spillRates: [100,200,300,400,500],
+    spillRatesToLayers: {}, 
+    floodEvents: {"2year": null,"5year": null,"10year": null,"25year": null,"50year": 200,"100year": 500}, 
+    spillLayerNames: rossR_spillLayerNames, 
+    forecastData: RossR 
+  };
 
-  var sta93_RossL_spillZone_floodEvents = {"2year": null,"5year": null,"10year": null,"25year": null,"50year": null,"100year": 200};
-  var sta93_RossL_spillZone = new SpillZone(100, 200, 2, sta93_RossL_spillZone_spillRates, sta93_RossL_spillZone_spillRatesToLayers, sta93_RossL_spillZone_floodEvents, rossL_spillLayerNames, RossL);
-  // /////////////////STATION93 ROSSR SPILL ZONE OBJECT CONFIGURATION/////////////////
-  var sta93_RossR_spillZone_spillRates = [100,200,300,400,500];
-  var sta93_RossR_spillZone_spillRatesToLayers = {};
-  for(var i=0;i<sta93_RossR_spillZone_spillRates.length;i++){
-      sta93_RossR_spillZone_spillRatesToLayers[sta93_RossR_spillZone_spillRates[i]] = null;
+  for(var i=0;i<rossROpt.spillRates.length;i++){
+      rossROpt.spillRatesToLayers[rossROpt.spillRates[i]] = null;
   }
+  var sta93_RossR_SpillZone = new SpillZone(rossROpt);
 
-  var sta93_RossR_spillZone_floodEvents = {"2year": null,"5year": null,"10year": null,"25year": null,"50year": 200,"100year": 500};
-  var sta93_RossR_spillZone = new SpillZone(100, 500, 5, sta93_RossR_spillZone_spillRates, sta93_RossR_spillZone_spillRatesToLayers, sta93_RossR_spillZone_floodEvents, rossR_spillLayerNames, RossR);
+  var sta93Opt = {
+    staNum: 93,
+    numSpillZones: 4,
+    spillZoneNames: ["Ross1", "Ross2", "RossL", "RossR"],
+    spillZones: {"Ross1": sta93_Ross1_SpillZone, "Ross2": sta93_Ross2_SpillZone, "RossL": sta93_RossL_SpillZone, "RossR": sta93_RossR_SpillZone},
+    spillExtent:   new OpenLayers.Bounds( -13580402.729243, 4466351.8865031,-13555942.880195,4482766.7383251),
+    plot: new Plot("assets/js/plots/sta93/sta93Plot.js", sta93_histFlow, sta93_fcFlow)
+  };
 
-
-  var sta93_spillZoneNames = ["Ross1", "Ross2", "RossL", "RossR"];
-  var sta93_spillZones = {"Ross1": sta93_Ross1_spillZone, "Ross2": sta93_Ross2_spillZone, "RossL": sta93_RossL_spillZone, "RossR": sta93_RossR_spillZone};
-  var sta93_spillExtent =  new OpenLayers.Bounds( -13580402.729243, 4466351.8865031,-13555942.880195,4482766.7383251);
-
-  var sta93Plot = new Plot("assets/js/plots/sta93/sta93Plot.js", sta93_histFlow, sta93_fcFlow);
-  var station93 = new Gage(93, 4, sta93_spillZoneNames, sta93_spillZones, sta93_spillExtent, sta93Plot);
-  // // //////////END STATION93 OBJECT CONFIGURATION///////////////////////////////////
-  // // //////////START STATION117 OBJECT INIT/////////////////////////////////
-  // /////////////////STATION117 WLL SPILL ZONE OBJECT CONFIGURATION/////////////////
-  var sta117_WLL_spillZone_spillRates = [280,421,561,701,841,982,1122,1262,1402];
-  var sta117_WLL_spillZone_spillRatesToLayers = {};
-  for(var i=0;i<sta117_WLL_spillZone_spillRates.length;i++){
-      sta117_WLL_spillZone_spillRatesToLayers[sta93_RossR_spillZone_spillRates[i]] = null;
-  }
-
-  var sta117_WLL_spillZone_floodEvents = {"2year": 421,"5year": 701,"10year": 841,"25year": 1122,"50year": 1262,"100year": 1402};
-  var sta117_WLL_spillZone = new SpillZone(280, 1402, 9, sta117_WLL_spillZone_spillRates, sta117_WLL_spillZone_spillRatesToLayers, sta117_WLL_spillZone_floodEvents, WLL_spillLayerNames, WLL);
-
-  var sta117_spillZoneNames = ["WLL"];
-  var sta117_spillZones = {"WLL": sta117_WLL_spillZone};                            
-  var sta117_spillExtent =  new OpenLayers.Bounds(-13547493.618568, 4451161.743461, -13535263.694044, 4459369.169372);
-
-  var sta117Plot = new Plot("assets/js/plots/sta117/sta117Plot.js", sta117_histFlow, sta117_fcFlow);
-  var station117 = new Gage(117, 1, sta117_spillZoneNames, sta117_spillZones, sta117_spillExtent, sta117Plot);
-  // ////////////END STATION117 OBJECT INIT/////////////////////////////////
-
-  // //////////START STATION112 OBJECT CONFIGURATION///////////////////////////////////
-  // /////////////////STATION112 Middlefield L SPILL ZONE OBJECT CONFIGURATION/////////////////
-  var sta112_MiddlefieldL_spillZone_spillRates = [100,208];
-  var sta112_MiddlefieldL_spillZone_spillRatesToLayers = {};
-  for(var i=0;i<sta112_MiddlefieldL_spillZone_spillRates.length;i++){
-      sta112_MiddlefieldL_spillZone_spillRatesToLayers[sta112_MiddlefieldL_spillZone_spillRates[i]] = null;
-  }
-
-  var sta112_MiddlefieldL_spillZone_floodEvents = {"2year": null,"5year": null,"10year": null,"25year": null,"50year": null,"100year": 208};
-  var sta112_MiddlefieldL_spillZone = new SpillZone(100, 208, 2, sta112_MiddlefieldL_spillZone_spillRates, sta112_MiddlefieldL_spillZone_spillRatesToLayers, sta112_MiddlefieldL_spillZone_floodEvents, middlefieldL_spillLayerNames, MiddlefieldL);
-  // /////////////////STATION112 Middlefield R SPILL ZONE OBJECT CONFIGURATION/////////////////
-  var sta112_MiddlefieldR_spillZone_spillRates = [100,200,300,400,500,600,700,800,900,1000,1105];
-  var sta112_MiddlefieldR_spillZone_spillRatesToLayers = {};
-  for(var i=0;i<sta112_MiddlefieldR_spillZone_spillRates.length;i++){
-      sta112_MiddlefieldR_spillZone_spillRatesToLayers[sta112_MiddlefieldR_spillZone_spillRates[i]] = null;
-  }
-
-  var sta112_MiddlefieldR_spillZone_floodEvents = {"2year": null,"5year": null,"10year": null,"25year": null,"50year": null,"100year": 1105};
-  var sta112_MiddlefieldR_spillZone = new SpillZone(100, 1105, 11, sta112_MiddlefieldR_spillZone_spillRates, sta112_MiddlefieldR_spillZone_spillRatesToLayers, sta112_MiddlefieldR_spillZone_floodEvents, middlefieldR_spillLayerNames, MiddlefieldR);
-
-  // /////////////////STATION112 DS101L SPILL ZONE OBJECT CONFIGURATION/////////////////
-  var sta112_DS101L_spillZone_spillRates = [100,200,300,400,500,600,700,800,836];
-  var sta112_DS101L_spillZone_spillRatesToLayers = {};
-  for(var i=0;i<sta112_DS101L_spillZone_spillRates.length;i++){
-      sta112_DS101L_spillZone_spillRatesToLayers[sta112_DS101L_spillZone_spillRates[i]] = null;
+  var station93 = new Gage(sta93Opt);
+  // // // //////////END STATION93 OBJECT CONFIGURATION///////////////////////////////////
+  // // // //////////START STATION117 OBJECT INIT/////////////////////////////////
+  // // /////////////////STATION117 WLL SPILL ZONE OBJECT CONFIGURATION/////////////////
+  var wllOpt = {
+    minSpill: 280, 
+    maxSpill: 1402, 
+    numSpillLayers: 9, 
+    spillRates: [280,421,561,701,841,982,1122,1262,1402],
+    spillRatesToLayers: {}, 
+    floodEvents: {"2year": 421,"5year": 701,"10year": 841,"25year": 1122,"50year": 1262,"100year": 1402}, 
+    spillLayerNames: WLL_spillLayerNames, 
+    forecastData: WLL
   }
 
-  var sta112_DS101L_spillZone_floodEvents = {"2year": null,"5year": null,"10year": null,"25year": 700,"50year": 800,"100year": 836};
-  var sta112_DS101L_spillZone = new SpillZone(100, 836, 9, sta112_DS101L_spillZone_spillRates, sta112_DS101L_spillZone_spillRatesToLayers, sta112_DS101L_spillZone_floodEvents, DS101L_spillLayerNames, DS101L);
-
-  // /////////////////STATION112 DS101R SPILL ZONE OBJECT CONFIGURATION/////////////////
-  var sta112_DS101R_spillZone_spillRates = [100,200,300];
-  var sta112_DS101R_spillZone_spillRatesToLayers = {};
-  for(var i=0;i<sta112_DS101R_spillZone_spillRates.length;i++){
-      sta112_DS101R_spillZone_spillRatesToLayers[sta112_DS101R_spillZone_spillRates[i]] = null;
+  for(var i=0;i<wllOpt.spillRates.length;i++){
+      wllOpt.spillRatesToLayers[wllOpt.spillRates[i]] = null;
   }
-  var sta112_DS101R_spillZone_floodEvents = {"2year": null,"5year": null,"10year": null,"25year": 200,"50year": 300,"100year": 300};
-  var sta112_DS101R_spillZone = new SpillZone(100, 300, 3, sta112_DS101R_spillZone_spillRates, sta112_DS101R_spillZone_spillRatesToLayers, sta112_DS101R_spillZone_floodEvents, DS101R_spillLayerNames, DS101R);
 
-  /////////////////STATION112 PopeChaucerL SPILL ZONE OBJECT CONFIGURATION/////////////////
-  var sta112_PopeChaucerL_spillZone_spillRates = [100,200,300,415];
-  var sta112_PopeChaucerL_spillZone_spillRatesToLayers = {};
-  for(var i=0;i<sta112_PopeChaucerL_spillZone_spillRates.length;i++){
-      sta112_PopeChaucerL_spillZone_spillRatesToLayers[sta112_PopeChaucerL_spillZone_spillRates[i]] = null;
+  var sta117_WLL_SpillZone = new SpillZone(wllOpt);
+
+  var sta117Opt = {
+    staNum: 117,
+    numSpillZones: 1,
+    spillZoneNames: ["WLL"],
+    spillZones: {"WLL": sta117_WLL_SpillZone},
+    spillExtent:   new OpenLayers.Bounds(-13547493.618568, 4451161.743461, -13535263.694044, 4459369.169372),
+    plot: new Plot("assets/js/plots/sta117/sta117Plot.js", sta117_histFlow, sta117_fcFlow)
+  };
+
+  var station117 = new Gage(sta117Opt);
+  ////////////END STATION117 OBJECT INIT/////////////////////////////////
+  // // //////////START STATION112 OBJECT CONFIGURATION///////////////////////////////////
+  // // /////////////////STATION112 Middlefield L SPILL ZONE OBJECT CONFIGURATION/////////////////
+  var middlefieldLOpt = {
+    minSpill: 100, 
+    maxSpill: 208, 
+    numSpillLayers: 2, 
+    spillRates: [100,208],
+    spillRatesToLayers: {}, 
+    floodEvents: {"2year": null,"5year": null,"10year": null,"25year": null,"50year": null,"100year": 208}, 
+    spillLayerNames: middlefieldL_spillLayerNames, 
+    forecastData: MiddlefieldL
   }
-  var sta112_PopeChaucerL_spillZone_floodEvents = {"2year": null,"5year": null,"10year": null,"25year": 100,"50year": 300,"100year": 415};
-  var sta112_PopeChaucerL_spillZone = new SpillZone(100, 415, 4, sta112_PopeChaucerL_spillZone_spillRates, sta112_PopeChaucerL_spillZone_spillRatesToLayers, sta112_PopeChaucerL_spillZone_floodEvents, popeChaucerL_spillLayerNames, PopeChaucerL);
 
-  // /////////////////STATION112 PopeChaucerR SPILL ZONE OBJECT CONFIGURATION/////////////////
-  var sta112_PopeChaucerR_spillZone_spillRates = [100,200,300,400,500,600,700,800,900,1000,1100,1179];
-  var sta112_PopeChaucerR_spillZone_spillRatesToLayers = {};
-  for(var i=0;i<sta112_PopeChaucerR_spillZone_spillRates.length;i++){
-      sta112_PopeChaucerR_spillZone_spillRatesToLayers[sta112_PopeChaucerR_spillZone_spillRates[i]] = null;
+  for(var i=0;i<middlefieldLOpt.spillRates.length;i++){
+      middlefieldLOpt.spillRatesToLayers[middlefieldLOpt.spillRates[i]] = null;
   }
-  var sta112_PopeChaucerR_spillZone_floodEvents = {"2year": null,"5year": null,"10year": null,"25year": 300,"50year": 900,"100year": 1179};
-  var sta112_PopeChaucerR_spillZone = new SpillZone(100, 1179, 12, sta112_PopeChaucerR_spillZone_spillRates, sta112_PopeChaucerR_spillZone_spillRatesToLayers, sta112_PopeChaucerR_spillZone_floodEvents, popeChaucerR_spillLayerNames, PopeChaucerR);
+
+  var sta112_MiddlefieldL_SpillZone = new SpillZone(middlefieldLOpt);
+  // // /////////////////STATION112 Middlefield R SPILL ZONE OBJECT CONFIGURATION/////////////////
+  var middlefieldROpt = {
+    minSpill: 100, 
+    maxSpill: 1105, 
+    numSpillLayers: 11, 
+    spillRates: [100,200,300,400,500,600,700,800,900,1000,1105],
+    spillRatesToLayers: {}, 
+    floodEvents: {"2year": null,"5year": null,"10year": null,"25year": null,"50year": null,"100year": 1105}, 
+    spillLayerNames: middlefieldR_spillLayerNames, 
+    forecastData: MiddlefieldR
+  }
+
+  for(var i=0;i<middlefieldROpt.spillRates.length;i++){
+      middlefieldROpt.spillRatesToLayers[middlefieldROpt.spillRates[i]] = null;
+  }
+  var sta112_MiddlefieldR_SpillZone = new SpillZone(middlefieldROpt);
 
 
-  var sta112_spillZoneNames = ["MiddlefieldL", "MiddlefieldR", "DS101L", "DS101R", "PopeChaucerL", "PopeChaucerR"];
-  var sta112_spillZones = {
-                              "MiddlefieldL": sta112_MiddlefieldL_spillZone, "MiddlefieldR": sta112_MiddlefieldR_spillZone, 
-                              "DS101L": sta112_DS101L_spillZone, "DS101R": sta112_DS101R_spillZone, 
-                              "PopeChaucerL": sta112_PopeChaucerL_spillZone, "PopeChaucerR": sta112_PopeChaucerR_spillZone
-                          };
-  var sta112_spillExtent =  new OpenLayers.Bounds( -13607788.276007, 4489790.2122119,-13583328.426959, 4506205.0640339);
+  // // /////////////////STATION112 DS101L SPILL ZONE OBJECT CONFIGURATION/////////////////
+  var ds101LOpt = {
+    minSpill: 100, 
+    maxSpill: 836, 
+    numSpillLayers: 9, 
+    spillRates: [100,200,300,400,500,600,700,800,836],
+    spillRatesToLayers: {}, 
+    floodEvents: {"2year": null,"5year": null,"10year": null,"25year": 700,"50year": 800,"100year": 836}, 
+    spillLayerNames: DS101L_spillLayerNames, 
+    forecastData: DS101L
+  }
 
-  var sta112Plot = new Plot("assets/js/plots/sta112/sta112Plot.js", sta112_histFlow, sta112_fcFlow);
-  var station112 = new Gage(112, 6, sta112_spillZoneNames, sta112_spillZones, sta112_spillExtent, sta112Plot);
-  // // //////////END STATION112 OBJECT CONFIGURATION///////////////////////////////////
-  // // //////////END STATION OBJECTS CONFIGURATION/////////////////////////////
+  for(var i=0;i<ds101LOpt.spillRates.length;i++){
+      ds101LOpt.spillRatesToLayers[ds101LOpt.spillRates[i]] = null;
+  }
+  var sta112_DS101L_SpillZone = new SpillZone(ds101LOpt);
+
+  // // /////////////////STATION112 DS101R SPILL ZONE OBJECT CONFIGURATION/////////////////
+  var ds101ROpt = {
+    minSpill: 100, 
+    maxSpill: 300, 
+    numSpillLayers: 3, 
+    spillRates: [100,200,300],
+    spillRatesToLayers: {}, 
+    floodEvents: {"2year": null,"5year": null,"10year": null,"25year": 200,"50year": 300,"100year": 300}, 
+    spillLayerNames: DS101R_spillLayerNames, 
+    forecastData: DS101R
+  }
+
+  for(var i=0;i<ds101ROpt.spillRates.length;i++){
+      ds101ROpt.spillRatesToLayers[ds101ROpt.spillRates[i]] = null;
+  }
+
+  var sta112_DS101R_SpillZone = new SpillZone(ds101ROpt);
+  // /////////////////STATION112 PopeChaucerL SPILL ZONE OBJECT CONFIGURATION/////////////////\
+  var popeChaucerLOpt = {
+    minSpill: 100, 
+    maxSpill: 415, 
+    numSpillLayers: 4, 
+    spillRates: [100,200,300,415],
+    spillRatesToLayers: {}, 
+    floodEvents: {"2year": null,"5year": null,"10year": null,"25year": 100,"50year": 300,"100year": 415}, 
+    spillLayerNames: popeChaucerL_spillLayerNames,
+    forecastData: PopeChaucerL
+  }
+
+  for(var i=0;i<popeChaucerLOpt.spillRates.length;i++){
+      popeChaucerLOpt.spillRatesToLayers[popeChaucerLOpt.spillRates[i]] = null;
+  }
+
+  var sta112_PopeChaucerL_SpillZone = new SpillZone(popeChaucerLOpt);
+
+  // // /////////////////STATION112 PopeChaucerR SPILL ZONE OBJECT CONFIGURATION/////////////////
+  var popeChaucerROpt = {
+    minSpill: 100, 
+    maxSpill: 1179, 
+    numSpillLayers: 12, 
+    spillRates: [100,200,300,400,500,600,700,800,900,1000,1100,1179],
+    spillRatesToLayers: {}, 
+    floodEvents: {"2year": null,"5year": null,"10year": null,"25year": 300,"50year": 900,"100year": 1179}, 
+    spillLayerNames: popeChaucerR_spillLayerNames,
+    forecastData: PopeChaucerR
+  }
+
+  for(var i=0;i<popeChaucerROpt.spillRates.length;i++){
+      popeChaucerROpt.spillRatesToLayers[popeChaucerROpt.spillRates[i]] = null;
+  }
+
+  var sta112_PopeChaucerR_SpillZone = new SpillZone(popeChaucerROpt);
+  var sta112Opt = {
+    staNum: 112,
+    numSpillZones: 6,
+    spillZoneNames: ["MiddlefieldL", "MiddlefieldR", "DS101L", "DS101R", "PopeChaucerL", "PopeChaucerR"],
+    spillZones: {
+                  "MiddlefieldL": sta112_MiddlefieldL_SpillZone, "MiddlefieldR": sta112_MiddlefieldR_SpillZone, 
+                  "DS101L": sta112_DS101L_SpillZone, "DS101R": sta112_DS101R_SpillZone, 
+                  "PopeChaucerL": sta112_PopeChaucerL_SpillZone, "PopeChaucerR": sta112_PopeChaucerR_SpillZone
+                },
+    spillExtent: new OpenLayers.Bounds( -13607788.276007, 4489790.2122119,-13583328.426959, 4506205.0640339),
+    plot: new Plot("assets/js/plots/sta112/sta112Plot.js", sta112_histFlow, sta112_fcFlow)
+  };
+
+  var station112 = new Gage(sta112Opt);
+  // var sta112_spillExtent =  ;
+
+  // var sta112Plot = new Plot("assets/js/plots/sta112/sta112Plot.js", sta112_histFlow, sta112_fcFlow);
+  // var station112 = new Gage(112, 6, sta112_spillZoneNames, sta112_spillZones, sta112_spillExtent, sta112Plot);
+  // // // //////////END STATION112 OBJECT CONFIGURATION///////////////////////////////////
+  // // // //////////END STATION OBJECTS CONFIGURATION/////////////////////////////
 
   // // //map station numbers to station objects
-  scvwdflood.stationObjects = {"51":station51, "93":station93 ,"117":station117, "112":station112};
+  // scvwdflood.stationObjects = {"51":station51, "93":station93 ,"117":station117, "112":station112};
+  scvwdflood.stationObjects = {"51":station51, "93": station93, "117": station117, "112":station112};
 }
 
 //PLOT object code
@@ -299,16 +412,16 @@ Plot.prototype.getSeries = function(time){
 ////END PLOT OBJECT CODE////////////////////
 
 ////////////////////SPILL ZONE OBJECT CODE/////////////////////////////////
-function SpillZone(minSpill, maxSpill, numSpillLayers, spillRates, spillRatesToLayers, floodEvents, spillLayerNames, forecastData){
-    this.minSpill = minSpill;
-    this.maxSpill = maxSpill;
-    this.numSpillLayers = numSpillLayers;
-    this.spillRates = spillRates;
-    this.spillRatesToLayers = spillRatesToLayers;
-    this.floodEvents = floodEvents;
+function SpillZone(opt){
+    this.minSpill = opt.minSpill;
+    this.maxSpill = opt.maxSpill;
+    this.numSpillLayers = opt.numSpillLayers;
+    this.spillRates = opt.spillRates;
+    this.spillRatesToLayers = opt.spillRatesToLayers;
+    this.floodEvents = opt.floodEvents;
     this.displayedLayers = [];
-    this.forecastData = forecastData;
-    this.spillLayerNames = spillLayerNames;
+    this.forecastData = opt.forecastData;
+    this.spillLayerNames = opt.spillLayerNames;
 }
 
 //get spill layer closest to given spill rate
@@ -328,14 +441,14 @@ SpillZone.prototype.getLayerFromSpillRate = function(spillRate){
 }
 ////////////////////END SPILL ZONE OBJECT CODE/////////////////////////////////
 //////////GAGE OBJECT CODE////////////////////
-function Gage(staNum, numSpillZones, spillZoneNames, spillZones, spillExtent, plot){
-    this.stationNumber = staNum;
-    this.numSpillZones = numSpillZones;
-    this.spillZoneNames = spillZoneNames;
-    this.spillZones = spillZones;
-    this.spillExtent = spillExtent;
+function Gage(opt){
+    this.stationNumber = opt.staNum;
+    this.numSpillZones = opt.numSpillZones;
+    this.spillZoneNames = opt.spillZoneNames;
+    this.spillZones = opt.spillZones;
+    this.spillExtent = opt.spillExtent;
     this.spillLayersLoaded = false;
-    this.plot = plot;
+    this.plot = opt.plot;
 }
 
 //get spill rates when user clicks on forecast hydrograph

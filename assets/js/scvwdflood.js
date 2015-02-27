@@ -358,6 +358,7 @@ $(document).ready(function(){
         select_feature_control.select(forecast_streamflow.getFeatureByFid($('#sbGageSelect option:selected').val()));
         $('#sbGageSelect').val("default");
     });
+    
     //event handler to clear demo spills
     $('#btnClearDemoSpill').on('click', function(){
         scvwdflood.selectedStation.hideSpillLayers();
