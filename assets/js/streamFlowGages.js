@@ -7,65 +7,33 @@ Description: This file contains configuration data and application code for gage
 //initialize gage objects
 function initGages(){
   /////////////START STATION51 SPILL ZONE LAYER INIT/////////////////
-  //cherry spill layer names, used for KML download
-  var cherry_spillLayerNames = ["51_Cherry_100cfs", "51_Cherry_200cfs","51_Cherry_300cfs","51_Cherry_400cfs", "51_Cherry_500cfs",
-                      "51_Cherry_600cfs", "51_Cherry_700cfs", "51_Cherry_800cfs", "51_Cherry_900cfs", "51_Cherry_1000cfs",
-                      "51_Cherry_1100cfs", "51_Cherry_1200cfs", "51_Cherry_1300cfs", "51_Cherry_1400cfs", "51_Cherry_1500cfs",
-                      "51_Cherry_1600cfs", "51_Cherry_1700cfs", "51_Cherry_1800cfs"];
-
-  //jarvis spill layer names
-  var jarvis_spillLayerNames = ["51_Jarvis_100cfs", "51_Jarvis_200cfs", "51_Jarvis_300cfs", "51_Jarvis_400cfs", "51_Jarvis_500cfs",
-                             "51_Jarvis_600cfs", "51_Jarvis_700cfs"];
-
-  // //////////START STA93 SPILL ZONE INIT/////////////////////////////////
-  //ross2 variables
-  var ross2_spillLayerNames = ["93_Ross2_100cfs", "93_Ross2_200cfs"];
-
-  //ross1 variables
-  var ross1_spillLayerNames = ["93_Ross1_100cfs", "93_Ross1_200cfs", "93_Ross1_300cfs","93_Ross1_400cfs","93_Ross1_500cfs"];
-
-  //rossR variables
-  var rossR_spillLayerNames = ["93_RossR_100cfs", "93_RossR_200cfs", "93_RossR_300cfs","93_RossR_400cfs","93_RossR_500cfs"];
-
-  //rossL variables
-  var rossL_spillLayerNames = ["93_RossL_100cfs", "93_RossL_200cfs"];
-  // //////////END STA93 SPILLZONE INIT/////////////////////////////////
-  // //////////START STATION117 SPILLZONE INIT/////////////////////////////
-  var WLL_spillLayerNames = ["117_WLL_280cfs", "117_WLL_421cfs", "117_WLL_561cfs", "117_WLL_701cfs", "117_WLL_841cfs",
-                              "117_WLL_982cfs", "117_WLL_1122cfs", "117_WLL_1262cfs", "117_WLL_1402cfs"];
-  // //////////END STA117 SPILLZONE INIT/////////////////////////////
-  // //////////START STATION112 SPILLZONE INIT/////////////////////////////
-  ///////middlefield L
-  //middlefieldL variables
-  var middlefieldL_spillLayerNames = ["112_MiddlefieldL_100cfs", "112_MiddlefieldL_208cfs"];
-
-  //////////middlefield R
-  //middlefieldR variables
-  var middlefieldR_spillLayerNames = ["112_MiddlefieldR_100cfs", "112_MiddlefieldR_200cfs", "112_MiddlefieldR_300cfs", "112_MiddlefieldR_400cfs",
-                                         "112_MiddlefieldR_500cfs", "112_MiddlefieldR_600cfs", "112_MiddlefieldR_700cfs", "112_MiddlefieldR_800cfs", 
-                                         "112_MiddlefieldR_900cfs", "112_MiddlefieldR_1000cfs", "112_MiddlefieldR_1105cfs"];
-
-  //////////DS101 L
-  //DS101 L variables
-  var DS101L_spillLayerNames = ["112_DS101L_100cfs", "112_DS101L_200cfs", "112_DS101L_300cfs", "112_DS101L_400cfs",
-                                         "112_DS101L_500cfs", "112_DS101L_600cfs", "112_DS101L_700cfs", "112_DS101L_800cfs", 
-                                         "112_DS101L_836cfs"];
-  //////////DS101 R
-  //DS101 R variables
-  var DS101R_spillLayerNames = ["112_DS101R_100cfs", "112_DS101R_200cfs", "112_DS101R_300cfs"];
-
-  //////////Pope Chaucer L
-  //Pope chaucer L variables
-  var popeChaucerL_spillLayerNames = ["112_PopeChaucerL_100cfs", "112_PopeChaucerL_200cfs", "112_PopeChaucerL_300cfs", "112_PopeChaucerL_415cfs"];
-
-  // //////////Pope Chaucer R
-  // //Pope chaucer R variables
-  var popeChaucerR_spillLayerNames = ["112_PopeChaucerR_100cfs", "112_PopeChaucerR_200cfs", "112_PopeChaucerR_300cfs", "112_PopeChaucerR_400cfs",
-                                      "112_PopeChaucerR_500cfs", "112_PopeChaucerR_600cfs", "112_PopeChaucerR_700cfs", "112_PopeChaucerR_800cfs",
-                                      "112_PopeChaucerR_900cfs", "112_PopeChaucerR_1000cfs", "112_PopeChaucerR_1100cfs", "112_PopeChaucerR_1179cfs"];
-
-  //////////END STA112 SPILLZONE INIT////////////////////////////////
-  
+  //spill layer names, used for KML download and to retrieve layers from geoserver via wms request URL
+  var spillLayerNames = {
+    cherry:   ["51_Cherry_100cfs", "51_Cherry_200cfs","51_Cherry_300cfs","51_Cherry_400cfs", "51_Cherry_500cfs",
+                "51_Cherry_600cfs", "51_Cherry_700cfs", "51_Cherry_800cfs", "51_Cherry_900cfs", "51_Cherry_1000cfs",
+                "51_Cherry_1100cfs", "51_Cherry_1200cfs", "51_Cherry_1300cfs", "51_Cherry_1400cfs", "51_Cherry_1500cfs",
+                "51_Cherry_1600cfs", "51_Cherry_1700cfs", "51_Cherry_1800cfs"],
+    jarvis: ["51_Jarvis_100cfs", "51_Jarvis_200cfs", "51_Jarvis_300cfs", "51_Jarvis_400cfs", "51_Jarvis_500cfs",
+             "51_Jarvis_600cfs", "51_Jarvis_700cfs"],
+    ross1: ["93_Ross1_100cfs", "93_Ross1_200cfs", "93_Ross1_300cfs","93_Ross1_400cfs","93_Ross1_500cfs"],
+    ross2: ["93_Ross2_100cfs", "93_Ross2_200cfs"],
+    rossL: ["93_RossL_100cfs", "93_RossL_200cfs"],
+    rossR: ["93_RossR_100cfs", "93_RossR_200cfs", "93_RossR_300cfs","93_RossR_400cfs","93_RossR_500cfs"],
+    WLL: ["117_WLL_280cfs", "117_WLL_421cfs", "117_WLL_561cfs", "117_WLL_701cfs", "117_WLL_841cfs",
+          "117_WLL_982cfs", "117_WLL_1122cfs", "117_WLL_1262cfs", "117_WLL_1402cfs"],
+    middlefieldL: ["112_MiddlefieldL_100cfs", "112_MiddlefieldL_208cfs"],
+    middlefieldR: ["112_MiddlefieldR_100cfs", "112_MiddlefieldR_200cfs", "112_MiddlefieldR_300cfs", "112_MiddlefieldR_400cfs",
+                   "112_MiddlefieldR_500cfs", "112_MiddlefieldR_600cfs", "112_MiddlefieldR_700cfs", "112_MiddlefieldR_800cfs", 
+                   "112_MiddlefieldR_900cfs", "112_MiddlefieldR_1000cfs", "112_MiddlefieldR_1105cfs"],
+    DS101L: ["112_DS101L_100cfs", "112_DS101L_200cfs", "112_DS101L_300cfs", "112_DS101L_400cfs",
+             "112_DS101L_500cfs", "112_DS101L_600cfs", "112_DS101L_700cfs", "112_DS101L_800cfs", 
+             "112_DS101L_836cfs"],
+    DS101R: ["112_DS101R_100cfs", "112_DS101R_200cfs", "112_DS101R_300cfs"],
+    popeChaucerL: ["112_PopeChaucerL_100cfs", "112_PopeChaucerL_200cfs", "112_PopeChaucerL_300cfs", "112_PopeChaucerL_415cfs"],     
+    popeChaucerR: ["112_PopeChaucerR_100cfs", "112_PopeChaucerR_200cfs", "112_PopeChaucerR_300cfs", "112_PopeChaucerR_400cfs",
+                    "112_PopeChaucerR_500cfs", "112_PopeChaucerR_600cfs", "112_PopeChaucerR_700cfs", "112_PopeChaucerR_800cfs",
+                    "112_PopeChaucerR_900cfs", "112_PopeChaucerR_1000cfs", "112_PopeChaucerR_1100cfs", "112_PopeChaucerR_1179cfs"]
+  };
 
   //////////START STATION OBJECT CONFIGURATION//////////////////////////////////////
   //////////START STATION51 OBJECT CONFIGURATION//////////////////////////////////////////////
@@ -77,7 +45,7 @@ function initGages(){
     spillRates: [100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500,1600,1700,1800],
     spillRatesToLayers: {}, 
     floodEvents: {"2year": null,"5year": null,"10year": 100,"25year": 300,"50year": 800,"100year": 1800}, 
-    spillLayerNames: cherry_spillLayerNames, 
+    spillLayerNames: spillLayerNames.cherry, 
     forecastData: Cherry
   };
   for(var i=0;i<cherryOpt.spillRates.length;i++){
@@ -93,7 +61,7 @@ function initGages(){
     spillRates: [100,200,300,400,500,600,700],
     spillRatesToLayers: {}, 
     floodEvents: {"2year": null,"5year": null,"10year": 100,"25year": 300,"50year": 500,"100year": 700}, 
-    spillLayerNames: jarvis_spillLayerNames, 
+    spillLayerNames: spillLayerNames.jarvis, 
     forecastData: Jarvis 
   };
 
@@ -123,7 +91,7 @@ function initGages(){
     spillRates: [100,200,300,400,500],
     spillRatesToLayers: {}, 
     floodEvents: {"2year": null,"5year": null,"10year": null,"25year": null,"50year": 200,"100year": 500}, 
-    spillLayerNames: ross1_spillLayerNames, 
+    spillLayerNames: spillLayerNames.ross1, 
     forecastData: Ross1 
   };
   for(var i=0;i<ross1Opt.spillRates.length;i++){
@@ -138,7 +106,7 @@ function initGages(){
     spillRates: [100,200],
     spillRatesToLayers: {}, 
     floodEvents: {"2year": null,"5year": null,"10year": null,"25year": null,"50year": null,"100year": 200}, 
-    spillLayerNames: ross2_spillLayerNames, 
+    spillLayerNames: spillLayerNames.ross2, 
     forecastData: Ross2 
   };
   for(var i=0;i<ross2Opt.spillRates.length;i++){
@@ -153,7 +121,7 @@ function initGages(){
     spillRates: [100,200],
     spillRatesToLayers: {}, 
     floodEvents: {"2year": null,"5year": null,"10year": null,"25year": null,"50year": null,"100year": 200}, 
-    spillLayerNames: rossL_spillLayerNames, 
+    spillLayerNames: spillLayerNames.rossL, 
     forecastData: RossL 
   };
   for(var i=0;i<rossLOpt.spillRates.length;i++){
@@ -168,7 +136,7 @@ function initGages(){
     spillRates: [100,200,300,400,500],
     spillRatesToLayers: {}, 
     floodEvents: {"2year": null,"5year": null,"10year": null,"25year": null,"50year": 200,"100year": 500}, 
-    spillLayerNames: rossR_spillLayerNames, 
+    spillLayerNames: spillLayerNames.rossR, 
     forecastData: RossR 
   };
 
@@ -187,9 +155,9 @@ function initGages(){
   };
 
   var station93 = new Gage(sta93Opt);
-  // // // //////////END STATION93 OBJECT CONFIGURATION///////////////////////////////////
-  // // // //////////START STATION117 OBJECT INIT/////////////////////////////////
-  // // /////////////////STATION117 WLL SPILL ZONE OBJECT CONFIGURATION/////////////////
+  // // // // //////////END STATION93 OBJECT CONFIGURATION///////////////////////////////////
+  // // // // //////////START STATION117 OBJECT INIT/////////////////////////////////
+  // // // /////////////////STATION117 WLL SPILL ZONE OBJECT CONFIGURATION/////////////////
   var wllOpt = {
     minSpill: 280, 
     maxSpill: 1402, 
@@ -197,7 +165,7 @@ function initGages(){
     spillRates: [280,421,561,701,841,982,1122,1262,1402],
     spillRatesToLayers: {}, 
     floodEvents: {"2year": 421,"5year": 701,"10year": 841,"25year": 1122,"50year": 1262,"100year": 1402}, 
-    spillLayerNames: WLL_spillLayerNames, 
+    spillLayerNames: spillLayerNames.WLL, 
     forecastData: WLL
   }
 
@@ -217,9 +185,9 @@ function initGages(){
   };
 
   var station117 = new Gage(sta117Opt);
-  ////////////END STATION117 OBJECT INIT/////////////////////////////////
-  // // //////////START STATION112 OBJECT CONFIGURATION///////////////////////////////////
-  // // /////////////////STATION112 Middlefield L SPILL ZONE OBJECT CONFIGURATION/////////////////
+  // ////////////END STATION117 OBJECT INIT/////////////////////////////////
+  // // // //////////START STATION112 OBJECT CONFIGURATION///////////////////////////////////
+  // // // /////////////////STATION112 Middlefield L SPILL ZONE OBJECT CONFIGURATION/////////////////
   var middlefieldLOpt = {
     minSpill: 100, 
     maxSpill: 208, 
@@ -227,7 +195,7 @@ function initGages(){
     spillRates: [100,208],
     spillRatesToLayers: {}, 
     floodEvents: {"2year": null,"5year": null,"10year": null,"25year": null,"50year": null,"100year": 208}, 
-    spillLayerNames: middlefieldL_spillLayerNames, 
+    spillLayerNames: spillLayerNames.middlefieldL, 
     forecastData: MiddlefieldL
   }
 
@@ -244,7 +212,7 @@ function initGages(){
     spillRates: [100,200,300,400,500,600,700,800,900,1000,1105],
     spillRatesToLayers: {}, 
     floodEvents: {"2year": null,"5year": null,"10year": null,"25year": null,"50year": null,"100year": 1105}, 
-    spillLayerNames: middlefieldR_spillLayerNames, 
+    spillLayerNames: spillLayerNames.middlefieldR, 
     forecastData: MiddlefieldR
   }
 
@@ -262,7 +230,7 @@ function initGages(){
     spillRates: [100,200,300,400,500,600,700,800,836],
     spillRatesToLayers: {}, 
     floodEvents: {"2year": null,"5year": null,"10year": null,"25year": 700,"50year": 800,"100year": 836}, 
-    spillLayerNames: DS101L_spillLayerNames, 
+    spillLayerNames: spillLayerNames.DS101L, 
     forecastData: DS101L
   }
 
@@ -279,7 +247,7 @@ function initGages(){
     spillRates: [100,200,300],
     spillRatesToLayers: {}, 
     floodEvents: {"2year": null,"5year": null,"10year": null,"25year": 200,"50year": 300,"100year": 300}, 
-    spillLayerNames: DS101R_spillLayerNames, 
+    spillLayerNames: spillLayerNames.DS101R, 
     forecastData: DS101R
   }
 
@@ -296,7 +264,7 @@ function initGages(){
     spillRates: [100,200,300,415],
     spillRatesToLayers: {}, 
     floodEvents: {"2year": null,"5year": null,"10year": null,"25year": 100,"50year": 300,"100year": 415}, 
-    spillLayerNames: popeChaucerL_spillLayerNames,
+    spillLayerNames: spillLayerNames.popeChaucerL,
     forecastData: PopeChaucerL
   }
 
@@ -314,7 +282,7 @@ function initGages(){
     spillRates: [100,200,300,400,500,600,700,800,900,1000,1100,1179],
     spillRatesToLayers: {}, 
     floodEvents: {"2year": null,"5year": null,"10year": null,"25year": 300,"50year": 900,"100year": 1179}, 
-    spillLayerNames: popeChaucerR_spillLayerNames,
+    spillLayerNames: spillLayerNames.popeChaucerR,
     forecastData: PopeChaucerR
   }
 
@@ -337,16 +305,10 @@ function initGages(){
   };
 
   var station112 = new Gage(sta112Opt);
-  // var sta112_spillExtent =  ;
-
-  // var sta112Plot = new Plot("assets/js/plots/sta112/sta112Plot.js", sta112_histFlow, sta112_fcFlow);
-  // var station112 = new Gage(112, 6, sta112_spillZoneNames, sta112_spillZones, sta112_spillExtent, sta112Plot);
   // // // //////////END STATION112 OBJECT CONFIGURATION///////////////////////////////////
   // // // //////////END STATION OBJECTS CONFIGURATION/////////////////////////////
-
-  // // //map station numbers to station objects
-  // scvwdflood.stationObjects = {"51":station51, "93":station93 ,"117":station117, "112":station112};
-  scvwdflood.stationObjects = {"51":station51, "93": station93, "117": station117, "112":station112};
+  //map station numbers to station objects
+  scvwdflood.stationObjects = {"51":station51, "93":station93 ,"117":station117, "112":station112};
 }
 
 //PLOT object code
@@ -493,6 +455,7 @@ Gage.prototype.getSpillLayers = function(){
 	    for(var i=0; i<this.numSpillZones; i++){
 	        var spillZoneName = this.spillZoneNames[i];
 	        var spillZone = this.spillZones[spillZoneName];
+          console.log(spillZoneName);
 	        for(var j=0;j<spillZone.numSpillLayers;j++){
 	            spillZone.spillRatesToLayers[spillZone.spillRates[j]] = new OpenLayers.Layer.Vector(
 	                spillZone.spillLayerNames[j],
