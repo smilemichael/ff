@@ -318,7 +318,7 @@ $(document).ready(function(){
     }
     $('#floodEventHelpIcon').on("mouseover", function(){
         if(!helpBoxOpen){
-            var xy = map.getControl('mousePositionControl').lastXy || { x: 0, y: 0 };
+            var xy = scvwdflood.map.getControl('mousePositionControl').lastXy || { x: 0, y: 0 };
             // $('#helpBox').css('display', 'block');
             showHelpBox(floodEventHelpText, currentMousePos.x, currentMousePos.y);
         }
