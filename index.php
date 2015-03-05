@@ -142,12 +142,12 @@
 							<hr/>
 							<select id ="floodDemoSelect" class="form-control" style="width:200px;display:inline;">
 								<option value="default" selected="selected" disabled="disabled">Choose...</option>
-								<option value="2year">50% (2 year)</option>
-								<option value="5year">20% (5 year)</option>
-								<option value="10year">10% (10 year)</option>
-								<option value="25year">4% (25 year)</option>
-								<option value="50year">2% (50 year)</option>
-								<option value="100year">1% (100 year)</option>
+								<option class="optFloodEvent" id="2year" value="2year">50% (2 year)</option>
+								<option class="optFloodEvent" id="5year" value="5year">20% (5 year)</option>
+								<option class="optFloodEvent" id="10year" value="10year">10% (10 year)</option>
+								<option class="optFloodEvent" id="25year" value="25year">4% (25 year)</option>
+								<option class="optFloodEvent" id="50year" value="50year">2% (50 year)</option>
+								<option class="optFloodEvent" id="100year" value="100year">1% (100 year)</option>
 							</select>
 						</div>
 						<button class="btn btn-primary" id="btnClearDemoSpill" disabled style="display:inline;margin-left:20px;margin-bottom:5px;">Clear Spill Layer</button>
