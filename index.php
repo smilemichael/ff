@@ -13,7 +13,7 @@
     	<link rel="stylesheet" href="assets/css/OL/theme/default/style.css" type="text/css">
 		<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
     	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-		<link rel="stylesheet" href="assets/css/custom.css" type="text/css">
+		<link rel="stylesheet" href="assets/css/scvwdflood.css" type="text/css">
 	</head>
 	<body onload="init()">
 		<div id="disclaimer-message" title="Disclaimer" style="display:none;width:400px;">
