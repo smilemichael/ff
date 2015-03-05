@@ -61,10 +61,9 @@
 		<div id="helpBox" style="display:none;z-index: 2000;">
 			<span id='closeHelpBox' title='close'>X</span>
 			<p id="helpBoxText"></p>
-			<!-- <p><a id="closeHelpBox" style="cursor:pointer;">[close]</a></p> -->
 		</div>
 		<!--flood forecast gage information in jQuery UI tabs -->
-		<div id="qpfControls">
+		<!-- <div id="qpfControls">
 			<ul>
 				<li><a href="#qpfTab">QPF</a></li>
 			</ul>
@@ -74,17 +73,17 @@
 		        <div id="qpf-slide"></div>
 		        <div id="qpf-value"></div>
 			</div>
-		</div>
+		</div> -->
 		<div id="forecastInfo">
 			<ul>
-				<li><a href="#fc-tabs-1">Flood Forecast Information</a></li>
+				<li><a href="#tabHydrograph">Flood Forecast Information</a></li>
 				<li><a href="#tabGageDetails">Gage Details</a></li>
-				<li><a href="#fc-tabs-3">1% Flood Demo</a></li>
-				<li><a href="#fc-tabs-4">ALERT Me</a></li>
+				<li><a href="#tabFloodEvent">1% Flood Demo</a></li>
+				<li><a href="#tabAlertMe">ALERT Me</a></li>
 				<!-- todo add slide down/up button functionality to hide tabbed pane -->
 				<!-- <li style="margin-left:50px;">Test</li> -->
 			</ul>
-			<div id="fc-tabs-1" style="white-space: nowrap;">
+			<div id="tabHydrograph" style="white-space: nowrap;">
 					<div id="fcPlot">
 						loading hydrograph...<img src='assets/images/ajax-loader.gif'/>
 					</div>
@@ -135,10 +134,10 @@
 				 	</tr>
 				 </table>
 			</div>
-			<div id="fc-tabs-3">
+			<div id="tabFloodEvent">
 				<div class="row">
 					<div class="col-md-12" style="display:inline;">
-						<div id="demoControls" style="display:inline;">
+						<div id="floodEventControls" style="display:inline;">
 							<p><strong>Please Select Flood Event</strong><img id='floodEventHelpIcon' style="margin-left:10px;" src="assets/images/helpIcon15px.png"/></p>
 							<hr/>
 							<select id ="floodDemoSelect" class="form-control" style="width:200px;display:inline;">
@@ -155,7 +154,7 @@
 					</div>
 				</div>
 			</div>
-			<div id="fc-tabs-4">
+			<div id="tabAlertMe">
 				<!--Alert Me functionality in external file-->
 			</div>
 		</div>

@@ -33,14 +33,11 @@ var scvwdflood = {
         if(scvwdflood.selectedStation.spillLayersLoaded == false){
             scvwdflood.selectedStation.getSpillLayers();
         }
-
-        
     },
     //handler for forecast gage deselection
     forecast_unselected_feature: function(event){
         scvwdflood.previousStation = scvwdflood.selectedStation;
         scvwdflood.previousStation.hideSpillLayers();
-
         $('#forecastInfo').slideUp(function(){
             scvwdflood.previousStation.plot.hc_chart.destroy();
             $("#forecastInfo").tabs( "option", "active", 0 ); //make first tab active
