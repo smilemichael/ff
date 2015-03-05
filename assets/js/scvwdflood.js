@@ -19,13 +19,18 @@ var scvwdflood = {
                 gd_longitude: event.feature.attributes.LONDD83,
                 gd_latitude: event.feature.attributes.LATDD83 
             };        
+
             for(var key in gageDetails){
                 $('#'+key).html(gageDetails[key]);
+            }
+
+            for(var i=0; i <scvwdflood.selectedStation.floodEvents.length;i++){
+                $('#'+scvwdflood.selectedStation.floodEvents[i]).prop('disabled', false);
             }
             //load forecast hydrograph before retrieving spill layers
             scvwdflood.selectedStation.loadPlot();
         }); 
-        
+
         //set selectedstation property of scvwdflood to currently selected station
         scvwdflood.selectedStation = scvwdflood.stationObjects[event.feature.attributes.STA_NUMBER];
         
@@ -40,10 +45,12 @@ var scvwdflood = {
         scvwdflood.previousStation.hideSpillLayers();
         $('#forecastInfo').slideUp(function(){
             scvwdflood.previousStation.plot.hc_chart.destroy();
+            $('#fcPlot').html("loading hydrograph...<img src='assets/images/ajax-loader.gif'/>");
             $("#forecastInfo").tabs( "option", "active", 0 ); //make first tab active
         });
         scvwdflood.selectedStation = null; //no station is currently selected
         $('#floodDemoSelect').val("default");//reset flood event select
+        $('.optFloodEvent').prop("disabled", "true");
     },
     featureOver: function(feature){
         var fname = feature.attributes.STA_NAME;
@@ -279,6 +286,9 @@ $(document).ready(function(){
                 }
         }
     });
+    //initally all flood event options are disabled
+    $('.optFloodEvent').prop("disabled", "true");
+
     //mouse position used for tooltip
     var currentMousePos = { x: -1, y: -1 };
     //update mousePosition on mouseMove

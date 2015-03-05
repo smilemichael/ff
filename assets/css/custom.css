@@ -25,6 +25,9 @@
     padding:2px 5px;
     background:#66CCFF;
 }
+/*.optFloodEvent{
+	display: none;
+}*/
 
 #closeHelpBox:hover {
     float:right;

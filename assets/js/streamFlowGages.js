@@ -72,6 +72,7 @@ function initGages(){
   var sta51_Jarvis_SpillZone = new SpillZone(jarvisOpt);
   var sta51Opt = {
     staNum: 51,
+    floodEvents: ["10year", "25year", "50year", "100year"],
     numSpillZones: 2,
     spillZoneNames: ["Cherry", "Jarvis"],
     spillZones: {"Cherry": sta51_Cherry_SpillZone, "Jarvis": sta51_Jarvis_SpillZone},
@@ -80,7 +81,7 @@ function initGages(){
   };
 
   var station51 = new Gage(sta51Opt);
-  // //////////END STATION51 Object INIT///////////////////////////////////
+  //////////END STATION51 Object INIT///////////////////////////////////
 
   //////////START STATION93 OBJECT CONFIGURATION///////////////////////////////////
   /////////////////STATION93 ROSS1 SPILL ZONE OBJECT CONFIGURATION/////////////////
@@ -148,6 +149,7 @@ function initGages(){
   var sta93Opt = {
     staNum: 93,
     numSpillZones: 4,
+    floodEvents: ["50year", "100year"],
     spillZoneNames: ["Ross1", "Ross2", "RossL", "RossR"],
     spillZones: {"Ross1": sta93_Ross1_SpillZone, "Ross2": sta93_Ross2_SpillZone, "RossL": sta93_RossL_SpillZone, "RossR": sta93_RossR_SpillZone},
     spillExtent:   new OpenLayers.Bounds( -13580402.729243, 4466351.8865031,-13555942.880195,4482766.7383251),
@@ -178,6 +180,7 @@ function initGages(){
   var sta117Opt = {
     staNum: 117,
     numSpillZones: 1,
+    floodEvents: ["2year", "5year", "10year", "25year", "50year", "100year"],
     spillZoneNames: ["WLL"],
     spillZones: {"WLL": sta117_WLL_SpillZone},
     spillExtent:   new OpenLayers.Bounds(-13547493.618568, 4451161.743461, -13535263.694044, 4459369.169372),
@@ -294,6 +297,7 @@ function initGages(){
   var sta112Opt = {
     staNum: 112,
     numSpillZones: 6,
+    floodEvents: ["25year", "50year", "100year"],
     spillZoneNames: ["MiddlefieldL", "MiddlefieldR", "DS101L", "DS101R", "PopeChaucerL", "PopeChaucerR"],
     spillZones: {
                   "MiddlefieldL": sta112_MiddlefieldL_SpillZone, "MiddlefieldR": sta112_MiddlefieldR_SpillZone, 
@@ -406,6 +410,7 @@ SpillZone.prototype.getLayerFromSpillRate = function(spillRate){
 function Gage(opt){
     this.stationNumber = opt.staNum;
     this.numSpillZones = opt.numSpillZones;
+    this.floodEvents = opt.floodEvents;
     this.spillZoneNames = opt.spillZoneNames;
     this.spillZones = opt.spillZones;
     this.spillExtent = opt.spillExtent;
@@ -466,7 +471,6 @@ Gage.prototype.getSpillLayers = function(){
                               format: new OpenLayers.Format.GeoJSON({
 	                                extractStyles: true,
 	                                extractAttributes: true
-	                                // maxDepth: 10
 	                            }) 
 	                        }),
 	                        strategies: [new OpenLayers.Strategy.Fixed({preload: true})],
@@ -484,6 +488,7 @@ Gage.prototype.getSpillLayers = function(){
 //display gage's spillzone layers for particular flood event
 Gage.prototype.displayFloodEvent = function(floodEvent){
     this.hideSpillLayers();
+    scvwdflood.map.zoomToExtent(this.spillExtent, true);
     for(var i=0;i<this.numSpillZones; i++){
         var spillZoneName = this.spillZoneNames[i];
         var spillZone = this.spillZones[spillZoneName];
@@ -497,7 +502,6 @@ Gage.prototype.displayFloodEvent = function(floodEvent){
             $('#btnClearDemoSpill').attr('disabled', 'disabled');
         }
     }
-    scvwdflood.map.zoomToExtent(this.spillExtent, true);
 }
 
 Gage.prototype.loadPlot = function(){
