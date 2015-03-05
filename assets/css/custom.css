@@ -99,6 +99,12 @@ body{
     background-color: white;
 }
 
+#tblGageDetails{
+	width: 50%;
+	min-width: 600px;
+	/*margin: 0 auto;*/
+}
+
 hr { 
 	display: block; 
 	height: 1px;
@@ -108,16 +114,6 @@ hr {
     padding: 0; 
 }
 
-#fcGageInfo{
-	position:relative;
-	vertical-align:top;
-	width:25%;
-	border:2px solid;
-	display:inline-block;
-	border-radius:5px;
-	padding:20px;
-	margin:10px;
-}
 
 #fcPlot{
 	width: 80%;

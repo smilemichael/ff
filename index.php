@@ -78,7 +78,7 @@
 		<div id="forecastInfo">
 			<ul>
 				<li><a href="#fc-tabs-1">Flood Forecast Information</a></li>
-				<li><a href="#fc-tabs-2">Gage Details</a></li>
+				<li><a href="#tabGageDetails">Gage Details</a></li>
 				<li><a href="#fc-tabs-3">1% Flood Demo</a></li>
 				<li><a href="#fc-tabs-4">ALERT Me</a></li>
 				<!-- todo add slide down/up button functionality to hide tabbed pane -->
@@ -89,9 +89,51 @@
 						loading hydrograph...<img src='assets/images/ajax-loader.gif'/>
 					</div>
 			</div>
-			<div id="fc-tabs-2">
-				<div id="fcGageInfo">
-				</div> 
+			<div id="tabGageDetails">
+				 <table id="tblGageDetails" class="table table-bordered table-striped table-hover">
+				 	<tr>
+				 		<td>
+				 			<strong>Station Name</strong>
+				 		</td>
+				 		<td id="gd_staName"></td>
+				 	</tr>
+				 	<tr>
+				 		<td>
+				 			<strong>Station Number</strong>
+				 		</td>
+				 		<td id="gd_staNum"></td>
+				 	</tr>
+				 	<tr>
+				 		<td>
+				 			<strong>Alert ID</strong>
+				 		</td>
+				 		<td id="gd_alertID"></td>
+				 	</tr>
+				 	<tr>
+				 		<td>
+				 			<strong>Gage Type</strong>
+				 		</td>
+				 		<td id="gd_gageType"></td>
+				 	</tr>
+				 	<tr>
+				 		<td>
+				 			<strong>Major Watershed</strong>
+				 		</td>
+				 		<td id="gd_majorWatershed"></td>
+				 	</tr>
+				 	<tr>
+				 		<td>
+				 			<strong>Longitude</strong>
+				 		</td>
+				 		<td id="gd_longitude"></td>
+				 	</tr>
+				 	<tr>
+				 		<td>
+				 			<strong>Latitude</strong>
+				 		</td>
+				 		<td id="gd_latitude"></td>
+				 	</tr>
+				 </table>
 			</div>
 			<div id="fc-tabs-3">
 				<div class="row">

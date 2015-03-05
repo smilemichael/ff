@@ -6,31 +6,25 @@ var scvwdflood = {
     selectedStation: null,
     previousStation:  null, //previously selected station, for switching off spill layers
     forecast_selected_feature: function(event){
-        var fcGageInfo = "";  //forecast gageInfo will contain the data of the selected forecast gage
         var featureLonLat = scvwdflood.getFeatureLonLat(event.feature);
-        $('#fcGageInfo, #fcPlot').empty();//clear old contents
-        fcGageInfo +=  "<div class='fcGageInfo' id=\"" + event.feature.fid + "\">"+
-                    "<strong>Station Name: </strong>" + event.feature.attributes.STA_NAME +"<br/>" +
-                    "<strong>Station Number: </strong>" + event.feature.attributes.STA_NUMBER +"<br/>" +
-                    "<strong>ALERT ID: </strong>" + event.feature.attributes.ALERT_ID +"<br/>" +
-                    "<strong>Gage Type: </strong>" + event.feature.attributes.GAGE_TYPE +"<br/>" +
-                    "<strong>Major Watershed: </strong>" + event.feature.attributes.WTRSHD_MAJ +"<br/>" +
-                    "<strong>Longitude: </strong>" + event.feature.attributes.LONDD83 +"<br/>" +
-                    "<strong>Latitude: </strong>" + event.feature.attributes.LATDD83 +"<br/></div>";
-                
         //zoom to selected forecast gage
         scvwdflood.map.zoomToExtent(scvwdflood.computeBBox(featureLonLat));
-        $('#fcGageInfo').html(fcGageInfo);
-        //make first tab active
-        $("#forecastInfo").tabs( "option", "active", 0 );
-        //enable flood simulation tab
-        $("#forecastInfo").tabs( "enable", 2 );
         $('#forecastInfo').slideDown(function(){
-            //display loading message while hydrograph is being rendered
-            $('#fcPlot').html("loading hydrograph...<img src='assets/images/ajax-loader.gif'/>");
+            var gageDetails = {
+                gd_staName: event.feature.attributes.STA_NAME,
+                gd_staNum: event.feature.attributes.STA_NUMBER,
+                gd_alertID: event.feature.attributes.ALERT_ID,
+                gd_gageType: event.feature.attributes.GAGE_TYPE,
+                gd_majorWatershed: event.feature.attributes.WTRSHD_MAJ,
+                gd_longitude: event.feature.attributes.LONDD83,
+                gd_latitude: event.feature.attributes.LATDD83 
+            };        
+            for(var key in gageDetails){
+                $('#'+key).html(gageDetails[key]);
+            }
             //load forecast hydrograph before retrieving spill layers
             scvwdflood.selectedStation.loadPlot();
-        }); //forecast gage info made visible
+        }); 
         
         //set selectedstation property of scvwdflood to currently selected station
         scvwdflood.selectedStation = scvwdflood.stationObjects[event.feature.attributes.STA_NUMBER];
@@ -49,7 +43,7 @@ var scvwdflood = {
 
         $('#forecastInfo').slideUp(function(){
             scvwdflood.previousStation.plot.hc_chart.destroy();
-            $('#fcPlot').html("loading hydrograph...<img src='assets/images/ajax-loader.gif'/>");
+            $("#forecastInfo").tabs( "option", "active", 0 ); //make first tab active
         });
         scvwdflood.selectedStation = null; //no station is currently selected
         $('#floodDemoSelect').val("default");//reset flood event select
